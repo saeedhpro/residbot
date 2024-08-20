@@ -1,0 +1,206 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+<!--    <link rel="stylesheet" href="saman-paya-light.css" />-->
+    <style>
+@page {
+  width: 752px;
+  height: 1280px;
+    size: 178.1mm 269.3mm; /* A4 size */
+    margin: 0; /* حذف حاشیه */
+}
+@font-face {
+  font-family: vazir;
+  src: url("../vazir.ttf");
+}
+@font-face {
+  font-family: vazir-light;
+  src: url("../vazir-light.ttf");
+}
+html {
+  width: 752px;
+  height: 1280px;
+}
+body {
+  width: 752px;
+  height: 1280px;
+  font-size: 27px;
+  font-weight: 300;
+  font-family: vazir;
+  color: #2a3034;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+h1 {
+  text-wrap: nowrap;
+  font-size: 32px;
+  font-weight: bold;
+  font-family: vazir-light;
+  position: absolute;
+  top: 270px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.container {
+  width: 752px;
+  height: 1280px;
+  background-image: url("Saman_Paya_Light.png");
+  object-fit: cover;
+  position: relative;
+}
+
+.rows {
+  width: 520px;
+  padding-top: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.divider {
+  margin-top: 15px;
+}
+
+.green-text {
+  color: #00a143;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.from-title {
+  top: 240px;
+}
+.from-value {
+  top: 275px;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.title {
+  direction: rtl;
+  opacity: 0.85;
+  flex-shrink: 0;
+  color: #7d8589;
+}
+
+.value {
+  text-align: center;
+  font-weight: bold;
+  font-family: vazir-light;
+  flex-shrink: 0;
+}
+
+.receipt {
+  position: absolute;
+  font-size: 36px;
+  top: 120px;
+  font-weight: bold;
+  font-family: vazir-light;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+svg {
+  width: 50px;
+  position: absolute;
+  top: 125px;
+  right: 40px;
+}
+
+.share {
+  position: absolute;
+  font-size: 36px;
+  bottom: 65px;
+  left: 260px;
+  color: #28abe2;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <svg
+        width=50px"
+        height="50px"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M4 12H20M20 12L14 6M20 12L14 18"
+          stroke="#64787F"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <div class="receipt">رسید</div>
+      <h1>ثبت انتقال وجه بین بانکی پایا</h1>
+      <div class="rows">
+        <div class="row">
+          <div class="title">تاریخ و زمان</div>
+          <div class="value">{{ datetime }}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">مبلغ</div>
+          <div class="value">{{ amount }} ریال</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row">
+          <div class="title">انتقال دهنده</div>
+          <div class="value">{{ sender }}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">سپرده مبدا</div>
+          <div class="value">{{ source_account }}</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row">
+          <div class="title">دریافت کننده</div>
+          <div class="value">{{ receiver }}</div>
+        </div>
+
+        <div class="row">
+          <div class="title"></div>
+          <div class="value">{{ iban }}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">بانک مقصد</div>
+          <div class="value">{{ receiver_bank }}</div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="divider"></div>
+        <div class="divider"></div>
+        <div class="divider"></div>
+
+        <div class="row">
+          <div class="title">شماره پیگیری</div>
+          <div class="value">{{ tracking_code }}</div>
+        </div>
+
+        <div class="share">اشتراک‌گذاری</div>
+      </div>
+    </div>
+  </body>
+</html>

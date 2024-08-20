@@ -1,0 +1,182 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title title>Document</title>
+<!--    <link rel="stylesheet" href="tejarat-paya.css" />-->
+      <style>
+@page {
+    size: 178.1mm 269.3mm; /* A4 size */
+    margin: 0; /* حذف حاشیه */
+}
+@font-face {
+  font-family: vazir;
+  src: url("../vazir.ttf");
+}
+@font-face {
+  font-family: vazir-light;
+  src: url("../vazir-light.ttf");
+}
+
+body {
+  font-size: 18px;
+  font-weight: 100;
+  font-family: vazir-light;
+  color: #4d4d4d;
+  text-shadow: 0 0 1px #959595;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.container {
+  width: 591px;
+  height: 1280px;
+  background-image: url("./Tejarat-paya.png");
+  object-fit: cover;
+  position: relative;
+}
+
+.status-title {
+  position: absolute;
+  top: 208px;
+  right: 80px;
+}
+
+.status-value {
+  position: absolute;
+  top: 208px;
+  left: 115px;
+  font-family: vazir;
+}
+
+.from-title {
+  position: absolute;
+  top: 268px;
+  right: 70px;
+}
+
+.from-value {
+  position: absolute;
+  top: 268px;
+  left: 85px;
+}
+
+.to-title {
+  position: absolute;
+  top: 322px;
+  right: 70px;
+}
+.to-value {
+  position: absolute;
+  top: 322px;
+  left: 112px;
+}
+
+.to-name-title {
+  position: absolute;
+  top: 377px;
+  right: 70px;
+}
+.to-name-value {
+  position: absolute;
+  top: 377px;
+  left: 85px;
+}
+
+.date-title {
+  position: absolute;
+  top: 430px;
+  right: 70px;
+}
+.date-value {
+  position: absolute;
+  top: 430px;
+  left: 85px;
+}
+
+.tracking-title {
+  position: absolute;
+  top: 485px;
+  right: 70px;
+}
+.tracking-value {
+  position: absolute;
+  top: 485px;
+  left: 85px;
+}
+
+.from-number-title {
+  position: absolute;
+  top: 540px;
+  right: 70px;
+}
+.from-number-value {
+  position: absolute;
+  top: 540px;
+  left: 85px;
+}
+
+.price-title {
+  position: absolute;
+  top: 595px;
+  right: 70px;
+}
+.price-value {
+  position: absolute;
+  top: 595px;
+  left: 85px;
+
+  display: flex;
+  gap: 5px;
+}
+
+.green {
+  color: #00a143;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.title {
+  padding-left: 4px;
+  z-index: 1;
+  opacity: 0.749;
+}
+
+.value {
+  padding-right: 4px;
+  z-index: 1;
+}
+
+      </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="status-title title">وضعیت</div>
+      <div class="status-value value">{{ status }}</div>
+      <div class="from-title title">حساب مبد‌أ</div>
+      <div class="from-value value">
+<!--        ۹۰*****۴۶-->
+        {{ source_account }}
+      </div>
+      <div class="to-title title">شبا مقصد</div>
+      <div class="to-value value">{{ iban }}</div>
+      <div class="to-name-title title">نام صاحب شبا</div>
+      <div class="to-name-value value">{{ receiver }}</div>
+      <div class="date-title title">تاریخ و زمان</div>
+      <div class="date-value value font-bold">{{ datetime }}</div>
+      <div class="tracking-title title">شماره پیگیری</div>
+      <div class="tracking-value value font-bold green">{{ tracking_code }}</div>
+      <div class="from-number-title title">شماره مرجع</div>
+      <div class="from-number-value value font-bold green">{{ marja }}</div>
+      <div class="price-title title">مبلغ</div>
+      <div dir="rtl" class="price-value value">
+        <span class="green font-bold" style="line-height: 32px"
+          >{{ amount }}</span
+        >
+        ریال
+      </div>
+    </div>
+  </body>
+</html>

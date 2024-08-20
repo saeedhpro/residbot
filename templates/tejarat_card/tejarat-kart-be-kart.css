@@ -1,0 +1,151 @@
+@font-face {
+  font-family: vazir;
+  src: url("../vazir.ttf");
+}
+@font-face {
+  font-family: vazir-light;
+  src: url("../vazir-light.ttf");
+}
+
+
+body {
+  font-size: 18px;
+  font-weight: 100;
+  font-family: vazir-light;
+  color: #959595;
+  text-shadow: 0 0 1px #959595;
+}
+
+.container {
+  width: 591px;
+  height: 1280px;
+  background-image: url("./Tejarak-kart-be-kart.png");
+  object-fit: cover;
+  position: relative;
+}
+
+.status-title {
+  position: absolute;
+  top: 172px;
+  right: 50px;
+}
+
+.status-value {
+  position: absolute;
+  top: 172px;
+  left: 95px;
+  font-family: vazir;
+}
+
+.from-title {
+  position: absolute;
+  top: 248px;
+  right: 50px;
+}
+
+.from-value {
+  position: absolute;
+  top: 248px;
+  left: 95px;
+}
+
+.to-title {
+  position: absolute;
+  top: 322px;
+  right: 50px;
+}
+.to-value {
+  position: absolute;
+  top: 322px;
+  left: 95px;
+}
+
+.to-name-title {
+  position: absolute;
+  top: 396px;
+  right: 50px;
+}
+.to-name-value {
+  position: absolute;
+  top: 396px;
+  left: 95px;
+}
+
+.date-title {
+  position: absolute;
+  top: 470px;
+  right: 50px;
+}
+.date-value {
+  position: absolute;
+  top: 470px;
+  left: 95px;
+}
+
+.tracking-title {
+  position: absolute;
+  top: 544px;
+  right: 50px;
+}
+.tracking-value {
+  position: absolute;
+  top: 544px;
+  left: 50px;
+}
+
+.from-number-title {
+  position: absolute;
+  top: 608px;
+  right: 50px;
+}
+.from-number-value {
+  position: absolute;
+  top: 608px;
+  left: 50px;
+}
+
+.price-title {
+  position: absolute;
+  top: 677px;
+  right: 50px;
+}
+.price-value {
+  position: absolute;
+  top: 677px;
+  left: 50px;
+
+  display: flex;
+  gap: 5px;
+}
+
+.green {
+  color: #00a143;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.title {
+  padding-left: 4px;
+  background-color: white;
+  z-index: 1;
+}
+
+.title::after {
+  content: "";
+  z-index: 0;
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%);
+  width: calc(400px - 100%);
+  height: 1px;
+  background-color: #EBEBEB;
+}
+
+.value {
+  padding-right: 4px;
+  background-color: white;
+  z-index: 1;
+}

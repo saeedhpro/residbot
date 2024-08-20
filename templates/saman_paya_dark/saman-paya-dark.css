@@ -1,0 +1,83 @@
+@font-face {
+  font-family: vazir;
+  src: url("../vazir.ttf");
+}
+@font-face {
+  font-family: vazir-light;
+  src: url("../vazir-light.ttf");
+}
+
+body {
+  font-size: 27px;
+  font-weight: 300;
+  font-family: vazir;
+  color: white;
+  padding: 0 !important;
+}
+
+h1 {
+  text-wrap: nowrap;
+  font-size: 32px;
+  font-weight: bold;
+  position: absolute;
+  top: 270px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.container {
+  width: 752px;
+  height: 1280px;
+  background-image: url("Saman_Paya_Dark.png");
+  object-fit: cover;
+  position: relative;
+}
+
+.rows {
+  width: 520px;
+  padding-top: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.divider {
+  margin-top: 15px;
+}
+
+.green-text {
+  color: #00a143;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.from-title {
+  top: 240px;
+}
+.from-value {
+  top: 275px;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.title {
+  direction: rtl;
+  opacity: 0.85;
+  flex-shrink: 0;
+}
+
+.value {
+  text-align: center;
+  font-weight: bold;
+  font-family: vazir-light;
+  flex-shrink: 0;
+}

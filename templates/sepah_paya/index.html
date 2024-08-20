@@ -1,0 +1,192 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title title>Document</title>
+<!--    <link rel="stylesheet" href="sepah-paya.css" />-->
+      <style>
+@page {
+    size: 178.1mm 269.3mm; /* A4 size */
+    margin: 0; /* حذف حاشیه */
+}
+@font-face {
+  font-family: vazir;
+  src: url("../vazir.ttf");
+}
+@font-face {
+  font-family: vazir-light;
+  src: url("../vazir-light.ttf");
+}
+
+body {
+  font-size: 22px;
+  font-weight: 300;
+  font-family: vazir;
+  color: #4d4d4d;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.container {
+  width: 685px;
+  height: 1280px;
+  background-image: url("./Sepah-Paya.png");
+  object-fit: cover;
+  position: relative;
+}
+
+.green {
+  color: #00a143;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.record-date-title {
+  top: 240px;
+}
+.record-date-value {
+  top: 275px;
+}
+
+.tracking-number-title {
+  top: 325px;
+}
+.tracking-number-value {
+  top: 360px;
+}
+
+.from-title {
+  top: 415px;
+}
+.from-value {
+  top: 445px;
+}
+
+.to-title {
+  top: 500px;
+}
+.to-value {
+  top: 535px;
+}
+
+.price-title {
+  top: 585px;
+}
+.price-value {
+  top: 620px;
+  direction: rtl;
+}
+
+.transaction-fee-title {
+  top: 673px;
+}
+.transaction-fee-value {
+  top: 703px;
+}
+
+.to-bank-title {
+  top: 758px;
+}
+.to-bank-value {
+  top: 790px;
+}
+
+.sender-title {
+  top: 845px;
+}
+.sender-value {
+  top: 875px;
+}
+
+.receiver-title {
+  top: 930px;
+}
+.receiver-value {
+  top: 960px;
+}
+
+.from-description-title {
+  top: 1015px;
+}
+.from-description-value {
+  top: 1050px;
+}
+
+.reason-title {
+  top: 1100px;
+}
+.reason-value {
+  top: 1140px;
+}
+
+.description-title {
+  top: 1185px;
+}
+.description-value {
+  top: 1215px;
+}
+
+.title {
+  direction: rtl;
+  position: absolute;
+  right: 32px;
+  opacity: 0.85;
+}
+
+.value {
+  width: 100%;
+  color: #606261;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-weight: bold;
+}
+
+      </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="record-date-title title">تاریخ ثبت پایا:</div>
+      <div class="record-date-value value">
+<!--        چهارشنبه ۲۵ بهمن ماه سال ۱۴۰۲ ساعت ۱۳:۴۸:۴۷-->
+        {{ datetime }}
+      </div>
+
+      <div class="tracking-number-title title">شماره پیگیری:</div>
+      <div class="tracking-number-value value">{{ tracking_code }}</div>
+
+      <div class="from-title title">شماره سپرده مبدا‌:</div>
+      <div class="from-value value">{{ source_account }}</div>
+
+      <div class="to-title title">شماره شبای مقصد:</div>
+      <div class="to-value value">{{ receiver }} {{ iban }}</div>
+
+      <div class="price-title title">مبلغ انتقال:</div>
+      <div class="price-value value">{{ amount }} ریال</div>
+
+      <div class="transaction-fee-title title">کسر کارمزد از سپرده:</div>
+      <div class="transaction-fee-value value">{{ receiver_account }}</div>
+
+      <div class="to-bank-title title">نام بانک مقصد:</div>
+      <div class="to-bank-value value">{{ receiver_bank }}</div>
+
+      <div class="sender-title title">فرستنده:</div>
+      <div class="sender-value value">{{ sender }}</div>
+
+      <div class="receiver-title title">گیرنده:</div>
+      <div class="receiver-value value">{{ receiver }}</div>
+
+      <div class="from-description-title title">شرح مبدا‌:</div>
+      <div class="from-description-value value">ندارد</div>
+
+      <div class="reason-title title">بابت:</div>
+      <div class="reason-value value">{{ reason }}</div>
+
+      <div class="description-title title">شرح:</div>
+      <div class="description-value value">{{ description }}</div>
+    </div>
+  </body>
+</html>

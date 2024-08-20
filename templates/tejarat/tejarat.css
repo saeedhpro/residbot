@@ -1,0 +1,131 @@
+@font-face {
+  font-family: vazir;
+  src: url("../vazir.ttf");
+}
+
+body {
+  font-size: 18px;
+  font-family: vazir;
+  color: #7e7e7e;
+  padding: 0 !important;
+}
+
+.container {
+  width: 677px;
+  height: 1019px;
+  background-image: url("./tejarat.png");
+  object-fit: cover;
+  position: relative;
+}
+
+.status {
+  position: absolute;
+  top: 240px;
+  right: 120px;
+}
+
+.in-progress {
+  position: absolute;
+  top: 240px;
+  left: 172px;
+}
+
+.type-title {
+  position: absolute;
+  top: 310px;
+  right: 117px;
+}
+
+.type-value {
+  position: absolute;
+  top: 310px;
+  left: 138px;
+}
+
+.from-title {
+  position: absolute;
+  top: 380px;
+  right: 117px;
+}
+
+.from-value {
+  position: absolute;
+  top: 380px;
+  left: 138px;
+}
+
+.to-title {
+  position: absolute;
+  top: 445px;
+  right: 117px;
+}
+
+.to-value {
+  position: absolute;
+  top: 447px;
+  left: 136px;
+}
+
+.to-name-title {
+  position: absolute;
+  top: 510px;
+  right: 114px;
+}
+
+.to-name-value {
+  position: absolute;
+  top: 512px;
+  left: 134px;
+}
+
+.date-title {
+  position: absolute;
+  top: 580px;
+  right: 114px;
+}
+
+.date-value {
+  position: absolute;
+  top: 582px;
+  left: 134px;
+}
+
+.tracking-title {
+  position: absolute;
+  top: 650px;
+  right: 113px;
+}
+
+.tracking-value {
+  position: absolute;
+  top: 652px;
+  left: 133px;
+}
+
+.from-number-title {
+  position: absolute;
+  top: 712px;
+  right: 111px;
+}
+
+.from-number-value {
+  position: absolute;
+  top: 712px;
+  left: 132px;
+}
+
+.price-title {
+  position: absolute;
+  top: 778px;
+  right: 122px;
+}
+
+.price-value {
+  position: absolute;
+  top: 779px;
+  left: 135px;
+}
+
+.green {
+  color: #00A143;
+}
