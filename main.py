@@ -336,6 +336,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'marja': convert_numbers_to_farsi(context.user_data['marja']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
         }
 
     await update.message.reply_text('در حال ساخت رسید... لطفا صبر کنید!:')
