@@ -344,7 +344,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         'no-stop-slow-scripts': '',
         'enable-local-file-access': '',
     }
-    match(context.user_data['bank_type']):
+    match context.user_data['bank_type']:
         case 'tejarat':
             options['height'] = '1019'
             options['width'] = '677'
