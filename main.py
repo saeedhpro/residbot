@@ -343,9 +343,31 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         'encoding': "UTF-8",
         'no-stop-slow-scripts': '',
         'enable-local-file-access': '',
-        'height': '1280',
-        'width': '752'
     }
+    match(context.user_data['bank_type']):
+        case 'tejarat':
+            options['height'] = '1019'
+            options['width'] = '677'
+        case 'tejarat_card':
+            options['height'] = '1280'
+            options['width'] = '591'
+        case 'tejarat_paya':
+            options['height'] = '1280'
+            options['width'] = '591'
+        case 'sepah_satna':
+            options['height'] = '1280'
+            options['width'] = '752'
+        case 'sepah_paya':
+            options['height'] = '1280'
+            options['width'] = '685'
+        case 'saman_paya_light':
+            options['height'] = '1280'
+            options['width'] = '752'
+        case 'saman_paya_dark':
+            options['height'] = '1280'
+            options['width'] = '752'
+
+
     imgkit.from_string(rendered_html, png_path, options=options)
 
     await update.message.reply_photo(photo=open(png_path, 'rb'))
