@@ -285,10 +285,12 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         }
 
     if bank_type == 'sepah_satna':
+        amount = context.user_data['amount']
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'amount_fa': format_amount(convert_numbers_to_farsi(convert_number_to_words(int(amount) / 10))),
             'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
@@ -411,6 +413,35 @@ def convert_numbers_to_farsi(text):
     english_to_farsi = str.maketrans('0123456789', '۰۱۲۳۴۵۶۷۸۹')
     return text.translate(english_to_farsi)
 
+def convert_number_to_words(number):
+    units = ["", "یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه"]
+    tens = ["", "ده", "بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود"]
+    teens = ["ده", "یازده", "دوازده", "سیزده", "چهارده", "پانزده", "شانزده", "هفده", "هجده", "نوزده"]
+    hundreds = ["", "صد", "دویست", "سیصد", "چهارصد", "پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد"]
+    thousands = ["", "هزار", "میلیون", "میلیارد"]
+
+    def convert_three_digits(n):
+        if n == 0:
+            return ""
+        elif n < 10:
+            return units[n]
+        elif n < 20:
+            return teens[n - 10]
+        elif n < 100:
+            return tens[n // 10] + (units[n % 10] if (n % 10) != 0 else "")
+        else:
+            return hundreds[n // 100] + " و " + convert_three_digits(n % 100)
+
+    def convert_number_to_words_recursive(n, level=0):
+        if n == 0:
+            return ""
+        else:
+            return convert_number_to_words_recursive(n // 1000, level + 1) + (
+                " و " if n % 1000 != 0 and level > 0 else "") + convert_three_digits(n % 1000) + (
+                       " " + thousands[level] if n % 1000 != 0 else "")
+
+    result = convert_number_to_words_recursive(number).strip()
+    return result if result else "صفر"
 
 def main():
     application = Application.builder().token("7415076812:AAEqyQE_M13mYmDn8wbxE3U-d6-uoYHe_2o").build()
