@@ -344,28 +344,27 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         'no-stop-slow-scripts': '',
         'enable-local-file-access': '',
     }
-    match context.user_data['bank_type']:
-        case 'tejarat':
-            options['height'] = '1019'
-            options['width'] = '677'
-        case 'tejarat_card':
-            options['height'] = '1280'
-            options['width'] = '591'
-        case 'tejarat_paya':
-            options['height'] = '1280'
-            options['width'] = '591'
-        case 'sepah_satna':
-            options['height'] = '1280'
-            options['width'] = '752'
-        case 'sepah_paya':
-            options['height'] = '1280'
-            options['width'] = '685'
-        case 'saman_paya_light':
-            options['height'] = '1280'
-            options['width'] = '752'
-        case 'saman_paya_dark':
-            options['height'] = '1280'
-            options['width'] = '752'
+    if context.user_data['bank_type'] == 'tejarat':
+        options['height'] = '1019'
+        options['width'] = '677'
+    elif context.user_data['bank_type'] == 'tejarat_card':
+        options['height'] = '1280'
+        options['width'] = '591'
+    elif context.user_data['bank_type'] == 'tejarat_paya':
+        options['height'] = '1280'
+        options['width'] = '591'
+    elif context.user_data['bank_type'] == 'sepah_satna':
+        options['height'] = '1280'
+        options['width'] = '752'
+    elif context.user_data['bank_type'] == 'sepah_paya':
+        options['height'] = '1280'
+        options['width'] = '685'
+    elif context.user_data['bank_type'] == 'saman_paya_light':
+        options['height'] = '1280'
+        options['width'] = '752'
+    elif context.user_data['bank_type'] == 'saman_paya_dark':
+        options['height'] = '1280'
+        options['width'] = '752'
 
 
     imgkit.from_string(rendered_html, png_path, options=options)
