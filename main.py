@@ -79,7 +79,7 @@ async def handle_source_account(update: Update, context):
     context.user_data['source_account'] = update.message.text
 
     if context.user_data['bank_type'] == 'tejarat_paya':
-        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
 
     if context.user_data['bank_type'] == 'tejarat_card':
@@ -117,10 +117,10 @@ async def handle_get_dest_iban(update: Update, context):
         return GET_SENDER_NAME
     if context.user_data['bank_type'] == 'tejarat_card':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
-        return GET_SENDER_NAME
+        return GET_DEST_NAME
     if context.user_data['bank_type'] == 'tejarat_paya':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
-        return GET_SENDER_NAME
+        return GET_DEST_NAME
     if context.user_data['bank_type'] == 'sepah_satna':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
