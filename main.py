@@ -183,6 +183,11 @@ async def handle_dest_account(update: Update, context):
         await update.message.reply_text('نام بانک مقصد را وارد کنید:')
         return GET_DEST_BANK
 
+    if context.user_data['bank_type'] == 'saman_paya_dark' or \
+            context.user_data['bank_type'] == 'saman_paya_light':
+        await update.message.reply_text('کد پیگیری را وارد کنید:')
+        return GET_TRACKING_CODE
+
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SENDER_NAME
 
