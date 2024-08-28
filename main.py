@@ -183,12 +183,7 @@ async def handle_dest_account(update: Update, context):
         await update.message.reply_text('نام بانک مقصد را وارد کنید:')
         return GET_DEST_BANK
 
-    if context.user_data['bank_type'] == 'saman_paya_dark' or \
-            context.user_data['bank_type'] == 'saman_paya_light':
-        await update.message.reply_text('کد پیگیری را وارد کنید:')
-        return GET_TRACKING_CODE
-
-    await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
+    await update.message.reply_text('نام انتقال دهنده را وارد کنید:')
     return GET_SENDER_NAME
 
 
@@ -251,6 +246,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
             'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'sender': convert_numbers_to_farsi(context.user_data['sender']),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'receiver_account': convert_numbers_to_farsi(context.user_data['receiver_account']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
@@ -264,6 +260,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
             'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'sender': convert_numbers_to_farsi(context.user_data['sender']),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'receiver_account': convert_numbers_to_farsi(context.user_data['receiver_account']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
