@@ -1,0 +1,141 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+      @font-face {
+        font-family: vazir-light;
+        src: url("/home/original/residbot/templates/Vazir-Light.ttf");
+      }
+      @font-face {
+        font-family: vazir-medium;
+        src: url("/home/original/residbot/templates/Vazirmatn-Medium.ttf");
+      }
+
+      body {
+        font-size: 27px;
+        font-weight: 300;
+        font-family: vazir;
+        color: #2a3034;
+      }
+
+      h1 {
+        text-wrap: nowrap;
+        font-size: 32px;
+        font-weight: bold;
+        font-family: vazir-light;
+        position: absolute;
+        top: 270px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .container {
+        width: 591px;
+        height: 1280px;
+        /* background-image: url("post_bank_paya_2-filled.png"); */
+        background-image: url("/home/original/residbot/templates/post_bank_paya_2/post-bank-paya-2.png");
+        object-fit: cover;
+        position: relative;
+      }
+
+      .price {
+        position: absolute;
+        top: 275px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 20px;
+        letter-spacing: 0px;
+        color: #ffffff;
+        font-weight: 400;
+        padding-left: 42px;
+      }
+      .unit {
+        position: absolute;
+        top: 0px;
+        left: 0;
+        font-size: 21px;
+        letter-spacing: 0px;
+        color: #ffffff;
+        display: inline-block;
+      }
+
+      .date {
+        position: absolute;
+        top: 216px;
+        right: 186px;
+        font-size: 23px;
+        letter-spacing: -1px;
+        color: #999999;
+        font-weight: 400;
+      }
+
+      .time {
+        position: absolute;
+        top: 216px;
+        right: 390px;
+        font-size: 22px;
+        letter-spacing: 0px;
+        color: #999999;
+        font-weight: 400;
+      }
+
+      .from-number {
+        position: absolute;
+        top: 338px;
+        left: 70px;
+        font-size: 17px;
+        letter-spacing: 0px;
+        color: #999999;
+        font-weight: bold;
+      }
+
+      .to-number {
+        position: absolute;
+        top: 405px;
+        left: 72px;
+        font-size: 17px;
+        letter-spacing: 0px;
+        color: #999999;
+        font-weight: bold;
+      }
+      .to-name {
+        position: absolute;
+        top: 456px;
+        left: 74px;
+        font-size: 17px;
+        letter-spacing: 0px;
+        color: #999999;
+        font-weight: bold;
+      }
+
+      .tracking-number {
+        position: absolute;
+        top: 712px;
+        right: 287px;
+        font-size: 20px;
+        letter-spacing: -1px;
+        line-height: 21px;
+        color: #999999;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="price">{{amount}} <span class="unit">ریال</span></div>
+      <div class="date">{{date}}</div>
+      <div class="time">{{time}}</div>
+      <div class="from-number">{{source_account}}</div>
+      <div class="from-name">{{sender}}</div>
+      <div class="to-number">{{iban}}</div>
+      <div class="to-name">{{receiver}}</div>
+      <div class="tracking-number">{{tracking_code}}</div>
+    </div>
+  </body>
+</html>
