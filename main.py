@@ -636,6 +636,7 @@ async def handle_dest_bank(update: Update, context):
     if context.user_data['bank_type'] == 'refah_2':
         await update.message.reply_text('کد پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
+    print(context.user_data['bank_type'], "=============")
     if context.user_data['bank_type'] == 'refah_satna':
         await update.message.reply_text('شناسه پرداخت را وارد کنید:')
         return GET_TRACKING_CODE
