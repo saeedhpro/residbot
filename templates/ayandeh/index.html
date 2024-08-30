@@ -1,0 +1,142 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+
+      html,
+      body {
+        font-family: vazir;
+      }
+
+      .container {
+        width: 654px;
+        height: 1280px;
+        background-image: url("/home/original/residbot/templates/ayandeh/ayandeh.png");
+        /* background-image: url("ayandeh-filled.png"); */
+        object-fit: cover;
+        position: relative;
+      }
+
+      .request-number {
+        width: 100%;
+        text-align: center;
+        opacity: 0.91;
+        font-size: 32px;
+        color: #ffffff;
+        font-weight: 400;
+        position: absolute;
+        top: 24;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .from {
+        opacity: 0.729;
+        position: absolute;
+        top: 287;
+        left: 50%;
+        transform: translateX(-50%);
+        text-wrap: nowrap;
+        font-size: 32px;
+        letter-spacing: -1px;
+        color: #1a1a1a;
+        font-weight: 400;
+      }
+
+      .date {
+        position: absolute;
+        top: 440;
+        left: 62;
+        opacity: 0.859;
+        font-size: 32px;
+        letter-spacing: -1px;
+        color: #1a1a1a;
+      }
+
+      .price {
+        opacity: 0.859;
+        font-size: 32px;
+        letter-spacing: -1px;
+        color: #1a1a1a;
+        font-weight: 400;
+        position: absolute;
+        top: 526;
+        left: 119;
+      }
+      .unit {
+        position: absolute;
+        top: 0;
+        left: -57;
+      }
+
+      .to {
+        position: absolute;
+        top: 609;
+        left: 108;
+        font-size: 32px;
+        opacity: 0.859;
+        letter-spacing: -1px;
+        color: #1a1a1a;
+        font-weight: 400;
+      }
+
+      .to-name {
+        position: absolute;
+        top: 693;
+        left: 61;
+        font-size: 32px;
+        opacity: 0.859;
+        letter-spacing: -1px;
+        color: #1a1a1a;
+        font-weight: 400;
+      }
+
+      .tracking-code {
+        position: absolute;
+        top: 777;
+        left: 62;
+        font-size: 32px;
+        opacity: 0.859;
+        letter-spacing: -1px;
+        color: #1a1a1a;
+        font-weight: 400;
+      }
+
+      .desc {
+        position: absolute;
+        top: 862;
+        left: 62;
+        font-size: 32px;
+        opacity: 0.859;
+        letter-spacing: -1px;
+        color: #1a1a1a;
+        font-weight: 400;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="request-number">اشتراک درخواست ۲۷۵۸۱۱۷۰۴</div>
+      <div class="from">
+        {{sender}} - <span dir="ltr">{{ source_account }}</span>
+      </div>
+      <div class="date">{{ datetime }}</div>
+
+      <div class="price">
+        {{ amount }}
+        <div class="unit">ریال</div>
+      </div>
+
+      <div class="to">{{iban}}</div>
+      <div class="to-name">{{receiver}}</div>
+      <div class="tracking-code">{{tracking_code}}</div>
+      <div class="desc">خرید</div>
+    </div>
+  </body>
+</html>

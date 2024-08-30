@@ -1,0 +1,112 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+
+      html,
+      body {
+        font-family: vazir;
+        font-size: 20px;
+        color: #184056;
+        font-weight: 400;
+      }
+
+      .container {
+        width: 668px;
+        height: 1280px;
+        background-image: url("/home/original/residbot/templates/maskan_satna/maskan-satna.png");
+        /* background-image: url("maskan_satna-filled.png"); */
+        object-fit: cover;
+        position: relative;
+      }
+
+      .from {
+        position: absolute;
+        top: 478;
+        left: 42;
+      }
+
+      .from-shaba {
+        position: absolute;
+        top: 540;
+        left: 45;
+      }
+
+      .to-shaba {
+        position: absolute;
+        top: 600;
+        left: 45;
+      }
+
+      .to-name {
+        position: absolute;
+        top: 663;
+        left: 48;
+      }
+
+      .to-last-name {
+        position: absolute;
+        top: 734;
+        left: 40;
+      }
+
+      .price {
+        font-size: 19px;
+        position: absolute;
+        top: 806;
+        left: 85;
+      }
+      .unit {
+        position: absolute;
+        top: 0;
+        left: -42;
+        right: auto;
+        color: #cf904f;
+      }
+      .for {
+        position: absolute;
+        top: 863;
+        left: 47;
+      }
+      .from-id {
+        font-size: 18px;
+        position: absolute;
+        top: 930;
+        left: 44;
+      }
+      .tracking-code {
+        position: absolute;
+        top: 989; 
+        left: 44;
+      }
+      .date {
+        position: absolute;
+        top: 1050;
+        left: 44;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="from">{{ source_account }}</div>
+      <div class="from-shaba">{{source_iban}}</div>
+      <div class="to-shaba">{{iban}}</div>
+      <div class="to-name">{{receiver_fname}}</div>
+      <div class="to-last-name">{{receiver_lname}}</div>
+      <div class="price">
+        {{amount}}
+        <div class="unit">ریال</div>
+      </div>
+      <div class="for">{{description}}</div>
+      <div class="from-id">{{marja}}</div>
+      <div class="tracking-code">{{tracking_code}}</div>
+      <div class="date">{{datetime}}</div>
+    </div>
+  </body>
+</html>

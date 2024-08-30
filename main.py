@@ -10,7 +10,7 @@ import imgkit
 
 (START, RETURN_MENU, SELECT_ACTION, SELECT_BANK, GET_STATUS, GET_TRANSACTION_TYPE, GET_SOURCE_ACCOUNT, GET_DEST_IBAN,
  GET_DEST_NAME, GET_DATETIME, GET_AMOUNT, GET_SENDER_NAME, GET_DEST_ACCOUNT, GET_DEST_BANK, GET_REASON, GET_DESCRIPTION,
- GET_TRACKING_CODE, GET_MARJA, GET_DATE, GET_TIME) = range(20)
+ GET_TRACKING_CODE, GET_MARJA, GET_DATE, GET_TIME, GET_RECEIVER_FNAME, GET_RECEIVER_LNAME, GET_SOURCE_IBAN) = range(23)
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -144,6 +144,10 @@ async def handle_source_account(update: Update, context):
         await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
 
+    if context.user_data['bank_type'] == 'maskan_satna':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
 
@@ -183,9 +187,33 @@ async def handle_get_dest_iban(update: Update, context):
     if context.user_data['bank_type'] == 'keshavarzi':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
+    if context.user_data['bank_type'] == 'maskan_satna':
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_RECEIVER_FNAME
 
     await update.message.reply_text('نام صاحب شبا را وارد کنید:')
     return GET_DEST_NAME
+
+
+async def handle_get_receiver_fname(update: Update, context):
+    context.user_data['receiver_fname'] = update.message.text
+
+    await update.message.reply_text('نام خانوادگی دریافت کننده را وارد کنید:')
+    return GET_RECEIVER_LNAME
+
+
+async def handle_get_receiver_lname(update: Update, context):
+    context.user_data['receiver_lname'] = update.message.text
+
+    await update.message.reply_text('شماره شبا ارسال کننده را وارد کنید:')
+    return GET_SOURCE_IBAN
+
+
+async def handle_get_source_iban(update: Update, context):
+    context.user_data['receiver_lname'] = update.message.text
+
+    await update.message.reply_text('توضیحات را وارد کنید:')
+    return GET_DESCRIPTION
 
 
 async def handle_get_dest_name(update: Update, context):
@@ -463,6 +491,21 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
         }
 
+    if bank_type == 'maskan_satna':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'source_iban': convert_numbers_to_farsi(context.user_data['source_iban']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'description': convert_numbers_to_farsi(context.user_data['description']),
+            'receiver_fname': convert_numbers_to_farsi(context.user_data['receiver_fname']),
+            'receiver_lname': convert_numbers_to_farsi(context.user_data['receiver_lname']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'marja': convert_numbers_to_farsi(context.user_data['marja']),
+        }
+
     await update.message.reply_text('در حال ساخت رسید... لطفا صبر کنید!:')
     rendered_html = template.render(html_content)
     png_path = f"./receipts/image/receipt_{context.user_data['tracking_code']}.png"
@@ -508,6 +551,9 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     elif context.user_data['bank_type'] == 'keshavarzi':
         options['height'] = '1280'
         options['width'] = '665'
+    elif context.user_data['bank_type'] == 'maskan_satna':
+        options['height'] = '1280'
+        options['width'] = '668'
 
 
     imgkit.from_string(rendered_html, png_path, options=options)
@@ -604,6 +650,9 @@ def main():
             GET_MARJA: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_marja)],
             GET_DATE: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_date)],
             GET_TIME: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_time)],
+            GET_RECEIVER_FNAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_receiver_fname)],
+            GET_RECEIVER_LNAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_receiver_lname)],
+            GET_SOURCE_IBAN: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_source_iban)],
         },
         fallbacks=[CommandHandler('start', start)],
     )
