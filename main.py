@@ -46,6 +46,8 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک کشاورزی", callback_data='keshavarzi')],
         [InlineKeyboardButton("بانک مهر", callback_data='mehr')],
         [InlineKeyboardButton("بانک مهر 2", callback_data='mehr_2')],
+        [InlineKeyboardButton("بانک مهر 3", callback_data='mehr_3')],
+        [InlineKeyboardButton("بانک مهر 4", callback_data='mehr_4')],
         [InlineKeyboardButton("بازگشت", callback_data='return_to_menu')],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -223,6 +225,9 @@ async def handle_get_dest_iban(update: Update, context):
     if context.user_data['bank_type'] == 'mehr_3':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
+    if context.user_data['bank_type'] == 'mehr_4':
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_DEST_NAME
     if context.user_data['bank_type'] == 'maskan_satna':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_RECEIVER_FNAME
@@ -293,6 +298,9 @@ async def handle_get_dest_name(update: Update, context):
     if context.user_data['bank_type'] == 'mehr_3':
         await update.message.reply_text('کد پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
+    if context.user_data['bank_type'] == 'mehr_4':
+        await update.message.reply_text('نام ارسال کننده را وارد کنید:')
+        return GET_SENDER_NAME
 
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
@@ -305,6 +313,7 @@ async def handle_get_sender_name(update: Update, context):
             or context.user_data['bank_type'] == 'saman_paya_light' \
             or context.user_data['bank_type'] == 'saman_paya_dark' \
             or context.user_data['bank_type'] == 'ayandeh' \
+            or context.user_data['bank_type'] == 'mehr_4' \
             or context.user_data['bank_type'] == 'eghtesad':
         await update.message.reply_text('کد پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
@@ -568,7 +577,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
             'mande': format_amount(convert_numbers_to_farsi(context.user_data['mande'])),
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver_lname']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
         }
 
@@ -580,7 +589,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
             'mande': format_amount(convert_numbers_to_farsi(context.user_data['mande'])),
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver_lname']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
         }
 
@@ -591,7 +600,19 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver_lname']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+        }
+
+    if bank_type == 'mehr_4':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'sender': convert_numbers_to_farsi(context.user_data['sender']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
         }
 
@@ -650,6 +671,9 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1280'
         options['width'] = '591'
     elif context.user_data['bank_type'] == 'mehr_3':
+        options['height'] = '1280'
+        options['width'] = '591'
+    elif context.user_data['bank_type'] == 'mehr_4':
         options['height'] = '1280'
         options['width'] = '591'
 
