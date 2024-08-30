@@ -1,0 +1,141 @@
+<!-- FIXME: styles -->
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+
+      html,
+      body {
+        font-family: vazir;
+      }
+
+      .container {
+        width: 687px;
+        height: 1280px;
+        background-image: url("/home/original/residbot/templates/parsian/parsian.png");
+        /* background-image: url("parsian-filled.png"); */
+        object-fit: cover;
+        position: relative;
+      }
+
+      .from-name {
+        position: absolute;
+        top: 534;
+        right: 64;
+        font-size: 25px;
+        letter-spacing: 0px;
+        line-height: 0px;
+        color: #000000;
+        font-weight: 400;
+        opacity: 0.902;
+      }
+      .from-number {
+        position: absolute;
+        top: 583;
+        left: 360;
+        font-size: 25px;
+        letter-spacing: 0px;
+        line-height: 0px;
+        color: #000000;
+        font-weight: 400;
+        opacity: 0.902;
+      }
+      .to-name {
+        position: absolute;
+        top: 522;
+        right: 372;
+        font-size: 25px;
+        letter-spacing: 0px;
+        line-height: 0px;
+        color: #000000;
+        font-weight: 400;
+        opacity: 0.902;
+      }
+      .to-number {
+        position: absolute;
+        top: 574;
+        left: 56;
+        font-size: 25px;
+        letter-spacing: 0px;
+        line-height: 0px;
+        color: #000000;
+        font-weight: 400;
+        opacity: 0.902;
+      }
+
+      .status {
+        font-size: 23px;
+        letter-spacing: 0px;
+        line-height: 0px;
+        color: #000000;
+        font-weight: 400;
+        position: absolute;
+        top: 782;
+        left: 89;
+      }
+
+      .desc {
+        font-size: 23px;
+        letter-spacing: 0px;
+        line-height: 0px;
+        color: #000000;
+        font-weight: 400;
+        position: absolute;
+        top: 840;
+        left: 95;
+      }
+
+      .price {
+        font-size: 23px;
+        letter-spacing: 0px;
+        line-height: 0px;
+        color: #000000;
+        font-weight: 400;
+        position: absolute;
+        top: 900;
+        left: 89;
+      }
+
+      .date {
+        font-size: 37px;
+        letter-spacing: -1px;
+        line-height: 23px;
+        color: #000000;
+        font-weight: 400;
+        position: absolute;
+        top: 1041;
+        left: 84;
+      }
+
+      .tracking-code {
+        font-size: 37px;
+        letter-spacing: -2px;
+        line-height: 23px;
+        color: #048d02;
+        font-weight: 400;
+        position: absolute;
+        top: 1100;
+        left: 86;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="from-name">{{sender}}</div>
+      <div class="from-number" dir="ltr">{{source_account}}</div>
+      <div class="to-name">{{receiver}}</div>
+      <div class="to-number" dir="ltr">{{iban}}</div>
+      <div class="status">{{status}}</div>
+      <div class="desc">{{description}}</div>
+      <div class="price">{{amount}}</div>
+      <div class="date">{{datetime}}</div>
+      <div class="tracking-code">{{tracking_code}}</div>
+    </div>
+  </body>
+</html>
