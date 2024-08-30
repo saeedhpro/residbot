@@ -469,7 +469,7 @@ async def handle_get_dest_name(update: Update, context):
         return GET_SENDER_NAME
     if context.user_data['bank_type'] == 'refah_satna':
         await update.message.reply_text('نام بانک مقصد را وارد کنید:')
-        return GET_TRACKING_CODE
+        return GET_DEST_BANK
 
     if context.user_data['bank_type'] == 'refah':
         await update.message.reply_text('نام بانک مقصد را وارد کنید:')
