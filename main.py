@@ -51,6 +51,7 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک مهر تاریک", callback_data='mehr_dark')],
         [InlineKeyboardButton("بانک مهر تاریک 2", callback_data='mehr_dark_2')],
         [InlineKeyboardButton("بانک مهر روشن", callback_data='mehr_light')],
+        [InlineKeyboardButton("بانک ملت", callback_data='mellat')],
         [InlineKeyboardButton("بازگشت", callback_data='return_to_menu')],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -66,7 +67,8 @@ async def handle_select_bank(update, context):
 
     context.user_data['bank_type'] = query.data
 
-    if context.user_data['bank_type'] == 'ayandeh_paya':
+    if context.user_data['bank_type'] == 'ayandeh_paya' \
+            or context.user_data['bank_type'] == 'mellat':
         await query.edit_message_text('تاریخ را به صورت ۱۴۰۳/۰۵/۲۴ وارد کنید')
         return GET_DATE
 
@@ -84,7 +86,7 @@ async def handle_get_datetime(update: Update, context: ContextTypes.DEFAULT_TYPE
 async def handle_get_date(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data['date'] = update.message.text
 
-    await update.message.reply_text('ساعت را به صورت ۱۴۰۳/۰۵/۲۴ ۱۲:۴۵ وارد کنید')
+    await update.message.reply_text('ساعت را به صورت ۱۲:۴۵ وارد کنید')
     return GET_TIME
 
 
@@ -196,6 +198,10 @@ async def handle_source_account(update: Update, context):
         await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
 
+    if context.user_data['bank_type'] == 'mellat':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
 
@@ -254,6 +260,9 @@ async def handle_get_dest_iban(update: Update, context):
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'mehr_light':
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_DEST_NAME
+    if context.user_data['bank_type'] == 'mellat':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'maskan_satna':
@@ -338,6 +347,9 @@ async def handle_get_dest_name(update: Update, context):
     if context.user_data['bank_type'] == 'mehr_4':
         await update.message.reply_text('نام ارسال کننده را وارد کنید:')
         return GET_SENDER_NAME
+    if context.user_data['bank_type'] == 'mellat':
+        await update.message.reply_text('نام ارسال کننده را وارد کنید:')
+        return GET_SENDER_NAME
 
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
@@ -354,6 +366,10 @@ async def handle_get_sender_name(update: Update, context):
             or context.user_data['bank_type'] == 'eghtesad':
         await update.message.reply_text('کد پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
+
+    if context.user_data['bank_type'] == 'mellat':
+        await update.message.reply_text('نام بانک مقصد را وارد کنید:')
+        return GET_DEST_BANK
 
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
@@ -403,6 +419,9 @@ async def handle_dest_bank(update: Update, context):
     if context.user_data['bank_type'] == 'sepah_paya':
         await update.message.reply_text('توضیحات را وارد کنید:')
         return GET_DESCRIPTION
+    if context.user_data['bank_type'] == 'mellat':
+        await update.message.reply_text('توضیحات را وارد کنید:')
+        return GET_DESCRIPTION
 
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
@@ -432,6 +451,9 @@ async def handle_tracking_code(update: Update, context):
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
     if context.user_data['bank_type'] == 'mehr_light':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
+    if context.user_data['bank_type'] == 'mellat':
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
     await update.message.reply_text('کد مرجع را وارد کنید:')
@@ -708,6 +730,21 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
         }
 
+    if bank_type == 'mellat':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'date': convert_numbers_to_farsi(context.user_data['date']),
+            'time': convert_numbers_to_farsi(context.user_data['time']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'sender': convert_numbers_to_farsi(context.user_data['sender']),
+            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
+            'description': convert_numbers_to_farsi(context.user_data['description']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+        }
+
     await update.message.reply_text('در حال ساخت رسید... لطفا صبر کنید!:')
     rendered_html = template.render(html_content)
     png_path = f"./receipts/image/receipt_{context.user_data['tracking_code']}.png"
@@ -777,6 +814,9 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     elif context.user_data['bank_type'] == 'mehr_light':
         options['height'] = '1280'
         options['width'] = '591'
+    elif context.user_data['bank_type'] == 'mellat':
+        options['height'] = '1280'
+        options['width'] = '744'
 
     imgkit.from_string(rendered_html, png_path, options=options)
 
