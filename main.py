@@ -8,7 +8,7 @@ import imgkit
 (START, RETURN_MENU, SELECT_ACTION, SELECT_BANK, GET_STATUS, GET_TRANSACTION_TYPE, GET_SOURCE_ACCOUNT, GET_DEST_IBAN,
  GET_DEST_NAME, GET_DATETIME, GET_AMOUNT, GET_SENDER_NAME, GET_DEST_ACCOUNT, GET_DEST_BANK, GET_REASON, GET_DESCRIPTION,
  GET_TRACKING_CODE, GET_MARJA, GET_DATE, GET_TIME, GET_RECEIVER_FNAME, GET_RECEIVER_LNAME, GET_SOURCE_IBAN,
- GET_MANDE) = range(24)
+ GET_MANDE, GET_DESCRIPTION2) = range(25)
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -49,6 +49,8 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک مهر 3", callback_data='mehr_3')],
         [InlineKeyboardButton("بانک مهر 4", callback_data='mehr_4')],
         [InlineKeyboardButton("بانک مهر تاریک", callback_data='mehr_dark')],
+        [InlineKeyboardButton("بانک مهر تاریک 2", callback_data='mehr_dark_2')],
+        [InlineKeyboardButton("بانک مهر روشن", callback_data='mehr_light')],
         [InlineKeyboardButton("بازگشت", callback_data='return_to_menu')],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -101,6 +103,10 @@ async def handle_get_amount(update: Update, context):
         return GET_MANDE
 
     if context.user_data['bank_type'] == 'mehr_3':
+        await update.message.reply_text('باقیمانده را وارد کنید:')
+        return GET_MANDE
+
+    if context.user_data['bank_type'] == 'mehr_dark_2':
         await update.message.reply_text('باقیمانده را وارد کنید:')
         return GET_MANDE
 
@@ -182,6 +188,14 @@ async def handle_source_account(update: Update, context):
         await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
 
+    if context.user_data['bank_type'] == 'mehr_dark_2':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
+    if context.user_data['bank_type'] == 'mehr_light':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
 
@@ -234,6 +248,12 @@ async def handle_get_dest_iban(update: Update, context):
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'mehr_dark':
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_DEST_NAME
+    if context.user_data['bank_type'] == 'mehr_dark_2':
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_DEST_NAME
+    if context.user_data['bank_type'] == 'mehr_light':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'maskan_satna':
@@ -309,6 +329,12 @@ async def handle_get_dest_name(update: Update, context):
     if context.user_data['bank_type'] == 'mehr_dark':
         await update.message.reply_text('کد پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
+    if context.user_data['bank_type'] == 'mehr_light':
+        await update.message.reply_text('کد پیگیری را وارد کنید:')
+        return GET_TRACKING_CODE
+    if context.user_data['bank_type'] == 'mehr_dark_2':
+        await update.message.reply_text('توضیحات خط اول را وارد کنید:')
+        return GET_DESCRIPTION
     if context.user_data['bank_type'] == 'mehr_4':
         await update.message.reply_text('نام ارسال کننده را وارد کنید:')
         return GET_SENDER_NAME
@@ -349,6 +375,16 @@ async def handle_get_description(update: Update, context):
     if context.user_data['bank_type'] == 'sepah_paya':
         await update.message.reply_text('نام ارسال کننده را وارد کنید:')
         return GET_SENDER_NAME
+    if context.user_data['bank_type'] == 'mehr_dark_2':
+        await update.message.reply_text('توضیحات خط دوم را وارد کنید:')
+        return GET_DESCRIPTION2
+
+    await update.message.reply_text('کد پیگیری را وارد کنید:')
+    return GET_TRACKING_CODE
+
+
+async def handle_get_description2(update: Update, context):
+    context.user_data['description2'] = update.message.text
     await update.message.reply_text('کد پیگیری را وارد کنید:')
     return GET_TRACKING_CODE
 
@@ -390,6 +426,12 @@ async def handle_tracking_code(update: Update, context):
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
     if context.user_data['bank_type'] == 'mehr_dark':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
+    if context.user_data['bank_type'] == 'mehr_dark_2':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
+    if context.user_data['bank_type'] == 'mehr_light':
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
     await update.message.reply_text('کد مرجع را وارد کنید:')
@@ -641,6 +683,31 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
         }
 
+    if bank_type == 'mehr_dark_2':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'mande': format_amount(convert_numbers_to_farsi(context.user_data['mande'])),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'description': convert_numbers_to_farsi(context.user_data['description']),
+            'description2': convert_numbers_to_farsi(context.user_data['description2']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+        }
+
+    if bank_type == 'mehr_light':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+        }
+
     await update.message.reply_text('در حال ساخت رسید... لطفا صبر کنید!:')
     rendered_html = template.render(html_content)
     png_path = f"./receipts/image/receipt_{context.user_data['tracking_code']}.png"
@@ -702,6 +769,12 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1280'
         options['width'] = '591'
     elif context.user_data['bank_type'] == 'mehr_dark':
+        options['height'] = '1280'
+        options['width'] = '591'
+    elif context.user_data['bank_type'] == 'mehr_dark_2':
+        options['height'] = '1280'
+        options['width'] = '591'
+    elif context.user_data['bank_type'] == 'mehr_light':
         options['height'] = '1280'
         options['width'] = '591'
 
@@ -804,6 +877,8 @@ def main():
             GET_RECEIVER_FNAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_receiver_fname)],
             GET_RECEIVER_LNAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_receiver_lname)],
             GET_SOURCE_IBAN: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_source_iban)],
+            GET_MANDE: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_mande)],
+            GET_DESCRIPTION2: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_description2)],
         },
         fallbacks=[CommandHandler('start', start)],
     )

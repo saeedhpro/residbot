@@ -1,0 +1,111 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+
+      html,
+      body {
+        font-family: vazir;
+        font-size: 27px;
+        letter-spacing: -1px;
+        color: #e6e6e6;
+        font-weight: 400;
+      }
+
+      .container {
+        width: 591px;
+        height: 1280px;
+        /* background-image: url("mehr_dark_2-filled.png"); */
+        background-image: url("/home/original/residbot/templates/mehr_dark_2/mehr-dark-2.png");
+        object-fit: cover;
+        position: relative;
+      }
+
+      .to-name {
+        font-size: 26px;
+        position: absolute;
+        top: 324px;
+        right: 53px;
+      }
+
+      .price {
+        font-size: 38px;
+        position: absolute;
+        top: 402px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .unit {
+        font-size: 27px;
+        position: absolute;
+        top: 8px;
+        left: -50px;
+      }
+      .date {
+        font-size: 19px;
+        letter-spacing: 0px;
+        color: #999999;
+        position: absolute;
+        top: 488px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .from {
+        font-size: 18px;
+        letter-spacing: 0px;
+        position: absolute;
+        top: 575px;
+        left: 89px;
+      }
+      .to {
+        font-size: 18px;
+        letter-spacing: 0px;
+        position: absolute;
+        top: 633px;
+        left: 83px;
+      }
+      .remaining {
+        font-size: 18px;
+        letter-spacing: 0px;
+        position: absolute;
+        top: 692px;
+        left: 47px;
+      }
+      .details {
+        font-size: 20px;
+        position: absolute;
+        top: 780px;
+        right: 47px;
+      }
+      p {
+        padding: 0;
+        margin: 0;
+        height: 29px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="to-name">{{receiver}}</div>
+      <div class="price">
+        {{amount}}
+        <div class="unit">ریال</div>
+      </div>
+      <div class="date">{{datetime}}</div>
+      <div class="from">{{source_account}}</div>
+      <div class="to">{{iban}}</div>
+      <div class="remaining"><span>{{mande}}</span> ریال</div>
+      <div class="details">
+        <p>{{description}}</p>
+        <p>{{description_2}}</p>
+      </div>
+    </div>
+  </body>
+</html>
