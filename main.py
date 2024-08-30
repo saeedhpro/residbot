@@ -42,6 +42,7 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک تجارت", callback_data='tejarat')],
         [InlineKeyboardButton("بانک تجارت کارت به کارت", callback_data='tejarat_card')],
         [InlineKeyboardButton("بانک تجارت پایا", callback_data='tejarat_paya')],
+        [InlineKeyboardButton("بانک آینده", callback_data='ayandeh')],
         [InlineKeyboardButton("بازگشت", callback_data='return_to_menu')],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -106,6 +107,10 @@ async def handle_source_account(update: Update, context):
         await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
 
+    if context.user_data['bank_type'] == 'ayandeh':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
 
@@ -133,6 +138,9 @@ async def handle_get_dest_iban(update: Update, context):
     if context.user_data['bank_type'] == 'saman_paya_dark':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
+    if context.user_data['bank_type'] == 'ayandeh':
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_DEST_NAME
 
     await update.message.reply_text('نام صاحب شبا را وارد کنید:')
     return GET_DEST_NAME
@@ -158,6 +166,9 @@ async def handle_get_dest_name(update: Update, context):
     if context.user_data['bank_type'] == 'saman_paya_dark':
         await update.message.reply_text('شماره حساب مقصد را وارد کنید:')
         return GET_DEST_ACCOUNT
+    if context.user_data['bank_type'] == 'ayandeh':
+        await update.message.reply_text('نام ارسال کننده را وارد کنید:')
+        return GET_SENDER_NAME
 
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
@@ -168,7 +179,8 @@ async def handle_get_sender_name(update: Update, context):
     if context.user_data['bank_type'] == 'tejarat' \
             or context.user_data['bank_type'] == 'sepah_paya'\
             or context.user_data['bank_type'] == 'saman_paya_light'\
-            or context.user_data['bank_type'] == 'saman_paya_dark':
+            or context.user_data['bank_type'] == 'saman_paya_dark' \
+            or context.user_data['bank_type'] == 'ayandeh':
         await update.message.reply_text('کد پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
 
@@ -217,6 +229,9 @@ async def handle_dest_bank(update: Update, context):
 
 async def handle_tracking_code(update: Update, context):
     context.user_data['tracking_code'] = update.message.text
+    if context.user_data['bank_type'] == 'ayandeh':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
     await update.message.reply_text('کد مرجع را وارد کنید:')
     return GET_MARJA
 
@@ -369,8 +384,14 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1280'
         options['width'] = '752'
     elif context.user_data['bank_type'] == 'saman_paya_dark':
-        options['height'] = '1692'
-        options['width'] = '957'
+        options['height'] = '1280'
+        options['width'] = '752'
+    elif context.user_data['bank_type'] == 'saman_paya_dark':
+        options['height'] = '1280'
+        options['width'] = '752'
+    elif context.user_data['bank_type'] == 'ayandeh':
+        options['height'] = '1280'
+        options['width'] = '654'
 
 
     imgkit.from_string(rendered_html, png_path, options=options)
