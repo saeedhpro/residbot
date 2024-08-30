@@ -352,8 +352,8 @@ async def handle_get_dest_iban(update: Update, context):
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'refah_satna':
-        await update.message.reply_text('نام بانک مقصد را وارد کنید:')
-        return GET_DEST_BANK
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_DEST_NAME
     if context.user_data['bank_type'] == 'resalat_paya':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
@@ -469,7 +469,7 @@ async def handle_get_dest_name(update: Update, context):
         return GET_SENDER_NAME
     if context.user_data['bank_type'] == 'refah_satna':
         await update.message.reply_text('نام بانک مقصد را وارد کنید:')
-        return GET_DEST_BANK
+        return GET_TRACKING_CODE
 
     if context.user_data['bank_type'] == 'refah':
         await update.message.reply_text('نام بانک مقصد را وارد کنید:')
