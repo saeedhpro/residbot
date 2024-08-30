@@ -8,7 +8,7 @@ import imgkit
 (START, RETURN_MENU, SELECT_ACTION, SELECT_BANK, GET_STATUS, GET_TRANSACTION_TYPE, GET_SOURCE_ACCOUNT, GET_DEST_IBAN,
  GET_DEST_NAME, GET_DATETIME, GET_AMOUNT, GET_SENDER_NAME, GET_DEST_ACCOUNT, GET_DEST_BANK, GET_REASON, GET_DESCRIPTION,
  GET_TRACKING_CODE, GET_MARJA, GET_DATE, GET_TIME, GET_RECEIVER_FNAME, GET_RECEIVER_LNAME, GET_SOURCE_IBAN,
- GET_MANDE, GET_DESCRIPTION2, GET_REDUCE_SOURCE_ACCOUNT) = range(25)
+ GET_MANDE, GET_DESCRIPTION2, GET_REDUCE_SOURCE_ACCOUNT, GET_DESCRIPTION3) = range(26)
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -53,7 +53,8 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک مهر روشن", callback_data='mehr_light')],
         [InlineKeyboardButton("بانک ملت", callback_data='mellat')],
         [InlineKeyboardButton("بانک پارسیان", callback_data='parsian')],
-        [InlineKeyboardButton("بانک پاسارگاد پایا", callback_data='parsian')],
+        [InlineKeyboardButton("بانک پاسارگاد پایا", callback_data='pasargad_paya')],
+        [InlineKeyboardButton("بانک پاسارگاد پایا 2", callback_data='pasargad_paya_2')],
         [InlineKeyboardButton("بازگشت", callback_data='return_to_menu')],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -212,6 +213,10 @@ async def handle_source_account(update: Update, context):
         await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
 
+    if context.user_data['bank_type'] == 'pasargad_paya_2':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
 
@@ -279,6 +284,9 @@ async def handle_get_dest_iban(update: Update, context):
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'pasargad_paya':
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_DEST_NAME
+    if context.user_data['bank_type'] == 'pasargad_paya_2':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'maskan_satna':
@@ -372,6 +380,9 @@ async def handle_get_dest_name(update: Update, context):
     if context.user_data['bank_type'] == 'pasargad_paya':
         await update.message.reply_text('نام ارسال کننده را وارد کنید:')
         return GET_SENDER_NAME
+    if context.user_data['bank_type'] == 'pasargad_paya_2':
+        await update.message.reply_text('نام ارسال کننده را وارد کنید:')
+        return GET_SENDER_NAME
 
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
@@ -394,6 +405,10 @@ async def handle_get_sender_name(update: Update, context):
         return GET_DEST_BANK
 
     if context.user_data['bank_type'] == 'pasargad_paya':
+        await update.message.reply_text('نام بانک مقصد را وارد کنید:')
+        return GET_DEST_BANK
+
+    if context.user_data['bank_type'] == 'pasargad_paya_2':
         await update.message.reply_text('نام بانک مقصد را وارد کنید:')
         return GET_DEST_BANK
 
@@ -427,12 +442,25 @@ async def handle_get_description(update: Update, context):
     if context.user_data['bank_type'] == 'pasargad_paya':
         await update.message.reply_text('علت (بابت) انتقال را وارد کنید:')
         return GET_DESCRIPTION2
+    if context.user_data['bank_type'] == 'pasargad_paya_2':
+        await update.message.reply_text('علت (بابت) انتقال را وارد کنید:')
+        return GET_DESCRIPTION2
 
     await update.message.reply_text('کد پیگیری را وارد کنید:')
     return GET_TRACKING_CODE
 
 
 async def handle_get_description2(update: Update, context):
+    context.user_data['description2'] = update.message.text
+    if context.user_data['bank_type'] == 'pasargad_paya_2':
+        await update.message.reply_text('شرح را وارد کنید')
+        return GET_DESCRIPTION3
+
+    await update.message.reply_text('کد پیگیری را وارد کنید:')
+    return GET_TRACKING_CODE
+
+
+async def handle_get_description3(update: Update, context):
     context.user_data['description2'] = update.message.text
     await update.message.reply_text('کد پیگیری را وارد کنید:')
     return GET_TRACKING_CODE
@@ -455,6 +483,12 @@ async def handle_dest_bank(update: Update, context):
     if context.user_data['bank_type'] == 'mellat':
         await update.message.reply_text('توضیحات را وارد کنید:')
         return GET_DESCRIPTION
+    if context.user_data['bank_type'] == 'pasargad_paya':
+        await update.message.reply_text('نام بانک کسر کارمزد را وارد کنید:')
+        return GET_REDUCE_SOURCE_ACCOUNT
+    if context.user_data['bank_type'] == 'pasargad_paya_2':
+        await update.message.reply_text('نام بانک کسر کارمزد را وارد کنید:')
+        return GET_REDUCE_SOURCE_ACCOUNT
 
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
@@ -462,7 +496,7 @@ async def handle_dest_bank(update: Update, context):
 
 async def handle_get_reduce_source_account(update: Update, context):
     context.user_data['reduce_source_account'] = update.message.text
-    await update.message.reply_text('توضیحات را وارد کنید:')
+    await update.message.reply_text('شرح مبدا را وارد کنید:')
     return GET_DESCRIPTION
 
 
@@ -892,8 +926,10 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     elif context.user_data['bank_type'] == 'parsian':
         options['height'] = '1280'
         options['width'] = '687'
-
     elif context.user_data['bank_type'] == 'pasargad_paya':
+        options['height'] = '1280'
+        options['width'] = '615'
+    elif context.user_data['bank_type'] == 'pasargad_paya_2':
         options['height'] = '1280'
         options['width'] = '615'
 
@@ -999,6 +1035,7 @@ def main():
             GET_SOURCE_IBAN: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_source_iban)],
             GET_MANDE: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_mande)],
             GET_DESCRIPTION2: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_description2)],
+            GET_DESCRIPTION3: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_description3)],
             GET_REDUCE_SOURCE_ACCOUNT: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_reduce_source_account)],
         },
         fallbacks=[CommandHandler('start', start)],
