@@ -61,7 +61,7 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک رفاه", callback_data='refah')],
         [InlineKeyboardButton("بانک رفاه 2", callback_data='refah_2')],
         [InlineKeyboardButton("بانک رفاه پایا", callback_data='refah_paya')],
-        [InlineKeyboardButton("بانک رفاه ساتنا", callback_data='refa_satna')],
+        [InlineKeyboardButton("بانک رفاه ساتنا", callback_data='refah_satna')],
         [InlineKeyboardButton("بانک رسالت پایا", callback_data='resalat_paya')],
         [InlineKeyboardButton("بازگشت", callback_data='return_to_menu')],
     ]
@@ -82,7 +82,7 @@ async def handle_select_bank(update, context):
             or context.user_data['bank_type'] == 'post_bank_paya_2'\
             or context.user_data['bank_type'] == 'refah_2'\
             or context.user_data['bank_type'] == 'refah_paya'\
-            or context.user_data['bank_type'] == 'refa_satna'\
+            or context.user_data['bank_type'] == 'refah_satna'\
             or context.user_data['bank_type'] == 'mellat':
         await query.edit_message_text('تاریخ را به صورت ۱۴۰۳/۰۵/۲۴ وارد کنید')
         return GET_DATE
@@ -253,7 +253,7 @@ async def handle_source_account(update: Update, context):
         await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
 
-    if context.user_data['bank_type'] == 'refa_satna':
+    if context.user_data['bank_type'] == 'refah_satna':
         await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
 
@@ -351,7 +351,7 @@ async def handle_get_dest_iban(update: Update, context):
     if context.user_data['bank_type'] == 'refah_paya':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
-    if context.user_data['bank_type'] == 'refa_satna':
+    if context.user_data['bank_type'] == 'refah_satna':
         await update.message.reply_text('نام بانک مقصد را وارد کنید:')
         return GET_DEST_BANK
     if context.user_data['bank_type'] == 'resalat_paya':
@@ -1141,7 +1141,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
         }
 
-    if bank_type == 'refa_satna':
+    if bank_type == 'refah_satna':
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
             'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
@@ -1272,7 +1272,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     elif context.user_data['bank_type'] == 'refah_paya':
         options['height'] = '1280'
         options['width'] = '591'
-    elif context.user_data['bank_type'] == 'refa_satna':
+    elif context.user_data['bank_type'] == 'refah_satna':
         options['height'] = '1280'
         options['width'] = '591'
     elif context.user_data['bank_type'] == 'resalat_paya':
@@ -1325,7 +1325,7 @@ def get_bank_type_in_farsi(bank_type='tejarat'):
         'refah': 'بانک رفاه',
         'refah_2': 'بانک رفاه 2',
         'refah_paya': 'بانک رفاه پایا',
-        'refa_satna': 'بانک رفاه ساتنا',
+        'refah_satna': 'بانک رفاه ساتنا',
         'resalat_paya': 'بانک رسالت پایا',
     }
     return bank_type_list[bank_type]
