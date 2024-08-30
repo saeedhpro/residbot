@@ -1,0 +1,92 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: FarHoma;
+        src: url("/home/original/residbot/templates/Far_Homa.ttf");
+      }
+
+      html,
+      body {
+        font-family: FarHoma;
+      }
+
+      .container {
+        width: 656px;
+        height: 1282px;
+        background-image: url("/home/original/residbot/templates/refah_2/refah-2.png");
+        /* background-image: url("refah_2-filled.png"); */
+        object-fit: cover;
+        position: relative;
+      }
+
+      .price {
+        position: absolute;
+        top: 0;
+        left: auto;
+        right: auto;
+      }
+      .unit {
+        position: absolute;
+        top: 0;
+        left: auto;
+        right: auto;
+      }
+      .value {
+        font-size: 19px;
+        line-height: 0px;
+        color: #808080;
+        font-weight: 400;
+        right: 206;
+        position: absolute;
+      }
+      .from {
+        top: 230;
+      }
+      .to-shaba {
+        top: 265
+      }
+      .to-name {
+        top: 304;
+      }
+      .to-client {
+        top: 338;
+      }
+      .to-bank {
+        top: 375;
+      }
+      .price {
+        top: 412;
+      }
+      .date {
+        top: 447;
+      }
+      .time {
+        top: 484;
+      }
+      .request-number {
+        top: 521;
+      }
+      .tracking-number {
+        top: 554;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="from value">{{source_account}}</div>
+      <div class="to-shaba value">{{iban}}</div>
+      <div class="to-name value">{{sender}}</div>
+      <div class="to-client value">{{receiver}}</div>
+      <div class="to-bank value">{{receiver_bank}}</div>
+      <div class="price value">{{amount}}</div>
+      <div class="date value">{{date}}</div>
+      <div class="time value">{{time}}</div>
+      <div class="request-number value">{{marja}}</div>
+      <div class="tracking-number value">{{tracking_code}}</div>
+    </div>
+  </body>
+</html>
