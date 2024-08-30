@@ -257,7 +257,6 @@ async def handle_source_account(update: Update, context):
         await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
 
-    print(context.user_data['bank_type'])
     if context.user_data['bank_type'] == 'resalat_paya':
         await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
@@ -1296,6 +1295,28 @@ def get_bank_type_in_farsi(bank_type='tejarat'):
         'tejarat_card': 'بانک تجارت کارت به کارت',
         'tejarat_paya': 'بانک تجارت پایا',
         'ayandeh': 'آینده',
+        'ayandeh_paya': 'بانک آینده پایا',
+        'eghtesad': 'بانک اقتصاد',
+        'keshavarzi': 'بانک کشاورزی',
+        'mehr': 'بانک مهر',
+        'mehr_2': 'بانک مهر 2',
+        'mehr_3': 'بانک مهر 3',
+        'mehr_4': 'بانک مهر 4',
+        'mehr_dark': 'بانک مهر تاریک',
+        'mehr_dark_2': 'بانک مهر تاریک 2',
+        'mehr_light': 'بانک مهر روشن',
+        'mellat': 'بانک ملت',
+        'parsian': 'بانک پارسیان',
+        'pasargad_paya': 'بانک پاسارگاد پایا',
+        'pasargad_paya_2': 'بانک پاسارگاد پایا 2',
+        'pasargad_satna': 'بانک پاسارگاد ساتنا',
+        'post_bank_paya': 'بانک پست بانک پایا',
+        'post_bank_paya_2': 'بانک پست بانک پایا 2',
+        'refah': 'بانک رفاه',
+        'refah_2': 'بانک رفاه 2',
+        'refah_paya': 'بانک رفاه پایا',
+        'refa_satna': 'بانک رفاه ساتنا',
+        'resalat_paya': 'بانک رسالت پایا',
     }
     return bank_type_list[bank_type]
 
