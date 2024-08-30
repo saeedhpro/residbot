@@ -529,10 +529,6 @@ async def handle_get_sender_name(update: Update, context):
         await update.message.reply_text('نام بانک مقصد را وارد کنید:')
         return GET_DEST_BANK
 
-    if context.user_data['bank_type'] == 'resalat_paya':
-        await update.message.reply_text('نام بانک مقصد را وارد کنید:')
-        return GET_DESCRIPTION
-
     if context.user_data['bank_type'] == 'parisan':
         await update.message.reply_text('توضیحات را وارد کنید:')
         return GET_DESCRIPTION
@@ -654,8 +650,8 @@ async def handle_get_reduce_source_account(update: Update, context):
         await update.message.reply_text('شرح را وارد کنید:')
         return GET_DESCRIPTION
     if context.user_data['bank_type'] == 'resalat_paya':
-        await update.message.reply_text('شرح را وارد کنید:')
-        return GET_DESCRIPTION
+        await update.message.reply_text('نام فرستنده را وارد کنید:')
+        return GET_SENDER_NAME
     await update.message.reply_text('شرح مبدا را وارد کنید:')
     return GET_DESCRIPTION
 
