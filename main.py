@@ -97,6 +97,10 @@ async def handle_get_amount(update: Update, context):
         await update.message.reply_text('باقیمانده را وارد کنید:')
         return GET_MANDE
 
+    if context.user_data['bank_type'] == 'mehr_3':
+        await update.message.reply_text('باقیمانده را وارد کنید:')
+        return GET_MANDE
+
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
 
@@ -167,6 +171,10 @@ async def handle_source_account(update: Update, context):
         await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
 
+    if context.user_data['bank_type'] == 'mehr_3':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
 
@@ -210,6 +218,9 @@ async def handle_get_dest_iban(update: Update, context):
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'mehr_2':
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_DEST_NAME
+    if context.user_data['bank_type'] == 'mehr_3':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'maskan_satna':
@@ -277,6 +288,9 @@ async def handle_get_dest_name(update: Update, context):
         await update.message.reply_text('کد پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
     if context.user_data['bank_type'] == 'mehr_2':
+        await update.message.reply_text('کد پیگیری را وارد کنید:')
+        return GET_TRACKING_CODE
+    if context.user_data['bank_type'] == 'mehr_3':
         await update.message.reply_text('کد پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
 
@@ -350,6 +364,9 @@ async def handle_tracking_code(update: Update, context):
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
     if context.user_data['bank_type'] == 'mehr_2':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
+    if context.user_data['bank_type'] == 'mehr_3':
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
     await update.message.reply_text('کد مرجع را وارد کنید:')
@@ -561,6 +578,18 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'mande': format_amount(convert_numbers_to_farsi(context.user_data['mande'])),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver_lname']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+        }
+
+    if bank_type == 'mehr_3':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver_lname']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
@@ -618,6 +647,9 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1280'
         options['width'] = '591'
     elif context.user_data['bank_type'] == 'mehr_2':
+        options['height'] = '1280'
+        options['width'] = '591'
+    elif context.user_data['bank_type'] == 'mehr_3':
         options['height'] = '1280'
         options['width'] = '591'
 
