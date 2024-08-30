@@ -531,7 +531,7 @@ async def handle_get_sender_name(update: Update, context):
 
     if context.user_data['bank_type'] == 'resalat_paya':
         await update.message.reply_text('نام بانک مقصد را وارد کنید:')
-        return GET_DEST_BANK
+        return GET_DESCRIPTION
 
     if context.user_data['bank_type'] == 'parisan':
         await update.message.reply_text('توضیحات را وارد کنید:')
