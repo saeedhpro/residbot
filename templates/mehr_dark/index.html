@@ -1,0 +1,80 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+
+      html,
+      body {
+        font-family: vazir;
+        letter-spacing: 0px;
+        color: #e6e6e6;
+        font-weight: 400;
+        font-size: 25px;
+      }
+
+      .container {
+        width: 591px;
+        height: 1280px;
+        background-image: url("/home/original/residbot/templates/mehr_dark/mehr-dark.png");
+        /* background-image: url("mehr-dark-filled.png"); */
+        object-fit: cover;
+        position: relative;
+      }
+
+      .price {
+        position: absolute;
+        top: 606px;
+        left: 103px;
+      }
+      .unit {
+        position: absolute;
+        top: 0;
+        left: -50px;
+      }
+
+      .from {
+        position: absolute;
+        top: 675px;
+        left: 52px;
+        direction: ltr;
+      }
+      .to {
+        position: absolute;
+        top: 746px;
+        left: 55px;
+        direction: ltr;
+      }
+      .to-name {
+        font-size: 26px;
+        position: absolute;
+        top: 815px;
+        left: 52px;
+      }
+      .date {
+        font-size: 26px;
+        position: absolute;
+        top: 883px;
+        left: 54px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="price">
+        {{amount}}
+        <div class="unit">ریال</div>
+      </div>
+      <div class="from">{{source_account}}</div>
+      <div class="to">{{iban}}</div>
+      <div class="to-name">{{receiver}}</div>
+      <div class="date">{{datetime}}</div>
+      <div class="tracking-number">{{tracking_code}}</div>
+    </div>
+  </body>
+</html>
