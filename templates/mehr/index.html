@@ -1,0 +1,103 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+
+      html,
+      body {
+        font-family: vazir;
+        color: #2a2a2a;
+        font-weight: 400;
+        opacity: 0.949;
+      }
+
+      .container {
+        width: 591px;
+        height: 1280px;
+        /* background-image: url("mehr-filled.png"); */
+        background-image: url("/home/original/residbot/templates/mehr/mehr.png");
+        object-fit: cover;
+        position: relative;
+      }
+
+      .to {
+        font-size: 21px;
+        position: absolute;
+        top: 642px;
+        left: 70px;
+      }
+      .remaining {
+        font-size: 22px;
+        letter-spacing: 0px;
+        position: absolute;
+        top: 718px;
+        left: 30px;
+      }
+      .to-name {
+        position: absolute;
+        top: 248px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 28px;
+        letter-spacing: -1px;
+      }
+      .from {
+        font-size: 21px;
+        position: absolute;
+        top: 565px;
+        left: 75px;
+      }
+      .price {
+        position: absolute;
+        top: 315px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 32px;
+        padding-left: 55px;
+      }
+      .unit {
+        font-size: 27px;
+        position: absolute;
+        top: 2px;
+        left: 0;
+      }
+      .tracking-number {
+        font-size: 22px;
+        letter-spacing: 0px;
+        position: absolute;
+        top: 794px;
+        left: 30px;
+      }
+      .date {
+        font-size: 23px;
+        letter-spacing: 0px;
+        color: #999999;
+        font-weight: 400;
+        position: absolute;
+        top: 385px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="to-name">{{receiver}}</div>
+      <div class="price">
+        {{amount}}
+        <div class="unit">ریال</div>
+      </div>
+      <div class="from">{{source_account}}</div>
+      <div class="to">{{iban}}</div>
+      <div class="remaining"><span>{{mande}}</span> ریال</div>
+      <div class="date">{{datetime}}</div>
+      <div class="tracking-number">{{tracking_number}}</div>
+    </div>
+  </body>
+</html>

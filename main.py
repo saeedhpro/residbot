@@ -1,4 +1,3 @@
-
 from jinja2 import Environment, FileSystemLoader
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import Application, ConversationHandler, CommandHandler, CallbackQueryHandler, MessageHandler, \
@@ -6,11 +5,10 @@ from telegram.ext import Application, ConversationHandler, CommandHandler, Callb
 import logging
 import imgkit
 
-
-
 (START, RETURN_MENU, SELECT_ACTION, SELECT_BANK, GET_STATUS, GET_TRANSACTION_TYPE, GET_SOURCE_ACCOUNT, GET_DEST_IBAN,
  GET_DEST_NAME, GET_DATETIME, GET_AMOUNT, GET_SENDER_NAME, GET_DEST_ACCOUNT, GET_DEST_BANK, GET_REASON, GET_DESCRIPTION,
- GET_TRACKING_CODE, GET_MARJA, GET_DATE, GET_TIME, GET_RECEIVER_FNAME, GET_RECEIVER_LNAME, GET_SOURCE_IBAN) = range(23)
+ GET_TRACKING_CODE, GET_MARJA, GET_DATE, GET_TIME, GET_RECEIVER_FNAME, GET_RECEIVER_LNAME, GET_SOURCE_IBAN,
+ GET_MANDE) = range(24)
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -46,6 +44,8 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک آینده پایا", callback_data='ayandeh_paya')],
         [InlineKeyboardButton("بانک اقتصاد", callback_data='eghtesad')],
         [InlineKeyboardButton("بانک کشاورزی", callback_data='keshavarzi')],
+        [InlineKeyboardButton("بانک مهر", callback_data='mehr')],
+        [InlineKeyboardButton("بانک مهر 2", callback_data='mehr_2')],
         [InlineKeyboardButton("بازگشت", callback_data='return_to_menu')],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -92,6 +92,17 @@ async def handle_get_time(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def handle_get_amount(update: Update, context):
     context.user_data['amount'] = update.message.text
+
+    if context.user_data['bank_type'] == 'mehr':
+        await update.message.reply_text('باقیمانده را وارد کنید:')
+        return GET_MANDE
+
+    await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
+    return GET_SOURCE_ACCOUNT
+
+
+async def handle_get_mande(update: Update, context):
+    context.user_data['mande'] = update.message.text
 
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
@@ -148,6 +159,14 @@ async def handle_source_account(update: Update, context):
         await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
 
+    if context.user_data['bank_type'] == 'mehr':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
+    if context.user_data['bank_type'] == 'mehr_2':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
 
@@ -185,6 +204,12 @@ async def handle_get_dest_iban(update: Update, context):
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'keshavarzi':
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_DEST_NAME
+    if context.user_data['bank_type'] == 'mehr':
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_DEST_NAME
+    if context.user_data['bank_type'] == 'mehr_2':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'maskan_satna':
@@ -248,6 +273,12 @@ async def handle_get_dest_name(update: Update, context):
     if context.user_data['bank_type'] == 'keshavarzi':
         await update.message.reply_text('توضیحات را وارد کنید:')
         return GET_DESCRIPTION
+    if context.user_data['bank_type'] == 'mehr':
+        await update.message.reply_text('کد پیگیری را وارد کنید:')
+        return GET_TRACKING_CODE
+    if context.user_data['bank_type'] == 'mehr_2':
+        await update.message.reply_text('کد پیگیری را وارد کنید:')
+        return GET_TRACKING_CODE
 
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
@@ -256,8 +287,8 @@ async def handle_get_dest_name(update: Update, context):
 async def handle_get_sender_name(update: Update, context):
     context.user_data['sender'] = update.message.text
     if context.user_data['bank_type'] == 'tejarat' \
-            or context.user_data['bank_type'] == 'sepah_paya'\
-            or context.user_data['bank_type'] == 'saman_paya_light'\
+            or context.user_data['bank_type'] == 'sepah_paya' \
+            or context.user_data['bank_type'] == 'saman_paya_light' \
             or context.user_data['bank_type'] == 'saman_paya_dark' \
             or context.user_data['bank_type'] == 'ayandeh' \
             or context.user_data['bank_type'] == 'eghtesad':
@@ -313,6 +344,12 @@ async def handle_tracking_code(update: Update, context):
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
     if context.user_data['bank_type'] == 'keshavarzi':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
+    if context.user_data['bank_type'] == 'mehr':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
+    if context.user_data['bank_type'] == 'mehr_2':
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
     await update.message.reply_text('کد مرجع را وارد کنید:')
@@ -506,6 +543,29 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'marja': convert_numbers_to_farsi(context.user_data['marja']),
         }
 
+    if bank_type == 'mehr':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'mande': format_amount(convert_numbers_to_farsi(context.user_data['mande'])),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver_lname']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+        }
+
+    if bank_type == 'mehr_2':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver_lname']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+        }
+
     await update.message.reply_text('در حال ساخت رسید... لطفا صبر کنید!:')
     rendered_html = template.render(html_content)
     png_path = f"./receipts/image/receipt_{context.user_data['tracking_code']}.png"
@@ -554,7 +614,12 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     elif context.user_data['bank_type'] == 'maskan_satna':
         options['height'] = '1280'
         options['width'] = '668'
-
+    elif context.user_data['bank_type'] == 'mehr':
+        options['height'] = '1280'
+        options['width'] = '591'
+    elif context.user_data['bank_type'] == 'mehr_2':
+        options['height'] = '1280'
+        options['width'] = '591'
 
     imgkit.from_string(rendered_html, png_path, options=options)
 
@@ -597,6 +662,7 @@ def convert_numbers_to_farsi(text):
     english_to_farsi = str.maketrans('0123456789', '۰۱۲۳۴۵۶۷۸۹')
     return text.translate(english_to_farsi)
 
+
 def convert_number_to_words(number):
     units = ["", "یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه"]
     tens = ["", "ده", "بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود"]
@@ -622,10 +688,11 @@ def convert_number_to_words(number):
         else:
             return convert_number_to_words_recursive(n // 1000, level + 1) + (
                 " و " if n % 1000 != 0 and level > 0 else "") + convert_three_digits(n % 1000) + (
-                       " " + thousands[level] if n % 1000 != 0 else "")
+                " " + thousands[level] if n % 1000 != 0 else "")
 
     result = convert_number_to_words_recursive(number).strip()
     return result if result else "صفر"
+
 
 def main():
     application = Application.builder().token("7415076812:AAEqyQE_M13mYmDn8wbxE3U-d6-uoYHe_2o").build()

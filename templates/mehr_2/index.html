@@ -1,0 +1,119 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+
+      html,
+      body {
+        font-family: vazir;
+      }
+
+      .container {
+        width: 591px;
+        height: 1280px;
+        /* background-image: url("mehr_2-filled.png"); */
+        background-image: url("/home/original/residbot/templates/mehr_2/mehr-2.png");
+        object-fit: cover;
+        position: relative;
+      }
+
+      .to-name {
+        font-size: 23px;
+        letter-spacing: 0px;
+        color: #1a1a1a;
+        font-weight: 400;
+        position: absolute;
+        top: 482px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .price {
+        font-size: 40px;
+        letter-spacing: -1px;
+        color: #668d08;
+        font-weight: 400;
+        position: absolute;
+        top: 539px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .unit {
+        font-size: 28px;
+        letter-spacing: 0px;
+        color: #668d08;
+        font-weight: 400;
+        position: absolute;
+        top: 7px;
+        left: -58px;
+      }
+
+      .date {
+        font-size: 20px;
+        letter-spacing: -1px;
+        color: #1a1a1a;
+        font-weight: 400;
+        position: absolute;
+        top: 615px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 14px;
+      }
+      .date span {
+        display: inline-block;
+      }
+      .from {
+        font-size: 20px;
+        letter-spacing: -1px;
+        color: #1a1a1a;
+        font-weight: 400;
+        position: absolute;
+        top: 676px;
+        left: 80px;
+        direction: ltr;
+      }
+      .to {
+        font-size: 20px;
+        letter-spacing: -1px;
+        color: #1a1a1a;
+        font-weight: 400;
+        position: absolute;
+        top: 752px;
+        left: 75px;
+        direction: ltr;
+      }
+      .tracking-number {
+        font-size: 20px;
+        letter-spacing: -1px;
+        color: #1a1a1a;
+        font-weight: 400;
+        position: absolute;
+        top: 820px;
+        left: 40px;
+        direction: ltr;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="to-name">{{receiver}}</div>
+      <div class="price">
+        {{amount}}
+        <div class="unit">ریال</div>
+      </div>
+      <div class="date">
+        <span>{{datetime}}</span>
+      </div>
+      <div class="from">{{source_account}}</div>
+      <div class="to">{{iban}}</div>
+      <div class="tracking-number">{{tracking_code}}</div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,155 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+
+      html,
+      body {
+        font-family: vazir;
+      }
+
+      .container {
+        width: 966px;
+        height: 1280px;
+        background-image: url("/home/original/residbot/templates/ayandeh_paya/ayandeh-paya.png");
+        /* background-image: url("ayandeh_paya-filled.png"); */
+        object-fit: cover;
+        position: relative;
+      }
+
+      .payment-code {
+        opacity: 0.878;
+        font-size: 32px;
+        letter-spacing: -2px;
+        color: #000000;
+        font-weight: 400;
+        position: absolute;
+        top: 164;
+        left: 42;
+      }
+
+      .status {
+        opacity: 0.878;
+        font-size: 34px;
+        letter-spacing: -2px;
+        color: #000000;
+        font-weight: 400;
+        position: absolute;
+        top: 232;
+        left: 41;
+      }
+
+      .from {
+        opacity: 0.878;
+        font-size: 30px;
+        letter-spacing: -1px;
+        color: #000000;
+        font-weight: 400;
+        position: absolute;
+        top: 308;
+        left: 99;
+      }
+
+      /* FIXME: */
+      .time {
+        opacity: 0.729;
+        font-size: 32px;
+        letter-spacing: -1px;
+        color: #808080;
+        font-weight: 400;
+        position: absolute;
+        top: 677;
+        left: 804px;
+      }
+
+      .date {
+        opacity: 0.729;
+        font-size: 32px;
+        letter-spacing: -1px;
+        color: #808080;
+        font-weight: 400;
+        position: absolute;
+        top: 675;
+        left: 605;
+      }
+
+      .to-name {
+        font-size: 34px;
+        letter-spacing: -1px;
+        color: #1a1a1a;
+        font-weight: 400;
+        position: absolute;
+        top: 751;
+        right: 78;
+      }
+
+      .to-number {
+        font-size: 30px;
+        letter-spacing: -1px;
+        color: #4d4d4d;
+        font-weight: 400;
+        position: absolute;
+        top: 983;
+        right: 170;
+      }
+
+      .tracking-number {
+        font-size: 31px;
+        letter-spacing: -1px;
+        color: #1a1a1a;
+        font-weight: 400;
+        position: absolute;
+        top: 1060;
+        right: 290;
+      }
+
+      .desc {
+        font-size: 31px;
+        letter-spacing: -1px;
+        color: #999999;
+        font-weight: 400;
+        position: absolute;
+        top: 1128;
+        right: 133;
+      }
+
+      .price {
+        font-size: 34px;
+        letter-spacing: -1px;
+        color: #1a1a1a;
+        font-weight: 400;
+        position: absolute;
+        top: 833;
+        left: 124;
+      }
+      .unit {
+        position: absolute;
+        top: 0;
+        left: -70;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="payment-code">{{marja}}</div>
+      <div class="status">{{status}}</div>
+      <div class="from">{{source_account}}</div>
+      <div class="time">{{time}}</div>
+      <div class="date">{{date}}</div>
+      <div class="to-name">{{receiver}}</div>
+      <div class="price">
+        {{amount}}
+        <div class="unit">ریال</div>
+      </div>
+      <div class="to-number">{{iban}}</div>
+      <div class="tracking-number">{{tracking_code}}</div>
+      <div class="desc">{{description}}</div>
+    </div>
+  </body>
+</html>
