@@ -628,7 +628,7 @@ async def handle_dest_bank(update: Update, context):
         return GET_REDUCE_SOURCE_ACCOUNT
     if context.user_data['bank_type'] == 'resalat_paya':
         await update.message.reply_text('نام بانک کسر کارمزد را وارد کنید:')
-        return GET_SENDER_NAME
+        return GET_REDUCE_SOURCE_ACCOUNT
 
     if context.user_data['bank_type'] == 'refah':
         await update.message.reply_text('علت (بابت) انتقال را وارد کنید:')
