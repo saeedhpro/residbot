@@ -1151,16 +1151,22 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         }
 
     if bank_type == 'resalat_paya':
+        amount = context.user_data['amount']
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
             'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'reduce_source_account': convert_numbers_to_farsi(context.user_data['reduce_source_account']),
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
+            'sender': convert_numbers_to_farsi(context.user_data['sender']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'date': convert_numbers_to_farsi(context.user_data['date']),
-            'time': convert_numbers_to_farsi(context.user_data['time']),
+            'amount_fa': format_amount(convert_numbers_to_farsi(convert_number_to_words(int(amount) / 10))),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'description': convert_numbers_to_farsi(context.user_data['description']),
+            'description2': convert_numbers_to_farsi(context.user_data['description2']),
+            'marja': convert_numbers_to_farsi(context.user_data['marja']),
         }
 
     await update.message.reply_text('در حال ساخت رسید... لطفا صبر کنید!:')
