@@ -1,0 +1,173 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+
+      html,
+      body {
+        font-family: vazir;
+      }
+
+      .container {
+        width: 591px;
+        height: 1280px;
+        background-image: url("/home/original/residbot/templates/refah_paya/refah-paya.png");
+        /* background-image: url("refah-paya-filled.png"); */
+        object-fit: cover;
+        position: relative;
+      }
+
+      .price {
+        position: absolute;
+        top: 350;
+        left: 50%;
+        display: flex;
+        gap: 8px;
+        transform: translateX(-50%);
+        font-size: 21px;
+        line-height: 0px;
+        color: #1a1a1a;
+        font-weight: 400;
+      }
+      .unit {
+        position: absolute;
+        top: 0;
+        left: auto;
+        right: auto;
+      }
+      .from {
+        font-size: 21px;
+        letter-spacing: 1px;
+        line-height: 0px;
+        color: #1a1a1a;
+        font-weight: 400;
+        opacity: 0.82;
+        position: absolute;
+        top: 504;
+        left: 36;
+        direction: ltr;
+      }
+      .to-shaba {
+        font-size: 21px;
+        letter-spacing: 1px;
+        line-height: 0px;
+        color: #1a1a1a;
+        font-weight: 400;
+        opacity: 0.82;
+        position: absolute;
+        top: 578;
+        left: 37;
+      }
+      .to-name {
+        font-size: 25px;
+        letter-spacing: 0px;
+        line-height: 0px;
+        color: #1a1a1a;
+        font-weight: 400;
+        opacity: 0.82;
+        position: absolute;
+        top: 652;
+        left: 35;
+      }
+      .to-bank {
+        font-size: 25px;
+        letter-spacing: -1px;
+        line-height: 0px;
+        color: #1a1a1a;
+        font-weight: 400;
+        opacity: 0.82;
+        position: absolute;
+        top: 725;
+        left: 89;
+      }
+      .for {
+        font-size: 25px;
+        letter-spacing: 0px;
+        line-height: 0px;
+        color: #1a1a1a;
+        font-weight: 400;
+        opacity: 0.82;
+        position: absolute;
+        top: 800;
+        left: 37;
+      }
+      .cost {
+        font-size: 18px;
+        letter-spacing: 0px;
+        line-height: 0px;
+        color: #333333;
+        font-weight: 400;
+        position: absolute;
+        top: 877;
+        left: 114;
+      }
+      .cost-unit {
+        opacity: 0.82;
+        font-size: 23px;
+        letter-spacing: -1px;
+        line-height: 0px;
+        color: #1a1a1a;
+        font-weight: 400;
+        position: absolute;
+        top: 872;
+        left: 44;
+      }
+      .date {
+        font-size: 19px;
+        letter-spacing: 0px;
+        line-height: 0px;
+        color: #333333;
+        font-weight: 400;
+        position: absolute;
+        top: 949;
+        left: 38;
+      }
+      .time {
+        font-size: 19px;
+        letter-spacing: 0px;
+        line-height: 0px;
+        color: #333333;
+        font-weight: 400;
+        position: absolute;
+        top: 1023;
+        left: 37;
+      }
+      .tracking-number {
+        font-size: 19px;
+        letter-spacing: 0px;
+        line-height: 0px;
+        color: #333333;
+        font-weight: 400;
+        position: absolute;
+        top: 1098;
+        left: 38;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="price">
+        <div style="font-size: 26px">مبلغ</div>
+        <div>{{amount}}</div>
+        <div style="font-size: 26px">ریال</div>
+      </div>
+
+      <div class="from">{{source_account}}</div>
+      <div class="to-shaba">{{iban}}</div>
+      <div class="to-name">{{receiver}}</div>
+      <div class="to-bank">{{receiver_bank}}</div>
+      <div class="for">{{description}}</div>
+      <div class="cost">{{amount}}</div>
+      <div class="cost-unit">ریال</div>
+      <div class="date">{{date}}</div>
+      <div class="time">{{time}}</div>
+      <div class="tracking-number">{{tracking_code}}</div>
+    </div>
+  </body>
+</html>
