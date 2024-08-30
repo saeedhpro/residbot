@@ -10,7 +10,7 @@ import imgkit
 
 (START, RETURN_MENU, SELECT_ACTION, SELECT_BANK, GET_STATUS, GET_TRANSACTION_TYPE, GET_SOURCE_ACCOUNT, GET_DEST_IBAN,
  GET_DEST_NAME, GET_DATETIME, GET_AMOUNT, GET_SENDER_NAME, GET_DEST_ACCOUNT, GET_DEST_BANK, GET_REASON, GET_DESCRIPTION,
- GET_TRACKING_CODE, GET_MARJA) = range(18)
+ GET_TRACKING_CODE, GET_MARJA, GET_DATE, GET_TIME) = range(20)
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -43,6 +43,7 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک تجارت کارت به کارت", callback_data='tejarat_card')],
         [InlineKeyboardButton("بانک تجارت پایا", callback_data='tejarat_paya')],
         [InlineKeyboardButton("بانک آینده", callback_data='ayandeh')],
+        [InlineKeyboardButton("بانک آینده پایا", callback_data='ayandeh_paya')],
         [InlineKeyboardButton("بازگشت", callback_data='return_to_menu')],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -58,12 +59,29 @@ async def handle_select_bank(update, context):
 
     context.user_data['bank_type'] = query.data
 
+    if context.user_data['bank_type'] == 'ayandeh_paya':
+        await query.edit_message_text('تاریخ را به صورت ۱۴۰۳/۰۵/۲۴ وارد کنید')
+        return GET_DATE
     await query.edit_message_text('تاریخ و ساعت را به صورت ۱۴۰۳/۰۵/۲۴ ۱۲:۴۵ وارد کنید')
     return GET_DATETIME
 
 
 async def handle_get_datetime(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data['datetime'] = update.message.text
+
+    await update.message.reply_text('مبلغ را به ریال وارد کنید ')
+    return GET_AMOUNT
+
+
+async def handle_get_date(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    context.user_data['date'] = update.message.text
+
+    await update.message.reply_text('ساعت را به صورت ۱۴۰۳/۰۵/۲۴ ۱۲:۴۵ وارد کنید')
+    return GET_TIME
+
+
+async def handle_get_time(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    context.user_data['time'] = update.message.text
 
     await update.message.reply_text('مبلغ را به ریال وارد کنید ')
     return GET_AMOUNT
@@ -111,6 +129,10 @@ async def handle_source_account(update: Update, context):
         await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
 
+    if context.user_data['bank_type'] == 'ayandeh_paya':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
 
@@ -141,6 +163,9 @@ async def handle_get_dest_iban(update: Update, context):
     if context.user_data['bank_type'] == 'ayandeh':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
+    if context.user_data['bank_type'] == 'ayandeh_paya':
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_DEST_NAME
 
     await update.message.reply_text('نام صاحب شبا را وارد کنید:')
     return GET_DEST_NAME
@@ -169,6 +194,9 @@ async def handle_get_dest_name(update: Update, context):
     if context.user_data['bank_type'] == 'ayandeh':
         await update.message.reply_text('نام ارسال کننده را وارد کنید:')
         return GET_SENDER_NAME
+    if context.user_data['bank_type'] == 'ayandeh_paya':
+        await update.message.reply_text('توضیحات را وارد کنید:')
+        return GET_DESCRIPTION
 
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
@@ -356,6 +384,32 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
         }
 
+    if bank_type == 'ayandeh':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+        }
+
+    if bank_type == 'ayandeh_paya':
+        html_content = {
+            'statys': 'پایان یافته',
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'time': convert_numbers_to_farsi(context.user_data['time']),
+            'date': convert_numbers_to_farsi(context.user_data['date']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'marja': convert_numbers_to_farsi(context.user_data['marja']),
+            'description': convert_numbers_to_farsi(context.user_data['description']),
+        }
+
     await update.message.reply_text('در حال ساخت رسید... لطفا صبر کنید!:')
     rendered_html = template.render(html_content)
     png_path = f"./receipts/image/receipt_{context.user_data['tracking_code']}.png"
@@ -392,6 +446,9 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     elif context.user_data['bank_type'] == 'ayandeh':
         options['height'] = '1280'
         options['width'] = '654'
+    elif context.user_data['bank_type'] == 'ayandeh_paya':
+        options['height'] = '1280'
+        options['width'] = '966'
 
 
     imgkit.from_string(rendered_html, png_path, options=options)
@@ -419,6 +476,7 @@ def get_bank_type_in_farsi(bank_type='tejarat'):
         'tejarat': 'بانک تجارت',
         'tejarat_card': 'بانک تجارت کارت به کارت',
         'tejarat_paya': 'بانک تجارت پایا',
+        'ayandeh': 'آینده',
     }
     return bank_type_list[bank_type]
 
@@ -485,6 +543,8 @@ def main():
             RETURN_MENU: [CallbackQueryHandler(handle_return_menu)],
             GET_TRACKING_CODE: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_tracking_code)],
             GET_MARJA: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_marja)],
+            GET_DATE: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_date)],
+            GET_TIME: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_time)],
         },
         fallbacks=[CommandHandler('start', start)],
     )
