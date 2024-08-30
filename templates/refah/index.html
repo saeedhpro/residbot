@@ -1,0 +1,104 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+
+      html,
+      body {
+        font-family: vazir;
+      }
+
+      .container {
+        width: 630px;
+        height: 1289px;
+        background-image: url("/home/original/residbot/templates/refah/refah.png");
+        /* background-image: url("refah-filled.png"); */
+        object-fit: cover;
+        position: relative;
+      }
+
+      .price {
+        position: absolute;
+        top: 521;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 26px;
+        letter-spacing: 1px;
+        line-height: 0px;
+        color: #1a1a1a;
+        font-weight: 800;
+      }
+      .unit {
+        position: absolute;
+        top: 0;
+        left: auto;
+        right: auto;
+      }
+      .value {
+        opacity: 0.941;
+        font-size: 22px;
+        color: #333333;
+        font-weight: 500;
+      }
+      .from {
+        position: absolute;
+        top: 582;
+        left: 26;
+        direction: ltr;
+      }
+      .to-number {
+        position: absolute;
+        top: 655;
+        left: 29;
+        direction: ltr;
+      }
+      .to-bank {
+        position: absolute;
+        top: 729;
+        left: 31;
+      }
+      .to-name {
+        position: absolute;
+        top: 803;
+        left: 30;
+      }
+      .reason {
+        position: absolute;
+        top: 878;
+        left: 32;
+      }
+      .date {
+        position: absolute;
+        top: 982;
+        left: 27;
+      }
+      .tracking-code {
+        position: absolute;
+        top: 1054;
+        left: 29;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="price">
+        <span style="font-size: 22px">مبلغ </span>
+        {{amount}}
+        <span style="font-size: 23px">ریال</span>
+      </div>
+      <div class="from value">{{ source_account }}</div>
+      <div class="to-number value">{{iban}}</div>
+      <div class="to-bank value">{{receiver_bank}}</div>
+      <div class="to-name value">{{receiver}}</div>
+      <div class="reason value">{{description2}}</div>
+      <div class="date value">{{datetime}}</div>
+      <div class="tracking-code value">{{tracking_code}}</div>
+    </div>
+  </body>
+</html>
