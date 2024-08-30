@@ -257,6 +257,10 @@ async def handle_source_account(update: Update, context):
         await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
 
+    if context.user_data['bank_type'] == 'resalat_paya':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
 
