@@ -119,6 +119,10 @@ async def handle_get_amount(update: Update, context):
         await update.message.reply_text('باقیمانده را وارد کنید:')
         return GET_MANDE
 
+    if context.user_data['bank_type'] == 'mehr_2':
+        await update.message.reply_text('باقیمانده را وارد کنید:')
+        return GET_MANDE
+
     if context.user_data['bank_type'] == 'mehr_3':
         await update.message.reply_text('باقیمانده را وارد کنید:')
         return GET_MANDE
