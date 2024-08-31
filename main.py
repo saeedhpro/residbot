@@ -588,7 +588,7 @@ async def handle_get_description2(update: Update, context):
 
 
 async def handle_get_description3(update: Update, context):
-    context.user_data['description2'] = update.message.text
+    context.user_data['description3'] = update.message.text
     await update.message.reply_text('کد پیگیری را وارد کنید:')
     return GET_TRACKING_CODE
 
