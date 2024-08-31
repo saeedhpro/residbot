@@ -201,6 +201,10 @@ async def handle_source_account(update: Update, context):
         await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
 
+    if context.user_data['bank_type'] == 'mehr_4':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
     if context.user_data['bank_type'] == 'mehr_dark':
         await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
