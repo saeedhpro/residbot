@@ -1374,6 +1374,8 @@ def convert_number_to_words(number):
         if n == 0:
             return ""
         else:
+            print(int(level), "level")
+            print(len(thousands), "thousands")
             return convert_number_to_words_recursive(n // 1000, level + 1) + (
                 " و " if n % 1000 != 0 and int(level) > 0 else "") + convert_three_digits(int(n % 1000)) + (
                 " " + thousands[int(level)] if int(n % 1000) != 0 else "")
