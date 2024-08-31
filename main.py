@@ -1367,8 +1367,8 @@ def convert_number_to_words(number):
             return ""
         else:
             return convert_number_to_words_recursive(n // 1000, level + 1) + (
-                " و " if n % 1000 != 0 and level > 0 else "") + convert_three_digits(n % 1000) + (
-                " " + thousands[level] if n % 1000 != 0 else "")
+                " و " if n % 1000 != 0 and int(level) > 0 else "") + convert_three_digits(int(n % 1000)) + (
+                " " + thousands[int(level)] if int(n % 1000) != 0 else "")
 
     result = convert_number_to_words_recursive(number).strip()
     return result if result else "صفر"
