@@ -1,0 +1,127 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+
+      html,
+      body {
+        font-family: vazir;
+        font-size: 10px;
+        color: #666666;
+        font-weight: 400;
+      }
+
+      .container {
+        width: 591px;
+        height: 1280px;
+        background-image: url("/home/original/residbot/templates/shahr/shahr.png");
+        /* background-image: url("shahr-filled.png"); */
+        object-fit: cover;
+        position: relative;
+      }
+
+      .date {
+        color: #999999;
+        position: absolute;
+        top: 300px;
+        left: 80px;
+        display: flex;
+      }
+
+      .title {
+        position: absolute;
+        top: 367;
+        right: 234;
+      }
+
+      .rows {
+        height: 60px;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        position: absolute;
+        top: 400px;
+        right: 110px;
+      }
+      .row {
+        width: auto;
+        color: #333333;
+        font-weight: 400;
+        position: relative;
+      }
+      .additional-col {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: calc(100% + 25px);
+        text-wrap: nowrap;
+      }
+      .footer {
+        width: 450px;
+        line-height: 13px;
+        position: absolute;
+        top: 645px;
+        right: 75px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="date">
+        <div>زمان دریافت رسید‌: {{time}}</div>
+        <div style="margin-left: 15px"></div>
+        <div>{{date}}</div>
+      </div>
+      <div class="title">درخواست انتقال وجه بین بانکی پایا عادی</div>
+
+      <div class="rows">
+        <div class="row">
+          شماره پیگیری {{tracking_code}}
+          <div class="additional-col">مبلغ {{amount}} ریال ایران</div>
+        </div>
+        <div class="row">
+          {{description2}}
+          <div class="additional-col">تاریخ تراکنش: {{date}} - {{time}}</div>
+        </div>
+        <div class="row" style="font-weight: 900;">وضعیت تراکنش ثبت شده</div>
+      </div>
+
+      <div class="rows" style="top: 475px">
+        <div class="row">مشخصات مقصد</div>
+        <div class="row">
+          شبای مقصد
+          <div class="additional-col" style="right: calc(100% + 130px)">
+            به نام :{{receiver}}
+          </div>
+        </div>
+        <div class="row" style="font-weight: bold;">{{iban}} {{receiver_bank}}</div>
+      </div>
+
+      <div class="rows" style="top: 555px">
+        <div class="row">مشخصات مبدا</div>
+        <div class="row">
+          شماره سپرده {{source_account}}
+          <div class="additional-col" style="right: calc(100% + 60px)">
+            صاحب سپرده {{sender}}
+          </div>
+        </div>
+        <div class="row" style="font-weight: bold;">شبای مبدأ {{source_iban}}</div>
+      </div>
+
+      <div class="footer">
+        توجه:”دستور پرداخت بین بانکی پایا به شرح ذیل با موفقیت ثبت گردید .لازم
+        به تاکید است مبغ مذکور بر اساس سیکل های تصویه پایا در هر روز کاری به
+        سپرده اعلامی واریز خواهد شد* 0.225
+      </div>
+    </div>
+  </body>
+</html>

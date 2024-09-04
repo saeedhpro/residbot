@@ -1,0 +1,129 @@
+<!-- FIXME: change to dotted rows -->
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+
+      html,
+      body {
+        font-family: vazir;
+      }
+
+      .container {
+        width: 591px;
+        height: 1280px;
+        background-image: url("/home/original/residbot/templates/shahr_satna/shahr-satna.png");
+        /* background-image: url("shahr-satna-filled.png"); */
+        object-fit: cover;
+        position: relative;
+      }
+
+      .share-date {
+        opacity: 0.729;
+        font-size: 17px;
+        letter-spacing: 0px;
+        color: #ffffff;
+        font-weight: 400;
+        position: absolute;
+        top: 377px;
+        left: 26px;
+      }
+
+      .date {
+        opacity: 0.729;
+        height: 37px;
+        font-size: 22px;
+        letter-spacing: -1px;
+        color: #333333;
+        font-weight: 400;
+        position: absolute;
+        top: 440px;
+        left: 15px;
+      }
+
+      .from {
+        opacity: 0.729;
+        font-size: 22px;
+        letter-spacing: -1px;
+        color: #333333;
+        font-weight: 400;
+        position: absolute;
+        top: 515;
+        left: 14;
+      }
+
+      .to {
+        opacity: 0.729;
+        font-size: 21px;
+        letter-spacing: 0px;
+        color: #333333;
+        font-weight: 400;
+        position: absolute;
+        top: 591;
+        left: 14;
+      }
+
+      .to-name {
+        opacity: 0.729;
+        font-size: 22px;
+        letter-spacing: -1px;
+        color: #333333;
+        font-weight: 400;
+        position: absolute;
+        top: 666;
+        left: 17;
+      }
+
+      .price {
+        opacity: 0.729;
+        font-size: 22px;
+        letter-spacing: -1px;
+        color: #333333;
+        font-weight: 400;
+        position: absolute;
+        top: 745;
+        left: 56;
+      }
+      .unit {
+        opacity: 0.729;
+        font-size: 22px;
+        letter-spacing: -1px;
+        color: #333333;
+        font-weight: 400;
+        position: absolute;
+        top: -3;
+        left: -40;
+      }
+      .tracking-number {
+        opacity: 0.729;
+        font-size: 22px;
+        letter-spacing: -1px;
+        color: #333333;
+        font-weight: 400;
+        position: absolute;
+        top: 818;
+        left: 15;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="share-date">{{datetime}}</div>
+      <div class="date">{{datetime}}</div>
+      <div class="from">{{source_account}}</div>
+      <div class="to">{{iban}}</div>
+      <div class="to-name">{{receiver}}</div>
+      <div class="price">
+        {{amount}}
+        <div class="unit">ریال</div>
+      </div>
+      <div class="tracking-number">{{tracking_code}}</div>
+    </div>
+  </body>
+</html>

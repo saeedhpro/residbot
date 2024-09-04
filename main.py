@@ -70,6 +70,10 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک صادرات پایا", callback_data='saderat_paya')],
         [InlineKeyboardButton("بانک دی", callback_data='day')],
         [InlineKeyboardButton("بانک دی ساتنا", callback_data='day_satna')],
+        [InlineKeyboardButton("بانک شهر", callback_data='shar')],
+        [InlineKeyboardButton("بانک شهر پایا", callback_data='shar_paya')],
+        [InlineKeyboardButton("بانک شهر پایا 2", callback_data='shahr_paya_2')],
+        [InlineKeyboardButton("بانک شهر ساتنا", callback_data='shahr_satna')],
         [InlineKeyboardButton("بازگشت", callback_data='return_to_menu')],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -91,6 +95,7 @@ async def handle_select_bank(update, context):
             or context.user_data['bank_type'] == 'refah_paya'\
             or context.user_data['bank_type'] == 'refah_satna'\
             or context.user_data['bank_type'] == 'saderat_paya'\
+            or context.user_data['bank_type'] == 'shar'\
             or context.user_data['bank_type'] == 'mellat':
         await query.edit_message_text('تاریخ را به صورت ۱۴۰۳/۰۵/۲۴ وارد کنید')
         return GET_DATE
@@ -305,6 +310,22 @@ async def handle_source_account(update: Update, context):
         await update.message.reply_text('شماره شبا را وارد کنید:')
         return GET_DEST_IBAN
 
+    if context.user_data['bank_type'] == 'shar':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
+    if context.user_data['bank_type'] == 'shar_paya':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
+    if context.user_data['bank_type'] == 'shar_paya_2':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
+    if context.user_data['bank_type'] == 'shahr_satna':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
 
@@ -422,6 +443,18 @@ async def handle_get_dest_iban(update: Update, context):
     if context.user_data['bank_type'] == 'sedarat_2':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
+    if context.user_data['bank_type'] == 'shar':
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_DEST_NAME
+    if context.user_data['bank_type'] == 'shar_paya':
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_DEST_NAME
+    if context.user_data['bank_type'] == 'shahr_paya_2':
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_DEST_NAME
+    if context.user_data['bank_type'] == 'shahr_satna':
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_DEST_NAME
 
     if context.user_data['bank_type'] == 'maskan_satna':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
@@ -446,7 +479,11 @@ async def handle_get_receiver_lname(update: Update, context):
 
 
 async def handle_get_source_iban(update: Update, context):
-    context.user_data['receiver_lname'] = update.message.text
+    context.user_data['source_iban'] = update.message.text
+
+    if context.user_data['bank_type'] == 'shar':
+        await update.message.reply_text('نام واریز کننده را وارد کنید:')
+        return GET_SENDER_NAME
 
     await update.message.reply_text('توضیحات را وارد کنید:')
     return GET_DESCRIPTION
@@ -458,6 +495,9 @@ async def handle_get_dest_name(update: Update, context):
         await update.message.reply_text('کد پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
     if context.user_data['bank_type'] == 'tejarat_paya':
+        await update.message.reply_text('کد پیگیری را وارد کنید:')
+        return GET_TRACKING_CODE
+    if context.user_data['bank_type'] == 'shahr_satna':
         await update.message.reply_text('کد پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
 
@@ -543,6 +583,18 @@ async def handle_get_dest_name(update: Update, context):
         return GET_DEST_BANK
 
     if context.user_data['bank_type'] == 'refah':
+        await update.message.reply_text('نام بانک مقصد را وارد کنید:')
+        return GET_DEST_BANK
+
+    if context.user_data['bank_type'] == 'shar':
+        await update.message.reply_text('نام بانک مقصد را وارد کنید:')
+        return GET_DEST_BANK
+
+    if context.user_data['bank_type'] == 'shar_paya':
+        await update.message.reply_text('نام بانک مقصد را وارد کنید:')
+        return GET_DEST_BANK
+
+    if context.user_data['bank_type'] == 'shahr_paya_2':
         await update.message.reply_text('نام بانک مقصد را وارد کنید:')
         return GET_DEST_BANK
 
@@ -634,6 +686,10 @@ async def handle_get_sender_name(update: Update, context):
         await update.message.reply_text('شرح را وارد کنید:')
         return GET_DESCRIPTION
 
+    if context.user_data['bank_type'] == 'shar':
+        await update.message.reply_text('بابت (علت) را وارد کنید:')
+        return GET_DESCRIPTION2
+
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
 
@@ -673,6 +729,9 @@ async def handle_get_description(update: Update, context):
         await update.message.reply_text('علت (بابت) انتقال را وارد کنید:')
         return GET_DESCRIPTION2
     if context.user_data['bank_type'] == 'resalat_satna_2':
+        await update.message.reply_text('علت (بابت) انتقال را وارد کنید:')
+        return GET_DESCRIPTION2
+    if context.user_data['bank_type'] == 'shar_paya':
         await update.message.reply_text('علت (بابت) انتقال را وارد کنید:')
         return GET_DESCRIPTION2
 
@@ -727,6 +786,13 @@ async def handle_dest_bank(update: Update, context):
     if context.user_data['bank_type'] == 'mellat':
         await update.message.reply_text('توضیحات را وارد کنید:')
         return GET_DESCRIPTION
+    if context.user_data['bank_type'] == 'shar_paya':
+        await update.message.reply_text('شرح را وارد کنید:')
+        return GET_DESCRIPTION
+    if context.user_data['bank_type'] == 'shahr_paya_2':
+        await update.message.reply_text('علت (بابت) را وارد کنید:')
+        return GET_DESCRIPTION2
+
     if context.user_data['bank_type'] == 'refah_paya':
         await update.message.reply_text('علت (بابت) را وارد کنید:')
         return GET_DESCRIPTION
@@ -764,6 +830,9 @@ async def handle_dest_bank(update: Update, context):
     if context.user_data['bank_type'] == 'refah_satna':
         await update.message.reply_text('شناسه پرداخت را وارد کنید:')
         return GET_TRACKING_CODE
+    if context.user_data['bank_type'] == 'shar':
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_SOURCE_IBAN
 
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
     return GET_SOURCE_ACCOUNT
@@ -838,6 +907,18 @@ async def handle_tracking_code(update: Update, context):
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
     if context.user_data['bank_type'] == 'sedarat_2':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
+    if context.user_data['bank_type'] == 'shar':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
+    if context.user_data['bank_type'] == 'shar_paya':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
+    if context.user_data['bank_type'] == 'shahr_paya_2':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
+    if context.user_data['bank_type'] == 'shahr_satna':
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
 
@@ -1423,6 +1504,60 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
         }
 
+    if bank_type == 'shar':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'date': convert_numbers_to_farsi(context.user_data['date']),
+            'time': convert_numbers_to_farsi(context.user_data['time']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'source_iban': convert_numbers_to_farsi(context.user_data['source_iban']),
+            'sender': convert_numbers_to_farsi(context.user_data['sender']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
+            'description2': format_amount(convert_numbers_to_farsi(context.user_data['description2'])),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+        }
+
+    if bank_type == 'shar_paya':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'description': format_amount(convert_numbers_to_farsi(context.user_data['description'])),
+            'description2': format_amount(convert_numbers_to_farsi(context.user_data['description2'])),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+        }
+
+    if bank_type == 'shahr_paya_2':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'description2': format_amount(convert_numbers_to_farsi(context.user_data['description2'])),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+        }
+
+    if bank_type == 'shahr_satna':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+        }
+
     await update.message.reply_text('در حال ساخت رسید... لطفا صبر کنید!:')
     rendered_html = template.render(html_content)
     png_path = f"./receipts/image/receipt_{context.user_data['tracking_code']}.png"
@@ -1549,6 +1684,18 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     elif context.user_data['bank_type'] == 'sedarat_2':
         options['height'] = '1280'
         options['width'] = '635'
+    elif context.user_data['bank_type'] == 'shar':
+        options['height'] = '1280'
+        options['width'] = '591'
+    elif context.user_data['bank_type'] == 'shar_paya':
+        options['height'] = '1280'
+        options['width'] = '623'
+    elif context.user_data['bank_type'] == 'shahr_paya_2':
+        options['height'] = '1280'
+        options['width'] = '591'
+    elif context.user_data['bank_type'] == 'shahr_satna':
+        options['height'] = '1280'
+        options['width'] = '591'
 
     imgkit.from_string(rendered_html, png_path, options=options)
 
@@ -1605,6 +1752,9 @@ def get_bank_type_in_farsi(bank_type='tejarat'):
         'saderat_paya': 'بانک صادرات پایا',
         'day': 'بانک دی',
         'day_satna': 'بانک دی ساتنا',
+        'shar': 'بانک شهر',
+        'shar_paya': 'بانک شهر پایا',
+        'shahr_paya_2': 'بانک شهر پایا 2',
     }
     return bank_type_list[bank_type]
 

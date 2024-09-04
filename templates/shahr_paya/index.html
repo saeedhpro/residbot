@@ -1,0 +1,166 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+
+      html,
+      body {
+        font-family: vazir;
+      }
+
+      .container {
+        width: 623px;
+        height: 1280px;
+        background-image: url("/home/original/residbot/templates/shar_paya/shahr-paya.png");
+        /* background-image: url("shahr-paya-filled.png"); */
+        object-fit: cover;
+        position: relative;
+      }
+
+      .date {
+        font-size: 22px;
+        letter-spacing: -1px;
+        color: #666666;
+        font-weight: 400;
+        position: absolute;
+        top: 416px;
+        left: 47px;
+      }
+
+      .from {
+        font-size: 22px;
+        letter-spacing: 0px;
+        color: #666666;
+        font-weight: 400;
+        position: absolute;
+        top: 515px;
+        left: 43px;
+        direction: ltr;
+      }
+
+      .to {
+        font-size: 23px;
+        letter-spacing: -1px;
+        color: #666666;
+        font-weight: 400;
+        position: absolute;
+        top: 564px;
+        left: 44px;
+      }
+
+      .to-name {
+        font-size: 18px;
+        letter-spacing: 0px;
+        color: #666666;
+        font-weight: 400;
+        position: absolute;
+        top: 617px;
+        left: 44px;
+      }
+
+      .to-bank {
+        font-size: 19px;
+        letter-spacing: 0px;
+        color: #666666;
+        font-weight: 400;
+        position: absolute;
+        top: 671px;
+        left: 44px;
+      }
+
+      .for {
+        font-size: 20px;
+        letter-spacing: -1px;
+        color: #666666;
+        font-weight: 400;
+        position: absolute;
+        top: 723px;
+        left: 41px;
+      }
+
+      .status {
+        font-size: 19px;
+        letter-spacing: 0px;
+        color: #666666;
+        font-weight: 400;
+        position: absolute;
+        top: 775px;
+        left: 41px;
+      }
+
+      .transfer-status {
+        font-size: 19px;
+        letter-spacing: 0px;
+        color: #666666;
+        font-weight: 400;
+        position: absolute;
+        top: 825px;
+        left: 41px;
+      }
+
+      .tracking-number {
+        font-size: 22px;
+        letter-spacing: 0px;
+        color: #666666;
+        font-weight: 400;
+        position: absolute;
+        top: 872px;
+        left: 45px;
+        direction: ltr;
+      }
+
+      .description {
+        font-size: 19px;
+        letter-spacing: 0px;
+        color: #666666;
+        font-weight: 400;
+        position: absolute;
+        top: 922px;
+        left: 42px;
+      }
+
+      .price {
+        font-size: 23px;
+        letter-spacing: -1px;
+        color: #666666;
+        font-weight: 400;
+        position: absolute;
+        top: 468px;
+        left: 79px;
+      }
+      .unit {
+        font-size: 20px;
+        letter-spacing: -1px;
+        color: #666666;
+        font-weight: 400;
+        position: absolute;
+        top: 0;
+        left: -36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="date">{{datetime}}</div>
+      <div class="from">{{source_account}}</div>
+      <div class="to">{{iban}}</div>
+      <div class="to-name">{{receiver}}</div>
+      <div class="to-bank">{{receiver_bank}}</div>
+      <div class="for">{{description2}}</div>
+      <div class="status">از طرف بانک پذیرفته شده</div>
+      <div class="transfer-status">آماده برای انجام انتقال وجه</div>
+      <div class="tracking-number">{{tracking_code}}</div>
+      <div class="description">{{description}}</div>
+      <div class="price">
+        {{amount}}
+        <div class="unit">ریال</div>
+      </div>
+    </div>
+  </body>
+</html>
