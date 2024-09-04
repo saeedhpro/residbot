@@ -1,0 +1,222 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+      @font-face {
+        font-family: vazir-light;
+        src: url("/home/original/residbot/templates/Vazir-Light.ttf");
+      }
+      @font-face {
+        font-family: vazir-medium;
+        src: url("/home/original/residbot/templates/Vazirmatn-Medium.ttf");
+      }
+
+      body {
+        font-size: 27px;
+        font-weight: 300;
+        font-family: vazir;
+        color: #2a3034;
+      }
+
+      h1 {
+        text-wrap: nowrap;
+        font-size: 32px;
+        font-weight: bold;
+        font-family: vazir-light;
+        position: absolute;
+        top: 270px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .container {
+        width: 591px;
+        height: 1280px;
+        /* background-image: url("day-filled.png"); */
+        background-image: url("/home/original/residbot/templates/day/day.png");
+        object-fit: cover;
+        position: relative;
+      }
+
+      .price {
+        position: absolute;
+        top: 396px;
+        right: 116px;
+        color: #000;
+        font-weight: 700;
+        font-size: 30px;
+        font-family: vazir;
+      }
+
+      .price-unit {
+        font-size: 24px;
+        font-weight: 400;
+      }
+
+      .date {
+        position: absolute;
+        top: 440px;
+        right: 76px;
+        color: #666666;
+        font-size: 20px;
+      }
+
+      .ok {
+        position: absolute;
+        top: 480px;
+        right: 110px;
+        font-size: 21px;
+        font-weight: 400;
+        color: #3fd85b;
+      }
+
+      .type {
+        position: absolute;
+        top: 480px;
+        right: 196px;
+        font-size: 21px;
+        font-weight: 400;
+        color: #999999;
+      }
+
+      .from-container {
+        width: 440px;
+        position: absolute;
+        top: 622px;
+        right: 76px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .from-title {
+        color: #999999;
+        font-size: 20px;
+      }
+      .from-value-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .from-value-number {
+        font-size: 19px;
+        text-align: left;
+        color: #333333;
+        line-height: 32px;
+        display: flex;
+      }
+      .from-value-number > svg {
+        width: 44px;
+        height: 32px;
+      }
+      .from-value-name {
+        font-size: 20px;
+        line-height: 22px;
+        color: #333333;
+        text-align: left;
+      }
+
+      .to-container {
+        width: 440px;
+        position: absolute;
+        top: 722px;
+        right: 76px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .to-title {
+        color: #999999;
+        font-size: 20px;
+      }
+      .to-value-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .to-value-number {
+        font-size: 19px;
+        text-align: left;
+        color: #333333;
+        line-height: 32px;
+        display: flex;
+      }
+      .to-value-number > svg {
+        width: 44px;
+        height: 32px;
+      }
+      .to-value-name {
+        font-size: 20px;
+        line-height: 19px;
+        text-align: left;
+        color: #333333;
+      }
+
+      .tracking-number-container {
+        width: 439px;
+        display: flex;
+        justify-content: space-between;
+
+        position: absolute;
+        top: 887px;
+        right: 78px;
+      }
+
+      .tracking-title {
+        font-size: 21px;
+        color: #333;
+      }
+      .tracking-value {
+        font-size: 19px;
+        letter-spacing: -1;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="price">
+        {{amount}} <span class="price-unit">ریال</span>
+      </div>
+      <div class="date">{{datetime}}</div>
+      <div class="ok">{{status}}</div>
+      <div class="type">انتقال وجه پایا</div>
+
+      <div class="from-container">
+        <div class="from-title">از سپرده</div>
+        <div class="from-value">
+          <div class="from-value-container">
+            <div class="from-value-number">
+              {{source_account}}
+              <svg></svg>
+            </div>
+            <div class="from-value-name">{{sender}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="to-container">
+        <div class="to-title">به شبا</div>
+        <div class="to-value">
+          <div class="to-value-container">
+            <div class="to-value-number">
+              {{iban}}
+              <svg></svg>
+            </div>
+            <div class="to-value-name">{{receiver}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tracking-number-container">
+        <div class="tracking-title">شماره پیگیری</div>
+        <div class="tracking-value">{{tracking_code}}</div>
+      </div>
+    </div>
+  </body>
+</html>

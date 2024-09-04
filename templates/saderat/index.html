@@ -1,0 +1,117 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+
+      html,
+      body {
+        font-family: vazir;
+      }
+
+      .container {
+        width: 614px;
+        height: 1280px;
+        background-image: url("/home/original/residbot/templates/saderat/saderat.png");
+        /* background-image: url("saderat-filled.png"); */
+        object-fit: cover;
+        position: relative;
+      }
+
+      .value {
+        font-size: 22px;
+        line-height: 0px;
+        color: #1a1a1a;
+        font-weight: 400;
+        opacity: 0.741;
+      }
+
+      .to-bank {
+        position: absolute;
+        top: 214;
+        left: 31;
+      }
+
+      .to-shaba {
+        position: absolute;
+        top: 441;
+        left: 94;
+        direction: ltr;
+      }
+
+      .to-name {
+        font-size: 24px;
+        position: absolute;
+        top: 510;
+        left: 44;
+      }
+
+      .type-markup {
+        font-size: 21px;
+        line-height: 0px;
+        color: #999999;
+        font-weight: 400;
+        position: absolute;
+        top: 308;
+        right: 43;
+      }
+
+      .type {
+        font-size: 23px;
+        position: absolute;
+        top: 577;
+        left: 44;
+      }
+
+      .price-toman {
+        color: #333333;
+        font-size: 23px;
+        position: absolute;
+        top: 632;
+        left: 45;
+      }
+
+      .price-rial {
+        font-size: 19px;
+        line-height: 0px;
+        color: #808080;
+        font-weight: 400;
+        position: absolute;
+        top: 674;
+        left: 53;
+      }
+
+      .date {
+        font-size: 23px;
+        position: absolute;
+        top: 723;
+        left: 44;
+      }
+
+      .desc {
+        font-size: 23px;
+        position: absolute;
+        top: 792;
+        left: 45;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="value to-bank">{{receiver_bank}}</div>
+      <div class="value to-shaba">{{iban}}</div>
+      <div class="value to-name">{{receiver}}</div>
+      <div class="value type">{{description2}}</div>
+      <div class="value type-markup">رسید برداشت وجه</div>
+      <div class="value price-toman">{{amount_toman}} تومان</div>
+      <div class="value price-rial">{{amount}} ریال</div>
+      <div class="value date" dir="ltr">{{datetime}}</div>
+      <div class="value desc">{{description}}</div>
+    </div>
+  </body>
+</html>

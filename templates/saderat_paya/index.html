@@ -1,0 +1,153 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+
+      html,
+      body {
+        font-family: vazir;
+      }
+
+      .container {
+        width: 747px;
+        height: 1280px;
+        background-image: url("/home/original/residbot/templates/saderat_paya/saderat-paya.png");
+        /* background-image: url("saderat_paya-filled.png"); */
+        object-fit: cover;
+        position: relative;
+      }
+
+      .from-number {
+        font-size: 32px;
+        line-height: 37px;
+        color: #f2f2f2;
+        font-weight: 400;
+        position: absolute;
+        right: 231;
+        top: 642;
+        direction: ltr;
+      }
+      .from-type {
+        opacity: 0.588;
+        font-size: 27px;
+        letter-spacing: -1px;
+        line-height: 0px;
+        color: #e6e6e6;
+        font-weight: 400;
+        position: absolute;
+        right: 229;
+        top: 708;
+      }
+      .to-number {
+        font-size: 28px;
+        letter-spacing: 0px;
+        line-height: 0px;
+        color: #e6e6e6;
+        font-weight: 400;
+        position: absolute;
+        top: 761;
+        right: 230;
+      }
+      .to-name {
+        font-size: 28px;
+        letter-spacing: -1px;
+        line-height: 0px;
+        color: #e6e6e6;
+        font-weight: 400;
+        opacity: 0.588;
+        position: absolute;
+        top: 804;
+        right: 232;
+      }
+      .price {
+        font-size: 28px;
+        line-height: 0px;
+        color: #e6e6e6;
+        font-weight: 400;
+        position: absolute;
+        top: 944;
+        right: 232;
+      }
+      .price span {
+        font-size: 27px;
+        line-height: 0px;
+        color: #e6e6e6;
+        font-weight: 400;
+        opacity: 0.741;
+      }
+      .for {
+        font-size: 26px;
+        line-height: 0px;
+        color: #e6e6e6;
+        font-weight: 400;
+        position: absolute;
+        top: 1085;
+        right: 232;
+      }
+      .tracking-number {
+        font-size: 27px;
+        line-height: 0px;
+        color: #e6e6e6;
+        font-weight: 400;
+        opacity: 0.949;
+        position: absolute;
+        top: 1164;
+        right: 230;
+      }
+      .time {
+        font-size: 29px;
+        line-height: 0px;
+        color: #e6e6e6;
+        font-weight: 400;
+        opacity: 0.988;
+        position: absolute;
+        top: 1213;
+        right: 222;
+      }
+      .time span {
+        letter-spacing: 0px;
+        opacity: 0.941;
+      }
+      .payment-id {
+        font-size: 29px;
+        line-height: 0px;
+        color: #e6e6e6;
+        font-weight: 400;
+        opacity: 0.678;
+        position: absolute;
+        top: 1037;
+        right: 225;
+      }
+      .type {
+        font-size: 29px;
+        line-height: 0px;
+        color: #e6e6e6;
+        font-weight: 400;
+        opacity: 0.988;
+        position: absolute;
+        top: 990;
+        right: 222;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="from-number">{{source_account}}</div>
+      <div class="from-type">{{description3}}</div>
+      <div class="to-number">{{iban}}</div>
+      <div class="to-name">{{receiver}}</div>
+      <div class="price">{{amount}} <span>ریال</span></div>
+      <div class="type">{{description2}}</div>
+      <div class="payment-id">{{marja}}</div>
+      <div class="for">{{description}}</div>
+      <div class="tracking-number">{{tracking_code}}</div>
+      <div class="time" dir="ltr"><span>{{time}}</span> {{date}}</div>
+    </div>
+  </body>
+</html>
