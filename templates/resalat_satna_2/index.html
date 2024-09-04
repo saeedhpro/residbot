@@ -1,0 +1,139 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+      }
+
+      body {
+        font-size: 22px;
+        font-family: vazir;
+        color: #4d4d4d;
+      }
+
+      .container {
+        width: 612px;
+        height: 1280px;
+        /* background-image: url("resalat-satna-2-filled.png"); */
+        background-image: url("/home/original/residbot/templates/resalat_satna_2/resalat-satna-2.png");
+        object-fit: cover;
+        position: relative;
+      }
+
+      .green {
+        color: #00a143;
+      }
+
+      .font-bold {
+        font-weight: 700;
+      }
+
+      .title {
+        font-size: 20px;
+        letter-spacing: 0px;
+        color: #666666;
+        font-weight: 400;
+        direction: rtl;
+        position: absolute;
+        right: 32px;
+        opacity: 0.85;
+      }
+
+      .value {
+        width: 100%;
+        font-size: 20px;
+        letter-spacing: -1px;
+        color: #1a1a1a;
+        position: absolute;
+        left: 50%;
+        top: auto;
+        bottom: 10px;
+        transform: translateX(-50%);
+        text-align: center;
+        font-weight: bold;
+      }
+      .rows {
+        width: 584px;
+        padding-top: 316px;
+        display: flex;
+        flex-direction: column;
+      }
+      .row {
+        width: 100%;
+        height: 77px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="rows">
+        <div class="row">
+          <div class="title">تاریخ ثبت سانتا:</div>
+          <div class="value">{{datetime}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">شماره پیگیری:</div>
+          <div class="value">{{tracking_code}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">شماره سپرده مبدا‌:</div>
+          <div class="value">{{source_account}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">شماره شبای مقصد:</div>
+          <div class="value">{{iban}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">مبلغ انتقال:</div>
+          <div class="value">{{amount}} ریال</div>
+        </div>
+
+        <div class="row">
+          <div class="title">کسر کارمزد از سپرده:</div>
+          <div class="value">{{reduce_source_account}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">نام بانک مقصد:</div>
+          <div class="value">{{receiver_bank}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">شناسه واریز:</div>
+          <div class="divider">{{marja}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">فرستنده:</div>
+          <div class="value">{{sender}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">گیرنده:</div>
+          <div class="value">{{receiver}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">بابت:</div>
+          <div class="value">{{description2}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">شرح:</div>
+          <div class="value" style="bottom: 32px">{{description}}</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
