@@ -4,6 +4,7 @@ from telegram.ext import Application, ConversationHandler, CommandHandler, Callb
     filters, ContextTypes
 import logging
 import imgkit
+from html2image import Html2Image
 
 (START, RETURN_MENU, SELECT_ACTION, SELECT_BANK, GET_STATUS, GET_TRANSACTION_TYPE, GET_SOURCE_ACCOUNT, GET_DEST_IBAN,
  GET_DEST_NAME, GET_DATETIME, GET_AMOUNT, GET_SENDER_NAME, GET_DEST_ACCOUNT, GET_DEST_BANK, GET_REASON, GET_DESCRIPTION,
@@ -908,7 +909,7 @@ async def handle_tracking_code(update: Update, context):
     if context.user_data['bank_type'] == 'post_bank_paya_2':
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
-    if context.user_data['bank_type'] == 'refah':
+    if context.user_data['bank_type'] == 'ref   ah':
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
     if context.user_data['bank_type'] == 'refah_paya':
@@ -1731,8 +1732,10 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     elif context.user_data['bank_type'] == 'sina_paya':
         options['height'] = '1280'
         options['width'] = '739'
+    hti = Html2Image()
+    hti.screenshot(html_str=rendered_html, css_str='', save_as='page.png', size=(options['width'], options['height']))
 
-    imgkit.from_string(rendered_html, png_path, options=options)
+    # imgkit.from_string(rendered_html, png_path, options=options)
 
     await update.message.reply_photo(photo=open(png_path, 'rb'))
 
