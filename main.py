@@ -1742,8 +1742,8 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     )
 
     # imgkit.from_string(rendered_html, png_path, options=options)
-
-    await update.message.reply_photo(photo=open(png_path, 'rb'))
+    photo = f"${png_path}${png_name}"
+    await update.message.reply_photo(photo=open(photo, 'rb'))
 
     return RETURN_MENU
 
