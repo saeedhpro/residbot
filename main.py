@@ -103,7 +103,7 @@ async def handle_select_bank(update, context):
         await query.edit_message_text('تاریخ را به صورت ۱۴۰۳/۰۵/۲۴ وارد کنید')
         return GET_DATE
 
-    await query.edit_message_text('تاریخ و ساعت را به صورت ۱۴۰۳/۰۵/۲۴ ۱۲:۴۵ وارد کنید')
+    await query.edit_message_text('تاریخ و ساعت را وارد کنید')
     return GET_DATETIME
 
 
@@ -794,7 +794,10 @@ async def handle_get_reason(update: Update, context):
 
 
 async def handle_dest_bank(update: Update, context):
-    context.user_data['receiver_bank'] = update.message.text
+    query = update.callback_query
+    context.user_data['receiver_bank'] = query.data
+    await query.answer()
+
     if context.user_data['bank_type'] == 'sepah_satna':
         await update.message.reply_text('توضیحات را وارد کنید:')
         return GET_DESCRIPTION
@@ -1622,9 +1625,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     elif context.user_data['bank_type'] == 'saman_paya_dark':
         options['height'] = '1280'
         options['width'] = '752'
-    elif context.user_data['bank_type'] == 'saman_paya_dark':
-        options['height'] = '1280'
-        options['width'] = '752'
     elif context.user_data['bank_type'] == 'ayandeh':
         options['height'] = '1280'
         options['width'] = '654'
@@ -1740,6 +1740,10 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         save_as=png_name,
         size=(int(options['width']), int(options['height']))
     )
+
+    with open("dep.html", "+w") as f:
+        f.write(rendered_html)
+    f.close()
 
     # imgkit.from_string(rendered_html, png_path, options=options)
     photo = f"{png_path}{png_name}"
