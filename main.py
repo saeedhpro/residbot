@@ -652,8 +652,6 @@ async def handle_get_sender_name(update: Update, context):
     context.user_data['sender'] = update.message.text
     if context.user_data['bank_type'] == 'tejarat' \
             or context.user_data['bank_type'] == 'sepah_paya' \
-            or context.user_data['bank_type'] == 'saman_paya_light' \
-            or context.user_data['bank_type'] == 'saman_paya_dark' \
             or context.user_data['bank_type'] == 'ayandeh' \
             or context.user_data['bank_type'] == 'mehr_4' \
             or context.user_data['bank_type'] == 'post_bank_paya' \
@@ -664,7 +662,9 @@ async def handle_get_sender_name(update: Update, context):
         await update.message.reply_text('کد پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
 
-    if context.user_data['bank_type'] == 'mellat':
+    if context.user_data['bank_type'] == 'mellat' \
+            or context.user_data['bank_type'] == 'saman_paya_light' \
+            or context.user_data['bank_type'] == 'saman_paya_dark':
         await update.message.reply_text('نام بانک مقصد را وارد کنید:')
         return GET_DEST_BANK
 
@@ -846,6 +846,12 @@ async def handle_dest_bank(update: Update, context):
         return GET_DESCRIPTION2
 
     if context.user_data['bank_type'] == 'refah_2':
+        await update.message.reply_text('کد پیگیری را وارد کنید:')
+        return GET_TRACKING_CODE
+
+    if context.user_data['bank_type'] == 'refah_2' \
+            or context.user_data['bank_type'] == 'saman_paya_light' \
+            or context.user_data['bank_type'] == 'saman_paya_dark':
         await update.message.reply_text('کد پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
     if context.user_data['bank_type'] == 'refah_satna':
