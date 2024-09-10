@@ -1737,7 +1737,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     hti.screenshot(
         html_str=rendered_html,
         css_str='',
-        save_as=png_path,
+        save_as=png_name,
         size=(int(options['width']), int(options['height']))
     )
 
