@@ -1593,7 +1593,8 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
 
     await update.message.reply_text('در حال ساخت رسید... لطفا صبر کنید!:')
     rendered_html = template.render(html_content)
-    png_path = f"./receipts/image/receipt_{context.user_data['tracking_code']}.png"
+    png_name = f"receipt_{context.user_data['tracking_code']}.png"
+    png_path = f"./receipts/image/"
     options = {
         'format': 'png',
         'encoding': "UTF-8",
@@ -1732,7 +1733,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     elif context.user_data['bank_type'] == 'sina_paya':
         options['height'] = '1280'
         options['width'] = '739'
-    hti = Html2Image()
+    hti = Html2Image(output_path=png_path)
     hti.screenshot(html_str=rendered_html, css_str='', save_as=png_path, size=(int(options['width']), int(options['height'])))
 
     # imgkit.from_string(rendered_html, png_path, options=options)
