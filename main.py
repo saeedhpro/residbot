@@ -1733,7 +1733,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1280'
         options['width'] = '739'
     hti = Html2Image()
-    hti.screenshot(html_str=rendered_html, css_str='', save_as='page.png', size=(options['width'], options['height']))
+    hti.screenshot(html_str=rendered_html, css_str='', save_as='page.png', size=(int(options['width']), int(options['height'])))
 
     # imgkit.from_string(rendered_html, png_path, options=options)
 
