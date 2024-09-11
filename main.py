@@ -794,9 +794,7 @@ async def handle_get_reason(update: Update, context):
 
 
 async def handle_dest_bank(update: Update, context):
-    query = update.callback_query
-    context.user_data['receiver_bank'] = query.data
-    await query.answer()
+    context.user_data['receiver_bank'] = update.message.text
 
     if context.user_data['bank_type'] == 'sepah_satna':
         await update.message.reply_text('توضیحات را وارد کنید:')
