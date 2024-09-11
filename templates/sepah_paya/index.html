@@ -3,33 +3,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title title>Document</title>
-<!--    <link rel="stylesheet" href="sepah-paya.css" />-->
-      <style>
-@page {
-    size: 178.1mm 269.3mm; /* A4 size */
-    margin: 0; /* حذف حاشیه */
-}
-@font-face {
+    <style>
+      @font-face {
   font-family: vazir;
-  src: url("/home/original/residbot/templates/vazir.ttf");
+  src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
 }
 @font-face {
   font-family: vazir-light;
-  src: url("/home/original/residbot/templates/vazir-light.ttf");
+  src: url("/home/original/residbot/templates/Vazir-Light.ttf");
 }
+
 body {
   font-size: 22px;
   font-weight: 300;
   font-family: vazir;
   color: #4d4d4d;
-  padding: 0 !important;
-  margin: 0 !important;
 }
 
 .container {
   width: 685px;
   height: 1280px;
-  background-image: url("/home/original/residbot/templates/sepah_paya/Sepah-Paya.png");
+  background-image: url("/home/original/residbot/templates/Sepah-Paya.png");
   object-fit: cover;
   position: relative;
 }
@@ -130,11 +124,8 @@ body {
 .title {
   direction: rtl;
   position: absolute;
-  left: 0;
-  transform: translateX(-34px);
-  /*right: 32px;*/
+  right: 32px;
   opacity: 0.85;
-width: 100%;
 }
 
 .value {
@@ -146,14 +137,12 @@ width: 100%;
   text-align: center;
   font-weight: bold;
 }
-
-      </style>
+    </style>
   </head>
   <body>
     <div class="container">
       <div class="record-date-title title">تاریخ ثبت پایا:</div>
       <div class="record-date-value value">
-<!--        چهارشنبه ۲۵ بهمن ماه سال ۱۴۰۲ ساعت ۱۳:۴۸:۴۷-->
         {{ datetime }}
       </div>
 
