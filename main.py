@@ -1747,6 +1747,10 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         size=(int(options['width']), int(options['height']))
     )
 
+    with open('dep.html', 'w') as f:
+        f.write(rendered_html)
+    f.close()
+
     # imgkit.from_string(rendered_html, png_path, options=options)
     photo = f"{png_path}{png_name}"
     await update.message.reply_photo(photo=open(photo, 'rb'))
