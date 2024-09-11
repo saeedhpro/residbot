@@ -1744,7 +1744,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         html_str=rendered_html,
         css_str='',
         save_as=png_name,
-        size=(752, 1280)
+        size=(int(options['width']), int(options['height']))
     )
 
     # imgkit.from_string(rendered_html, png_path, options=options)
