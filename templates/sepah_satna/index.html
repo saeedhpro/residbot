@@ -3,36 +3,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-<!--    <link rel="stylesheet" href="sepah-satna.css" />-->
     <style>
-@page {
-  width: 752px;
-  height: 1280px;
-    size: 178.1mm 269.3mm; /* A4 size */
-    margin: 0; /* حذف حاشیه */
-}
-@font-face {
+    @font-face {
   font-family: vazir;
-  src: url("/home/original/residbot/templates/vazir.ttf");
+  src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
 }
 @font-face {
   font-family: vazir-light;
-  src: url("../vazir-light.ttf");
+  src: url("/home/original/residbot/templates/Vazir-Light.ttf");
 }
-html {
 
-  width: 752px;
-  height: 1280px;
-}
 body {
-  width: 752px;
-  height: 1280px;
   font-size: 22px;
   font-weight: 300;
   font-family: vazir;
   color: #4d4d4d;
-  padding: 0 !important;
-  margin: 0 !important;
 }
 
 .container {
@@ -72,8 +57,10 @@ body {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
   gap: 10px;
+}
+.row-centered {
+  align-items: center !important;
 }
 
 .title {
@@ -81,7 +68,6 @@ body {
   opacity: 0.85;
   color: #666666;
   flex-shrink: 0;
-  white-space: nowrap;
 }
 
 .value {
@@ -96,8 +82,12 @@ body {
   height: 1px;
   border-top: 2px dotted #3e9166;
   margin-bottom: 6px;
+  margin-top: 26px;
 }
 
+.price {
+  max-width: 400px;
+}
     </style>
   </head>
   <body>
@@ -136,7 +126,7 @@ body {
         <div class="row">
           <div class="title">مبلغ انتقال:</div>
           <div class="divider"></div>
-          <div class="value green-text" style="color: #3e9166">
+          <div class="value green-text price" style="color: #3e9166">
             {{ amount }} ریال ({{ amount_fa }} تومان)
           </div>
         </div>
@@ -144,10 +134,7 @@ body {
         <div class="row">
           <div class="title">تاریخ ثبت ساتنا:</div>
           <div class="divider"></div>
-          <div class="value">
-<!--            ۱۴۰۲/۱۱/۲۵ ساعت ۱۲:۳۹-->
             {{ datetime }}
-          </div>
         </div>
 
         <div class="row">
