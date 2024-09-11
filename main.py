@@ -1626,7 +1626,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1280'
         options['width'] = '685'
     elif context.user_data['bank_type'] == 'saman_paya_light':
-        options['height'] = '1350'
+        options['height'] = '1280'
         options['width'] = '752'
     elif context.user_data['bank_type'] == 'saman_paya_dark':
         options['height'] = '1280'
@@ -1744,7 +1744,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         html_str=rendered_html,
         css_str='',
         save_as=png_name,
-        size=(int(options['width']), 'full')
+        size=(752, 1280)
     )
 
     # imgkit.from_string(rendered_html, png_path, options=options)
