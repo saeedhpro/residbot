@@ -6,8 +6,7 @@
     <style>
       @font-face {
         font-family: vazir;
-        /*src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");*/
-        src: url("/home/saeed/work/python/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
       }
 
       html,
@@ -21,8 +20,7 @@
       .container {
         width: 591px;
         height: 1280px;
-        /*background-image: url("/home/original/residbot/templates/shahr/shahr.png");*/
-        background-image: url("/home/saeed/work/python/residbot/templates/shahr/shahr.png");
+        background-image: url("/home/original/residbot/templates/shahr/shahr.png");
         /* background-image: url("shahr-filled.png"); */
         object-fit: cover;
         position: relative;
@@ -79,20 +77,20 @@
   <body>
     <div class="container">
       <div class="date">
-        <div>زمان دریافت رسید‌: {{time}}</div>
+        <div>زمان دریافت رسید‌: ۱۲۱۲</div>
         <div style="margin-left: 15px"></div>
-        <div>{{date}}</div>
+        <div>۱۲۳۵۶۴۵۶۶۶</div>
       </div>
       <div class="title">درخواست انتقال وجه بین بانکی پایا عادی</div>
 
       <div class="rows">
         <div class="row">
-          شماره پیگیری {{tracking_code}}
-          <div class="additional-col">مبلغ {{amount}} ریال ایران</div>
+          شماره پیگیری ۲۲۲۲۲۲۲
+          <div class="additional-col">مبلغ ۱,۲۳۰,۰۰۰,۰۰۰ ریال ایران</div>
         </div>
         <div class="row">
-          {{description2}}
-          <div class="additional-col">تاریخ تراکنش: {{date}} - {{time}}</div>
+          ۲۲,۲۲۲
+          <div class="additional-col">تاریخ تراکنش: ۱۲۳۵۶۴۵۶۶۶ - ۱۲۱۲</div>
         </div>
         <div class="row" style="font-weight: 900;">وضعیت تراکنش ثبت شده</div>
       </div>
@@ -102,21 +100,21 @@
         <div class="row">
           شبای مقصد
           <div class="additional-col" style="right: calc(100% + 130px)">
-            به نام :{{receiver}}
+            به نام :dssddssd
           </div>
         </div>
-        <div class="row" style="font-weight: bold;">{{iban}} {{receiver_bank}}</div>
+        <div class="row" style="font-weight: bold;">۵۱۵۱۳۵۱۵۵۳۵۱۵۳۱۵۱۵۱۵۵۵۱۵۱۵ sddsd sd</div>
       </div>
 
       <div class="rows" style="top: 555px">
         <div class="row">مشخصات مبدا</div>
         <div class="row">
-          شماره سپرده {{source_account}}
+          شماره سپرده ۱۲۳۱۳۲۱۳۲۱۲۳۱۳۲۱
           <div class="additional-col" style="right: calc(100% + 60px)">
-            صاحب سپرده {{sender}}
+            صاحب سپرده ۱۱۱۱۱۱۱۱۱۱۱۱۱۱۱۱
           </div>
         </div>
-        <div class="row" style="font-weight: bold;">شبای مبدأ {{source_iban}}</div>
+        <div class="row" style="font-weight: bold;">شبای مبدأ ۴۵۶۶۶۶۶۶۶۶۶۶۶۶۶۶۶۶۶۶</div>
       </div>
 
       <div class="footer">
