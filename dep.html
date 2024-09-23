@@ -6,122 +6,143 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        /*src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");*/
+        src: url("/home/saeed/work/python/residbot/templates/Vazirmatn-Regular.ttf");
       }
 
       html,
       body {
         font-family: vazir;
-        font-size: 10px;
-        color: #666666;
-        font-weight: 400;
       }
 
       .container {
-        width: 591px;
+        width: 665px;
         height: 1280px;
-        background-image: url("/home/original/residbot/templates/shahr/shahr.png");
-        /* background-image: url("shahr-filled.png"); */
+        /*background-image: url("/home/original/residbot/templates/keshavarzi/keshavarzi.png");*/
+        background-image: url("/home/saeed/work/python/residbot/templates/keshavarzi/keshavarzi.png");
+        /* background-image: url("keshavarzi-filled.png"); */
         object-fit: cover;
         position: relative;
       }
 
-      .date {
-        color: #999999;
-        position: absolute;
-        top: 300px;
-        left: 80px;
-        display: flex;
-      }
-
-      .title {
-        position: absolute;
-        top: 367;
-        right: 234;
-      }
-
-      .rows {
-        height: 60px;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: flex-start;
-        position: absolute;
-        top: 400px;
-        right: 110px;
-      }
-      .row {
-        width: auto;
-        color: #333333;
+      .from {
+        font-size: 21px;
+        letter-spacing: 0px;
+        line-height: 29px;
+        color: #4d4d4d;
         font-weight: 400;
-        position: relative;
-      }
-      .additional-col {
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        right: calc(100% + 25px);
-        text-wrap: nowrap;
+        top: 415px;
+        left: 80px;
       }
-      .footer {
-        width: 450px;
-        line-height: 13px;
+      .to {
+        font-size: 25px;
+        letter-spacing: 0px;
+        line-height: 34px;
+        color: #4d4d4d;
+        font-weight: 400;
         position: absolute;
-        top: 645px;
-        right: 75px;
+        top: 445px;
+        left: 92px;
+      }
+
+      .price {
+        font-size: 23px;
+        letter-spacing: 0px;
+        line-height: 34px;
+        color: #4d4d4d;
+        font-weight: 400;
+        position: absolute;
+        top: 484px;
+        left: 132px;
+        direction: ltr;
+      }
+      .unit {
+        position: absolute;
+        top: -2px;
+        left: -55px;
+      }
+      .tracking-number {
+        position: absolute;
+        top: 0;
+        left: auto;
+        right: auto;
+      }
+      .date {
+        font-size: 23px;
+        letter-spacing: 0px;
+        line-height: 34px;
+        color: #4d4d4d;
+        font-weight: 400;
+        position: absolute;
+        top: 520px;
+        left: 86px;
+      }
+      .status {
+        font-size: 23px;
+        letter-spacing: 0px;
+        line-height: 34px;
+        color: #4d4d4d;
+        font-weight: 400;
+        position: absolute;
+        top: 555px;
+        left: 73px;
+      }
+      .description {
+        font-size: 23px;
+        letter-spacing: 0px;
+        line-height: 34px;
+        color: #4d4d4d;
+        font-weight: 400;
+        position: absolute;
+        top: 590px;
+        left: 76px;
+      }
+      .description {
+        font-size: 23px;
+        letter-spacing: 0px;
+        line-height: 34px;
+        color: #4d4d4d;
+        font-weight: 400;
+        position: absolute;
+        top: 590px;
+        left: 76px;
+      }
+      .to-name {
+        font-size: 23px;
+        letter-spacing: 0px;
+        line-height: 34px;
+        color: #4d4d4d;
+        font-weight: 400;
+        position: absolute;
+        top: 626px;
+        left: 76px;
+      }
+      .tracking-number {
+        font-size: 23px;
+        letter-spacing: 1px;
+        line-height: 34px;
+        color: #4d4d4d;
+        font-weight: 400;
+        position: absolute;
+        top: 665px;
+        left: 100px;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="date">
-        <div>زمان دریافت رسید‌: ۱۲۱۲</div>
-        <div style="margin-left: 15px"></div>
-        <div>۱۲۳۵۶۴۵۶۶۶</div>
+      <div class="from">۵۰۰۰۵۷۷۸</div>
+      <div class="to">IR۲۴۰۱۷۰۰۰۰۰۰۰۰۳۵۷۶۰۷۴۵۱</div>
+      <div class="price">
+        ۵۰۰ ۰۰۰ ۰۰۰
+        <div class="unit">ریال</div>
       </div>
-      <div class="title">درخواست انتقال وجه بین بانکی پایا عادی</div>
-
-      <div class="rows">
-        <div class="row">
-          شماره پیگیری ۲۲۲۲۲۲۲
-          <div class="additional-col">مبلغ ۱,۲۳۰,۰۰۰,۰۰۰ ریال ایران</div>
-        </div>
-        <div class="row">
-          ۲۲,۲۲۲
-          <div class="additional-col">تاریخ تراکنش: ۱۲۳۵۶۴۵۶۶۶ - ۱۲۱۲</div>
-        </div>
-        <div class="row" style="font-weight: 900;">وضعیت تراکنش ثبت شده</div>
-      </div>
-
-      <div class="rows" style="top: 475px">
-        <div class="row">مشخصات مقصد</div>
-        <div class="row">
-          شبای مقصد
-          <div class="additional-col" style="right: calc(100% + 130px)">
-            به نام :dssddssd
-          </div>
-        </div>
-        <div class="row" style="font-weight: bold;">۵۱۵۱۳۵۱۵۵۳۵۱۵۳۱۵۱۵۱۵۵۵۱۵۱۵ sddsd sd</div>
-      </div>
-
-      <div class="rows" style="top: 555px">
-        <div class="row">مشخصات مبدا</div>
-        <div class="row">
-          شماره سپرده ۱۲۳۱۳۲۱۳۲۱۲۳۱۳۲۱
-          <div class="additional-col" style="right: calc(100% + 60px)">
-            صاحب سپرده ۱۱۱۱۱۱۱۱۱۱۱۱۱۱۱۱
-          </div>
-        </div>
-        <div class="row" style="font-weight: bold;">شبای مبدأ ۴۵۶۶۶۶۶۶۶۶۶۶۶۶۶۶۶۶۶۶</div>
-      </div>
-
-      <div class="footer">
-        توجه:”دستور پرداخت بین بانکی پایا به شرح ذیل با موفقیت ثبت گردید .لازم
-        به تاکید است مبغ مذکور بر اساس سیکل های تصویه پایا در هر روز کاری به
-        سپرده اعلامی واریز خواهد شد* 0.225
-      </div>
+      <div class="date">دوشنبه ۰۱ خرداد ۱۴۰۲ ۱۲:۳۵</div>
+      <div class="status">ارسال شده</div>
+      <div class="description">خرید کالا</div>
+      <div class="to-name">سید احمد طبیب زاده</div>
+      <div class="tracking-number">۱۴۰۲۰۳۰۱۰۱۶۲۳۹۳۹۲۲</div>
     </div>
   </body>
 </html>

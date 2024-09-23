@@ -3,29 +3,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <div class="divider"></div>
     <style>
       @font-face {
   font-family: vazir;
-  src: url("/home/original/residbot/templates/vazir.ttf");
+  src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
 }
-@page {
-  width: 677px;
-  height: 1019px;
-    size: 178.1mm 269.3mm; /* A4 size */
-    margin: 0; /* حذف حاشیه */
-}
-html {
-  width: 677px;
-  height: 1019px;
-}
+
 body {
-  width: 677px;
-  height: 1019px;
+  margin: 0;
   font-size: 18px;
   font-family: vazir;
   color: #7e7e7e;
-  padding: 0 !important;
-  margin: 0 !important;
 }
 
 .container {
@@ -145,31 +134,116 @@ body {
 }
 
 .green {
-  color: #00A143;
+  color: #00a143;
+}
+
+.rows {
+  width: 430px;
+  position: absolute;
+  top: 220px;
+  left: 50%;
+  transform: translateX(calc(-50% + 5px));
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.row {
+  width: 100%;
+  height: 66px;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  color: #333333;
+  font-size: 22px;
+  gap: 7px;
+}
+.title {
+  font-size: 18px;
+  letter-spacing: 0px;
+  color: #4d4d4d;
+  font-weight: 300;
+  flex-shrink: 0;
+  opacity: 0.749;
+}
+.value {
+  opacity: 0.749;
+  font-size: 20px;
+  letter-spacing: 0px;
+  color: #4d4d4d;
+  font-weight: 300;
+  flex-shrink: 0;
+}
+.divider {
+  width: 100%;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+.ltr {
+  direction: ltr;
 }
     </style>
-<!--    <link rel="stylesheet" href="tejarat.css" />-->
   </head>
   <body>
     <div class="container">
-      <div class="status">وضعیت</div>
-      <div class="in-progress">{{ status }}</div>
-      <div class="type-title">نوع تراکنش</div>
-      <div class="type-value">انتقال وجه / ساتنا</div>
-      <div class="from-title">حساب مبدا</div>
-      <div class="from-value">{{ source_account }}</div>
-      <div class="to-title">شبا مقصد</div>
-      <div class="to-value">{{ iban }}</div>
-      <div class="to-name-title">نام حساب شبا</div>
-      <div class="to-name-value">{{ sender }}</div>
-      <div class="date-title">تاریخ و زمان</div>
-      <div class="date-value">{{ datetime }}</div>
-      <div class="tracking-title">شماره پیگیری</div>
-      <div class="tracking-value">{{ tracking_code }}</div>
-      <div class="from-number-title">شماره مرجع</div>
-      <div class="from-number-value">{{ marja }}</div>
-      <div class="price-title">مبلغ</div>
-      <div dir="rtl" class="price-value"><span class="green">{{ amount }}</span> ریال</div>
+      <div class="rows">
+        <div class="row">
+          <div class="title">وضعیت</div>
+          <div class="divider"></div>
+          <div class="value" style="padding-left: 40px">{{ status }}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">نوع تراکنش</div>
+          <div class="divider"></div>
+          <div class="value">انتقال وجه / ساتنا</div>
+        </div>
+
+        <div class="row">
+          <div class="title">حساب مبدا</div>
+          <div class="divider"></div>
+          <div class="value">{{ source_account }}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">شبا مقصد</div>
+          <div class="divider"></div>
+          <div class="value">{{ iban }}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">نام حساب شبا</div>
+          <div class="divider"></div>
+          <div class="value">{{ sender }}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">تاریخ و زمان</div>
+          <div class="divider"></div>
+          <div class="value ltr">{{ datetime }}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">شماره پیگیری</div>
+          <div class="divider"></div>
+          <div class="value">{{ tracking_code }}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">شماره مرجع</div>
+          <div class="divider"></div>
+          <div class="value">{{ marja }}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">مبلغ</div>
+          <div class="divider"></div>
+          <div dir="rtl" class="value">
+            <span class="green">{{ amount }}</span> ریال
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

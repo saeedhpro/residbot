@@ -6,7 +6,8 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        /*src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");*/
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
       }
 
       html,
@@ -17,7 +18,8 @@
       .container {
         width: 665px;
         height: 1280px;
-        background-image: url("/home/original/residbot/templates/keshavarzi/keshavarzi.png");
+        /*background-image: url("/home/original/residbot/templates/keshavarzi/keshavarzi.png");*/
+        background-image: url("{{current_directory}}/templates/{{bank_type_en}}/keshavarzi.png");
         /* background-image: url("keshavarzi-filled.png"); */
         object-fit: cover;
         position: relative;

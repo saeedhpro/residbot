@@ -6,11 +6,13 @@
     <style>
       @font-face {
   font-family: vazir;
-  src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+  /*src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");*/
+  src: url("/home/saeed/work/python/residbot/templates/Vazirmatn-Regular.ttf");
 }
 @font-face {
   font-family: vazir-light;
-  src: url("/home/original/residbot/templates/Vazir-Light.ttf");
+  /*src: url("/home/original/residbot/templates/Vazir-Light.ttf");*/
+  src: url("/home/saeed/work/python/residbot/templates/Vazir-Light.ttf");
 }
 
 body {
@@ -19,7 +21,9 @@ body {
   font-family: vazir;
   color: #2a3034;
 }
-
+.ltr {
+  direction: ltr !important;
+}
 h1 {
   text-wrap: nowrap;
   font-size: 32px;
@@ -34,7 +38,8 @@ h1 {
 .container {
   width: 752px;
   height: 1280px;
-  background-image: url("/home/original/residbot/templates/saman_paya_light/Saman_Paya_Light.png");
+  /*background-image: url("/home/original/residbot/templates/saman_paya_light/Saman_Paya_Light.png");*/
+  background-image: url("/home/saeed/work/python/residbot/templates/saman_paya_light/Saman_Paya_Light.png");
   object-fit: cover;
   position: relative;
 }
@@ -137,7 +142,7 @@ svg {
       <div class="rows">
         <div class="row">
           <div class="title">تاریخ و زمان</div>
-          <div class="value">{{ datetime }}</div>
+          <div class="value ltr">{{ datetime }}</div>
         </div>
 
         <div class="row">

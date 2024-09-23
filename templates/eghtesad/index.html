@@ -6,9 +6,12 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        /*src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");*/
+        src: url("/home/saeed/work/python/residbot/templates/Vazirmatn-Regular.ttf");
       }
-
+      .ltr {
+        direction: ltr !important;
+      }
       html,
       body {
         font-family: vazir;
@@ -18,7 +21,8 @@
       .container {
         width: 637px;
         height: 1280px;
-        background-image: url("/home/original/residbot/templates/eghtesad/eghtesad.png");
+        /*background-image: url("/home/original/residbot/templates/eghtesad/eghtesad.png");*/
+        background-image: url("/home/saeed/work/python/residbot/templates/eghtesad/eghtesad.png");
         /* background-image: url("eghtesad-filled.png"); */
         object-fit: cover;
         position: relative;
@@ -124,7 +128,7 @@
         <p>{{sender}}</p>
         <div class="transaction-id">{{source_account}}</div>
       </div>
-      <div class="date">{{datetime}}</div>
+      <div class="date ltr">{{datetime}}</div>
       <div class="tracking-number">{{tracking_code}}</div>
       <div class="resource-number">{{marja}}</div>
       <div class="to">{{iban}}</div>
