@@ -6,20 +6,22 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
       }
       @font-face {
         font-family: vazir-light;
-        src: url("/home/original/residbot/templates/Vazir-Light.ttf");
+        src: url("{{current_directory}}/templates/Vazir-Light.ttf");
       }
       @font-face {
         font-family: vazir-medium;
-        src: url("/home/original/residbot/templates/Vazirmatn-Medium.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Medium.ttf");
       }
 
       html,
       body {
+        margin: 0;
         font-family: vazir;
+        font-weight: 700;
       }
 
       * {
@@ -32,88 +34,107 @@
       .container {
         width: 739px;
         height: 1280px;
-        /* background-image: url("sina_paya-filled.png"); */
-        background-image: url("/home/original/residbot/templates/sina_paya/sina-paya.png");
+        /* background-image: url("sina-paya-filled.png"); */
+        background-image: url("{{current_directory}}/templates/{{bank_type_en}}/sina-paya.png");
         object-fit: cover;
         position: relative;
       }
 
-      .from {
-        font-size: 25px;
+      .rows {
+        width: 660px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
         position: absolute;
-        top: 288px;
-        right: 109px;
+        top: 227px;
+        right: 82px;
       }
 
-      .to-number {
-        font-size: 23px;
-        position: absolute;
-        top: 342px;
-        right: 156px;
-        font-size: 23px;
+      .row {
+        letter-spacing: -1px;
+        font-family: "Vazir";
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        /* min-height: 50px; */
       }
-      .to-name {
+      .title {
         font-size: 27px;
-        position: absolute;
-        top: 394px;
-        right: 146px;
+        font-weight: 700;
+        color: #999999;
+        flex-shrink: 0;
+        letter-spacing: -1px;
+        align-self: flex-start;
       }
-      .to-reason {
-        font-size: 26px;
-        position: absolute;
-        top: 450px;
-        right: 228px;
-      }
-
-      .price {
-        font-size: 23px;
-        position: absolute;
-        top: 548px;
-        right: 134px;
-        padding-left: 78px;
-      }
-      .unit {
-        font-size: 24px;
-        position: absolute;
-        top: 8px;
-        left: 0;
-        display: inline-block;
-      }
-
-      .tracking-number {
-        font-size: 24px;
-        position: absolute;
-        top: 604px;
-        right: 197px;
-      }
-
-      .date {
-        font-size: 24px;
-        position: absolute;
-        top: 658px;
-        right: 142px;
-      }
-
-      .time {
-        font-size: 23px;
-        position: absolute;
-        top: 712px;
-        right: 153px;
+      .value {
+        font-size: 27px;
+        font-weight: 700;
+        color: #1a1a1a;
+        opacity: 0.878;
+        letter-spacing: -1px;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="from">{{source_account}}</div>
-      <div class="to-number">{{iban}}</div>
-      <div class="to-name">{{receiver}}</div>
-      <div class="to-reason">
+      <div class="rows">
+        <div class="row">
+          <div class="title">نوع تراکنش:</div>
+          <div class="value">انتقال وجه پایا</div>
+        </div>
+
+        <div class="row">
+          <div class="title">از:</div>
+          <div class="value" dir="ltr" style="font-size: 25px">
+<!--            ۴۳۶-۷**-*******-۱-->
+            {{source_account}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="title">به:</div>
+          <div class="value" dir="ltr" style="font-size: 23px">
+            {{iban}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="title">به نام:</div>
+          <div class="value">{{receiver}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">پرداخت بابت:</div>
+          <div
+            class="value"
+            style="font-size: 26px; display: flex; flex-wrap: wrap"
+          >
         {{description2}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="title">مبلغ:</div>
+          <div class="value" style="font-size: 23px; letter-spacing: 1px">
+            {{amount}} <span style="font-size: 24px">ریال</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="title">کد پیگیری:</div>
+          <div class="value" style="font-size: 24px">{{tracking_code}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">تاریخ:</div>
+          <div class="value" style="font-size: 24px">{{date}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">ساعت:</div>
+          <div class="value" style="font-size: 23px">{{time}}</div>
+        </div>
       </div>
-      <div class="price">{{amount}} <span class="unit">ریال</span></div>
-      <div class="tracking-number">{{tracking_code}}</div>
-      <div class="date">{{date}}</div>
-      <div class="time">{{time}}</div>
     </div>
   </body>
 </html>

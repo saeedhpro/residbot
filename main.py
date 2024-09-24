@@ -39,6 +39,7 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک تجارت", callback_data='tejarat')],
         [InlineKeyboardButton("بانک تجارت پایا", callback_data='tejarat_paya')],
         [InlineKeyboardButton("بانک تجارت کارت به کارت", callback_data='tejarat_card')],
+        [InlineKeyboardButton("بانک سینا پایا", callback_data='sina_paya')],
         # [InlineKeyboardButton("بانک سامان تیره", callback_data='saman_paya_dark')],
         # [InlineKeyboardButton("بانک سامان روشن", callback_data='saman_paya_light')],
         # [InlineKeyboardButton("بانک سپه پایا", callback_data='sepah_paya')],
@@ -77,7 +78,6 @@ async def select_bank_type(update, context):
         # [InlineKeyboardButton("بانک شهر پایا", callback_data='shahr_paya')],
         # [InlineKeyboardButton("بانک شهر پایا 2", callback_data='shahr_paya_2')],
         # [InlineKeyboardButton("بانک شهر ساتنا", callback_data='shahr_satna')],
-        # [InlineKeyboardButton("بانک سینا پایا", callback_data='sina_paya')],
         # [InlineKeyboardButton("بازگشت", callback_data='return_to_menu')],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -1044,6 +1044,20 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'current_directory': current_directory,
         }
 
+    if bank_type == 'sina_paya':
+        html_content = {
+            'bank_type_en': context.user_data['bank_type'],
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'date': convert_numbers_to_farsi(context.user_data['date']),
+            'time': convert_numbers_to_farsi(context.user_data['time']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'current_directory': current_directory,
+        }
+
     if bank_type == 'saman_paya_dark':
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
@@ -1629,19 +1643,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'sina_paya':
-        html_content = {
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'date': convert_numbers_to_farsi(context.user_data['date']),
-            'time': convert_numbers_to_farsi(context.user_data['time']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
             'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
