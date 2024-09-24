@@ -2204,7 +2204,7 @@ def bank_from_codes(code = ''):
 
 
 def get_bank_icon(iban):
-    if iban < 26:
+    if len(iban) < 26:
         return ''
     return bank_from_codes(iban[3:5])
 
