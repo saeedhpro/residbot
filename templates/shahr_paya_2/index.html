@@ -6,18 +6,20 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
       }
 
       html,
       body {
+        margin: 0;
         font-family: vazir;
+        font-weight: 700;
       }
 
       .container {
         width: 591px;
         height: 1280px;
-        background-image: url("/home/original/residbot/templates/shar_paya_2/shahr-paya.png");
+        background-image: url("{{current_directory}}/templates/shar_paya_2/shahr-paya-2.png");
         /* background-image: url("shahr-paya-2-filled.png"); */
         object-fit: cover;
         position: relative;
@@ -28,7 +30,6 @@
         font-size: 26px;
         letter-spacing: 0px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 463px;
         left: 39px;
@@ -37,9 +38,7 @@
       .to {
         opacity: 0.722;
         font-size: 21px;
-        letter-spacing: -1px;
         color: #393939;
-        font-weight: 400;
         position: absolute;
         top: 532px;
         left: 43px;
@@ -50,7 +49,6 @@
         font-size: 24px;
         letter-spacing: 0px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 590px;
         left: 41px;
@@ -61,7 +59,6 @@
         font-size: 26px;
         letter-spacing: 0px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 660px;
         left: 42px;
@@ -72,7 +69,6 @@
         font-size: 25px;
         letter-spacing: 0px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 735px;
         left: 41px;
@@ -81,9 +77,7 @@
       .transaction-status {
         opacity: 0.702;
         font-size: 25px;
-        letter-spacing: -1px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 800px;
         left: 38px;
@@ -94,7 +88,6 @@
         font-size: 25px;
         letter-spacing: 0px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 868px;
         left: 39px;
@@ -105,7 +98,6 @@
         font-size: 25px;
         letter-spacing: 0px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 934px;
         left: 44px;
@@ -114,9 +106,8 @@
       .price {
         opacity: 0.741;
         font-size: 30px;
-        letter-spacing: -1px;
+        letter-spacing: 1px;
         color: #393939;
-        font-weight: 400;
         position: absolute;
         top: 395px;
         left: 89px;
@@ -126,7 +117,6 @@
         font-size: 23px;
         letter-spacing: 0px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 3px;
         left: -46px;
@@ -137,20 +127,33 @@
         font-size: 24px;
         letter-spacing: 0px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 333px;
         left: 46px;
+      }
+      .to-icon {
+        width: 54px;
+        height: 54px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: -75px;
+      }
+      .ltr {
+        direction: ltr;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="date">{{datetime}}</div>
+      <div class="date ltr">{{datetime}}</div>
       <div class="from">{{source_account}}</div>
       <div class="to">{{iban}}</div>
       <div class="to-name">{{receiver}}</div>
-      <div class="to-bank">{{receiver_bank}}</div>
+      <div class="to-bank">
+        {{receiver_bank}}
+        <img class="to-icon" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
+      </div>
       <div class="for">{{description2}}</div>
       <div class="transaction-status">از طرف بانک پذیرفته شده</div>
       <div class="transfer-status">آماده برای انجام انتقال وجه</div>

@@ -1006,7 +1006,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'source_account': mask_string(convert_numbers_to_farsi(context.user_data['source_account'])),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
             'sender': convert_numbers_to_farsi(context.user_data['sender']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
@@ -1021,7 +1021,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'source_account': mask_string(convert_numbers_to_farsi(context.user_data['source_account'])),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'marja': convert_numbers_to_farsi(context.user_data['marja']),
@@ -1066,10 +1066,11 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
             'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': format_iban_shar_satna(convert_numbers_to_farsi(context.user_data['iban'])),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'current_directory': current_directory,
+            'bank_icon': get_bank_icon(context.user_data['iban']),
         }
 
         # ====
@@ -2167,6 +2168,45 @@ def format_iban_shar_satna(input_str, splitter='-'):
     # if len(input_str) < 26:
     #     return input_str
     # return f"{input_str[:4]}-{input_str[4:7]}-{input_str[8:12]}-{input_str[8:12]}"
+
+def bank_from_codes(code = ''):
+    bank_codes = {
+        '011': 'sanat.png',
+        '012': 'mellat.png',
+        '013': 'refah.png',
+        '014': 'maskan.png',
+        '015': 'sepah.png',
+        '016': 'keshavarzi.png',
+        '017': 'meli.png',
+        '018': 'tejarat.png',
+        '019': 'saderat.png',
+        '020': 'tose_saderat.svg',
+        '021': 'post_bank.svg',
+        '022': 'tose_taavon.svg',
+        '051': 'tose.svg',
+        '053': 'karafarin.svg',
+        '054': 'parsian.png',
+        '055': 'eghtesad.png',
+        '056': 'saman.png',
+        '057': 'pasargad.png',
+        '058': 'sarmayeh.png',
+        '059': 'sina.png',
+        '060': 'mehr.png',
+        '061': 'shahr.png',
+        '062': 'ayandeh.svg',
+        '063': 'ansar.svg',
+        '064': 'gardeshgari.svg',
+        '065': 'hekmat.svg',
+        '066': 'day.svg',
+        '069': 'iran_zamin.svg',
+    }
+    return bank_codes[code]
+
+
+def get_bank_icon(iban):
+    if iban < 26:
+        return ''
+    return bank_from_codes(iban[3:5])
 
 def main():
     load_dotenv()
