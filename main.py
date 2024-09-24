@@ -1000,6 +1000,49 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
 
     current_directory = os.getcwd()
 
+    if bank_type == 'tejarat':
+        html_content = {
+            'status': 'در حال انجام',
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'source_account': mask_string(convert_numbers_to_farsi(context.user_data['source_account'])),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'sender': convert_numbers_to_farsi(context.user_data['sender']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'marja': convert_numbers_to_farsi(context.user_data['marja']),
+            'current_directory': current_directory,
+        }
+
+    if bank_type == 'tejarat_paya':
+        html_content = {
+            'status': 'در حال انجام',
+            'bank_type_en': context.user_data['bank_type'],
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'source_account': mask_string(convert_numbers_to_farsi(context.user_data['source_account'])),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'marja': convert_numbers_to_farsi(context.user_data['marja']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'current_directory': current_directory,
+        }
+
+    if bank_type == 'tejarat_card':
+        html_content = {
+            'status': 'در حال انجام',
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'marja': convert_numbers_to_farsi(context.user_data['marja']),
+            'current_directory': current_directory,
+        }
+
     if bank_type == 'saman_paya_dark':
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
@@ -1066,48 +1109,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'reason': 'بدون علت',
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'marja': convert_numbers_to_farsi(context.user_data['marja']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'tejarat':
-        html_content = {
-            'status': 'در حال انجام',
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'source_account': mask_string(convert_numbers_to_farsi(context.user_data['source_account'])),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'sender': convert_numbers_to_farsi(context.user_data['sender']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'marja': convert_numbers_to_farsi(context.user_data['marja']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'tejarat_card':
-        html_content = {
-            'status': 'در حال انجام',
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'marja': convert_numbers_to_farsi(context.user_data['marja']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'tejarat_paya':
-        html_content = {
-            'status': 'در حال انجام',
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'source_account': mask_string(convert_numbers_to_farsi(context.user_data['source_account'])),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'marja': convert_numbers_to_farsi(context.user_data['marja']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
             'current_directory': current_directory,
         }
 
