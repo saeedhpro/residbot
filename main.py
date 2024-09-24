@@ -2206,7 +2206,7 @@ def bank_from_codes(code = ''):
 def get_bank_icon(iban):
     if len(iban) < 26:
         return ''
-    return bank_from_codes(iban[3:5])
+    return bank_from_codes(iban[2:5])
 
 def main():
     load_dotenv()
