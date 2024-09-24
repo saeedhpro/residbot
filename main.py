@@ -1055,6 +1055,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'description2': convert_numbers_to_farsi(context.user_data['description2']),
             'current_directory': current_directory,
         }
 
