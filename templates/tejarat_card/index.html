@@ -3,47 +3,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title title>Document</title>
-<!--    <link rel="stylesheet" href="tejarat-kart-be-kart.css" />-->
     <style>
-@page {
-  width: 591px;
-  height: 1280px;
-    size: 178.1mm 269.3mm; /* A4 size */
-    margin: 0; /* حذف حاشیه */
-}
-@font-face {
+      @font-face {
   font-family: vazir;
-  /*src: url("/home/original/residbot/templates/vazir.ttf");*/
-  src: url("/home/saeed/work/python/residbot/templates/vazir.ttf");
+  src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
 }
 @font-face {
   font-family: vazir-light;
-  /*src: url("/home/original/residbot/templates/vazir-light.ttf");*/
-  src: url("/home/saeed/work/python/residbot/templates/vazir-light.ttf");
+  src: url("{{current_directory}}/templates/Vazir-Light.ttf");
 }
 
-html {
-
-  width: 591px;
-  height: 1280px;
-}
 body {
-  width: 591px;
-  height: 1280px;
+  margin: 0;
   font-size: 18px;
-  font-weight: 100;
   font-family: vazir-light;
   color: #959595;
   text-shadow: 0 0 1px #959595;
-  padding: 0 !important;
-  margin: 0 !important;
 }
 
 .container {
   width: 591px;
   height: 1280px;
-  /*background-image: url("/home/original/residbot/templates/tejarat_card/Tejarak-kart-be-kart.png");*/
-  background-image: url("/home/saeed/work/python/residbot/templates/tejarat_card/Tejarak-kart-be-kart.png");
+  background-image: url("{{current_directory}}/templates/{{bank_type_en}}/Tejarak-kart-be-kart.png");
   object-fit: cover;
   position: relative;
 }
@@ -134,12 +115,13 @@ body {
   right: 50px;
 }
 .price-value {
-  position: absolute;
-  top: 677px;
-  left: 50px;
-
   display: flex;
   gap: 5px;
+}
+
+.price {
+  color: #009245;
+  font-weight: 700;
 }
 
 .green {
@@ -150,55 +132,128 @@ body {
   font-weight: 700;
 }
 
-.title {
-  padding-left: 4px;
-  background-color: white;
-  z-index: 1;
-}
-
-.title::after {
-  content: "";
-  z-index: 0;
+.rows {
+  width: 500px;
   position: absolute;
-  top: 50%;
-  right: 100%;
-  transform: translateY(-50%);
-  width: calc(400px - 100%);
-  height: 1px;
-  background-color: #EBEBEB;
+  top: 220px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.value {
-  padding-right: 4px;
-  background-color: white;
-  z-index: 1;
+.row {
+  width: 100%;
+  height: 70px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  color: #333333;
+  font-size: 22px;
+  opacity: 0.729;
+  gap: 7px;
+}
+.row span {
+  font-size: 19px;
+  letter-spacing: 0px;
+  color: #4d4d4d;
+  font-weight: 300;
+  flex-shrink: 0;
+}
+.divider {
+  width: 100%;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+.status-divider {
+  width: 286px;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 187px;
+  right: 116px;
+}
+
+.plus {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: -2px;
+  left: 14px;
+}
+.ltr {
+  direction: ltr;
 }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="status-title title">وضعیت</div>
+      <div class="status-divider"></div>
       <div class="status-value value">
         <span class="green">{{ status }}</span>
       </div>
-      <div class="from-title title">حساب مبدا</div>
-      <div class="from-value value">{{ source_account }}</div>
-      <div class="to-title title">شبا مقصد</div>
-      <div class="to-value value">{{ iban }}</div>
-      <div class="to-name-title title">نام صاحب شبا</div>
-      <div class="to-name-value value">{{ receiver }}</div>
-      <div class="date-title title">تاریخ و زمان</div>
-      <div class="date-value value">{{ datetime }}</div>
-      <div class="tracking-title title">شماره پیگیری</div>
-      <div class="tracking-value value font-bold">{{ tracking_code }}</div>
-      <div class="from-number-title title">شماره مرجع</div>
-      <div class="from-number-value value font-bold">{{ marja }}</div>
-      <div class="price-title title">مبلغ</div>
-      <div dir="rtl" class="price-value value">
-        <span class="green font-bold" style="line-height: 32px"
-          >{{ amount }}</span
-        >
-        ریال
+
+      <div class="rows">
+        <div class="row">
+          <span>حساب مبدا</span>
+          <div class="divider"></div>
+          <span style="padding-left: 50px">{{ source_account }}</span>
+        </div>
+
+        <div class="row">
+          <span>شبا مقصد</span>
+          <div class="divider"></div>
+          <span style="padding-left: 50px; position: relative">
+            {{ iban }}
+            <img src="plus.png" class="plus">
+          </span>
+        </div>
+
+        <div class="row">
+          <span>نام صاحب شبا</span>
+          <div class="divider"></div>
+          <span style="padding-left: 50px">{{ receiver }}</span>
+        </div>
+
+        <div class="row">
+          <span>تاریخ و زمان</span>
+          <div class="divider"></div>
+          <span style="padding-left: 50px" class="ltr">{{ datetime }}</span>
+        </div>
+
+        <div class="row">
+          <span>شماره پیگیری</span>
+          <div class="divider"></div>
+          <span style="font-weight: 700">{{ tracking_code }}</span>
+        </div>
+
+        <div class="row">
+          <span>شماره مرجع</span>
+          <div class="divider"></div>
+          <span style="font-weight: 700">{{ marja }}</span>
+        </div>
+
+        <div class="row">
+          <span>مبلغ</span>
+          <div class="divider"></div>
+          <span
+            class="green font-bold"
+            style="display: inline-flex; flex-direction: row-reverse; gap: 8px"
+          >
+            <span
+              style="
+                color: #009245;
+                font-family: vazir;
+                font-weight: 700;
+                font-size: 19px;
+              "
+            >{{ amount }}</span
+            >
+            <span style="font-weight: 300">ریال</span>
+          </span>
+        </div>
       </div>
     </div>
   </body>

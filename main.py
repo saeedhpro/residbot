@@ -38,11 +38,11 @@ async def select_bank_type(update, context):
     keyboard = [
         [InlineKeyboardButton("بانک تجارت", callback_data='tejarat')],
         [InlineKeyboardButton("بانک تجارت پایا", callback_data='tejarat_paya')],
+        [InlineKeyboardButton("بانک تجارت کارت به کارت", callback_data='tejarat_card')],
         # [InlineKeyboardButton("بانک سامان تیره", callback_data='saman_paya_dark')],
         # [InlineKeyboardButton("بانک سامان روشن", callback_data='saman_paya_light')],
         # [InlineKeyboardButton("بانک سپه پایا", callback_data='sepah_paya')],
         # [InlineKeyboardButton("بانک سپه ساتنا", callback_data='sepah_satna')],
-        # [InlineKeyboardButton("بانک تجارت کارت به کارت", callback_data='tejarat_card')],
         # [InlineKeyboardButton("بانک آینده", callback_data='ayandeh')],
         # [InlineKeyboardButton("بانک آینده پایا", callback_data='ayandeh_paya')],
         # [InlineKeyboardButton("بانک اقتصاد", callback_data='eghtesad')],
@@ -1032,6 +1032,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     if bank_type == 'tejarat_card':
         html_content = {
             'status': 'در حال انجام',
+            'bank_type_en': context.user_data['bank_type'],
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
