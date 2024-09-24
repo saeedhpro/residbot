@@ -2149,6 +2149,11 @@ def mask_string(s):
     return s[0] + s[1] + '*' * (len(s) - 4) + s[-2] + s[-1]
 
 
+def format_number_sina_pay(input_str):
+    if len(input_str) < 5:
+        return input_str
+    return f"{input_str[:3]}-{input_str[3]}{'*' * (len(input_str) - 5)}-{input_str[-1]}"
+
 def main():
     load_dotenv()
     token = os.environ.get('TOKEN')
