@@ -2160,9 +2160,9 @@ def format_number_sina_pay(input_str):
 
 
 def format_iban_shar_satna(input_str, splitter='-'):
-    reversed_amount = input_str[::-1]
+    reversed_amount = input_str
     grouped = [reversed_amount[i:i + 4] for i in range(0, len(reversed_amount), 4)]
-    formatted_amount = splitter.join(grouped)[::-1]
+    formatted_amount = splitter.join(grouped)
     return formatted_amount
     # if len(input_str) < 26:
     #     return input_str
