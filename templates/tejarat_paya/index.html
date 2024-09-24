@@ -3,45 +3,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title title>Document</title>
-<!--    <link rel="stylesheet" href="tejarat-paya.css" />-->
-      <style>
-@page {
-  width: 591px;
-  height: 1280px;
-    size: 178.1mm 269.3mm; /* A4 size */
-    margin: 0; /* حذف حاشیه */
-}
-@font-face {
+    <style>
+      @font-face {
   font-family: vazir;
-  /*src: url("/home/original/residbot/templates/vazir.ttf");*/
-  src: url("/home/saeed/work/python/residbot/templates/vazir.ttf");
+  src: url("{{current_directory}}/Vazirmatn-Regular.ttf");
 }
 @font-face {
   font-family: vazir-light;
-  /*src: url("/home/original/residbot/templates/vazir-light.ttf");*/
-  src: url("/home/saeed/work/python/residbot/templates/vazir-light.ttf");
+  src: url("{{current_directory}}/Vazir-Light.ttf");
 }
-html {
-  width: 591px;
-  height: 1280px;
-}
+
 body {
-  width: 591px;
-  height: 1280px;
+  margin: 0;
   font-size: 18px;
   font-weight: 100;
   font-family: vazir-light;
   color: #4d4d4d;
   text-shadow: 0 0 1px #959595;
-  padding: 0 !important;
-  margin: 0 !important;
 }
 
 .container {
   width: 591px;
   height: 1280px;
-  /*background-image: url("/home/original/residbot/templates/tejarat_paya/Tejarat-paya.png");*/
-  background-image: url("/home/saeed/work/python/residbot/templates/tejarat_paya/Tejarat-paya.png");
+  background-image: url("{{current_directory}}/templates/{{bank_type_en}}/Tejarat-paya.png");
   object-fit: cover;
   position: relative;
 }
@@ -67,8 +51,9 @@ body {
 
 .from-value {
   position: absolute;
-  top: 268px;
+  top: 264px;
   left: 85px;
+  font-size: 25px;
 }
 
 .to-title {
@@ -141,7 +126,7 @@ body {
 }
 
 .green {
-  color: #00a143;
+  color: #389575;
 }
 
 .font-bold {
@@ -158,24 +143,23 @@ body {
   padding-right: 4px;
   z-index: 1;
 }
-
-      </style>
+.ltr {
+  direction: ltr;
+}
+    </style>
   </head>
   <body>
     <div class="container">
       <div class="status-title title">وضعیت</div>
       <div class="status-value value">{{ status }}</div>
       <div class="from-title title">حساب مبد‌أ</div>
-      <div class="from-value value">
-<!--        ۹۰*****۴۶-->
-        {{ source_account }}
-      </div>
+      <div class="from-value value">{{ source_account }}</div>
       <div class="to-title title">شبا مقصد</div>
       <div class="to-value value">{{ iban }}</div>
       <div class="to-name-title title">نام صاحب شبا</div>
       <div class="to-name-value value">{{ receiver }}</div>
       <div class="date-title title">تاریخ و زمان</div>
-      <div class="date-value value font-bold">{{ datetime }}</div>
+      <div class="date-value value font-bold ltr">{{ datetime }}</div>
       <div class="tracking-title title">شماره پیگیری</div>
       <div class="tracking-value value font-bold green">{{ tracking_code }}</div>
       <div class="from-number-title title">شماره مرجع</div>
