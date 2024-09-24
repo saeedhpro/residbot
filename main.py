@@ -6,7 +6,6 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import Application, ConversationHandler, CommandHandler, CallbackQueryHandler, MessageHandler, \
     filters, ContextTypes
 import logging
-import imgkit
 from html2image import Html2Image
 
 (START, RETURN_MENU, SELECT_ACTION, SELECT_BANK, GET_STATUS, GET_TRANSACTION_TYPE, GET_SOURCE_ACCOUNT, GET_DEST_IBAN,
@@ -38,12 +37,12 @@ async def select_bank_type(update, context):
     await query.answer()
     keyboard = [
         [InlineKeyboardButton("بانک تجارت", callback_data='tejarat')],
+        [InlineKeyboardButton("بانک تجارت پایا", callback_data='tejarat_paya')],
         # [InlineKeyboardButton("بانک سامان تیره", callback_data='saman_paya_dark')],
         # [InlineKeyboardButton("بانک سامان روشن", callback_data='saman_paya_light')],
         # [InlineKeyboardButton("بانک سپه پایا", callback_data='sepah_paya')],
         # [InlineKeyboardButton("بانک سپه ساتنا", callback_data='sepah_satna')],
         # [InlineKeyboardButton("بانک تجارت کارت به کارت", callback_data='tejarat_card')],
-        # [InlineKeyboardButton("بانک تجارت پایا", callback_data='tejarat_paya')],
         # [InlineKeyboardButton("بانک آینده", callback_data='ayandeh')],
         # [InlineKeyboardButton("بانک آینده پایا", callback_data='ayandeh_paya')],
         # [InlineKeyboardButton("بانک اقتصاد", callback_data='eghtesad')],
