@@ -1066,7 +1066,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
             'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'iban': format_iban_shar_satna(convert_numbers_to_farsi(context.user_data['iban'])),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'current_directory': current_directory,
@@ -2157,6 +2157,16 @@ def format_number_sina_pay(input_str):
     if len(input_str) < 5:
         return input_str
     return f"{input_str[:3]}-{input_str[3]}{'*' * (len(input_str) - 5)}-{input_str[-1]}"
+
+
+def format_iban_shar_satna(input_str, splitter='-'):
+    reversed_amount = input_str[::-1]
+    grouped = [reversed_amount[i:i + 4] for i in range(0, len(reversed_amount), 4)]
+    formatted_amount = splitter.join(grouped)[::-1]
+    return formatted_amount
+    # if len(input_str) < 26:
+    #     return input_str
+    # return f"{input_str[:4]}-{input_str[4:7]}-{input_str[8:12]}-{input_str[8:12]}"
 
 def main():
     load_dotenv()
