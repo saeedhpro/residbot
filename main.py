@@ -101,6 +101,7 @@ async def handle_select_bank(update, context):
             or context.user_data['bank_type'] == 'refah_satna' \
             or context.user_data['bank_type'] == 'saderat_paya' \
             or context.user_data['bank_type'] == 'shahr' \
+            or context.user_data['bank_type'] == 'shahr_paya' \
             or context.user_data['bank_type'] == 'sina_paya' \
             or context.user_data['bank_type'] == 'mellat':
         await query.edit_message_text('تاریخ را به صورت ۱۴۰۳/۰۵/۲۴ وارد کنید')
@@ -343,10 +344,10 @@ async def handle_source_account(update: Update, context):
 async def handle_get_dest_iban(update: Update, context):
     iban = update.message.text
     iban = iban.upper()
-    pattern = r'^IR\d{24}$'
-    if not re.match(pattern, iban):
-        await update.message.reply_text('شبای وارد شده صحیح نمی باشد. لطفا شماره شبای صحیح را وارد کنید:')
-        return GET_DEST_IBAN
+    # pattern = r'^IR\d{24}$'
+    # if not re.match(pattern, iban):
+    #     await update.message.reply_text('شبای وارد شده صحیح نمی باشد. لطفا شماره شبای صحیح را وارد کنید:')
+    #     return GET_DEST_IBAN
 
     context.user_data['iban'] = iban
 

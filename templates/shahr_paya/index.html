@@ -6,18 +6,20 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
       }
 
       html,
       body {
+        margin: 0;
         font-family: vazir;
+        font-weight: normal;
       }
 
       .container {
         width: 623px;
         height: 1280px;
-        background-image: url("/home/original/residbot/templates/shar_paya/shahr-paya.png");
+        background-image: url("{{current_directory}}/templates/shar_paya/shahr-paya.png");
         /* background-image: url("shahr-paya-filled.png"); */
         object-fit: cover;
         position: relative;
@@ -25,9 +27,7 @@
 
       .date {
         font-size: 22px;
-        letter-spacing: -1px;
         color: #666666;
-        font-weight: 400;
         position: absolute;
         top: 416px;
         left: 47px;
@@ -37,7 +37,6 @@
         font-size: 22px;
         letter-spacing: 0px;
         color: #666666;
-        font-weight: 400;
         position: absolute;
         top: 515px;
         left: 43px;
@@ -46,9 +45,7 @@
 
       .to {
         font-size: 23px;
-        letter-spacing: -1px;
         color: #666666;
-        font-weight: 400;
         position: absolute;
         top: 564px;
         left: 44px;
@@ -56,9 +53,9 @@
 
       .to-name {
         font-size: 18px;
+        font-weight: 700;
         letter-spacing: 0px;
         color: #666666;
-        font-weight: 400;
         position: absolute;
         top: 617px;
         left: 44px;
@@ -66,9 +63,9 @@
 
       .to-bank {
         font-size: 19px;
+        font-weight: 700;
         letter-spacing: 0px;
         color: #666666;
-        font-weight: 400;
         position: absolute;
         top: 671px;
         left: 44px;
@@ -76,9 +73,8 @@
 
       .for {
         font-size: 20px;
-        letter-spacing: -1px;
+        font-weight: 700;
         color: #666666;
-        font-weight: 400;
         position: absolute;
         top: 723px;
         left: 41px;
@@ -86,9 +82,9 @@
 
       .status {
         font-size: 19px;
+        font-weight: 700;
         letter-spacing: 0px;
         color: #666666;
-        font-weight: 400;
         position: absolute;
         top: 775px;
         left: 41px;
@@ -96,9 +92,9 @@
 
       .transfer-status {
         font-size: 19px;
+        font-weight: 700;
         letter-spacing: 0px;
         color: #666666;
-        font-weight: 400;
         position: absolute;
         top: 825px;
         left: 41px;
@@ -108,7 +104,6 @@
         font-size: 22px;
         letter-spacing: 0px;
         color: #666666;
-        font-weight: 400;
         position: absolute;
         top: 872px;
         left: 45px;
@@ -117,9 +112,9 @@
 
       .description {
         font-size: 19px;
+        font-weight: 700;
         letter-spacing: 0px;
         color: #666666;
-        font-weight: 400;
         position: absolute;
         top: 922px;
         left: 42px;
@@ -127,31 +122,41 @@
 
       .price {
         font-size: 23px;
-        letter-spacing: -1px;
         color: #666666;
-        font-weight: 400;
         position: absolute;
         top: 468px;
-        left: 79px;
+        left: 42px;
+        display: flex;
+        gap: 8px;
+        letter-spacing: 1px;
       }
       .unit {
         font-size: 20px;
-        letter-spacing: -1px;
+        line-height: 18px;
+        align-self: center;
+        font-weight: 700;
         color: #666666;
-        font-weight: 400;
+      }
+      .to-icon {
+        width: 40px;
+        height: 40px;
         position: absolute;
-        top: 0;
-        left: -36px;
+        top: 50%;
+        transform: translateY(-50%);
+        right: -54px;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="date">{{datetime}}</div>
+      <div class="date"><span style="font-weight: 700;">{{time}}</span> - {{date}}</div>
       <div class="from">{{source_account}}</div>
       <div class="to">{{iban}}</div>
       <div class="to-name">{{receiver}}</div>
-      <div class="to-bank">{{receiver_bank}}</div>
+      <div class="to-bank">
+        {{receiver_bank}}
+        <img class="to-icon" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
+      </div>
       <div class="for">{{description2}}</div>
       <div class="status">از طرف بانک پذیرفته شده</div>
       <div class="transfer-status">آماده برای انجام انتقال وجه</div>
