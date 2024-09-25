@@ -501,7 +501,8 @@ async def handle_get_receiver_lname(update: Update, context):
 
 
 async def handle_get_source_iban(update: Update, context):
-    context.user_data['source_iban'] = update.message.text
+    iban = update.message.text
+    context.user_data['source_iban'] = iban.upper()
 
     if context.user_data['bank_type'] == 'shahr':
         await update.message.reply_text('نام واریز کننده را وارد کنید:')
