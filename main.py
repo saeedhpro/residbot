@@ -1806,7 +1806,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1280'
         options['width'] = '591'
     elif context.user_data['bank_type'] == 'shahr_paya':
-        options['height'] = '1280'
+        options['height'] = '1320'
         options['width'] = '623'
     hti = Html2Image(output_path=png_path)
     hti.screenshot(
