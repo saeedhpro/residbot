@@ -345,7 +345,7 @@ async def handle_get_dest_iban(update: Update, context):
     iban = iban.upper()
     pattern = r'^IR\d{24}$'
     if not re.match(pattern, iban):
-        await update.message.reply_text('شماره شبا را وارد کنید:')
+        await update.message.reply_text('شبای وارد شده صحیح نمی باشد. لطفا شماره شبای صحیح را وارد کنید:')
         return GET_DEST_IBAN
 
     context.user_data['iban'] = iban
@@ -2215,7 +2215,7 @@ def bank_from_codes(code=''):
 def get_bank_icon(iban):
     if len(iban) < 26:
         return ''
-    return bank_from_codes(iban[2:5])
+    return bank_from_codes(iban[4:7])
 
 
 def main():
