@@ -1097,6 +1097,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'description2': format_amount(convert_numbers_to_farsi(context.user_data['description2'])),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'current_directory': current_directory,
+            'bank_icon': get_bank_icon(context.user_data['iban']),
         }
 
     if bank_type == 'shahr_paya_2':
@@ -2215,7 +2216,8 @@ def bank_from_codes(code=''):
 def get_bank_icon(iban):
     if len(iban) < 26:
         return ''
-    return bank_from_codes(iban[4:7])
+    ib = iban.replace(" ", "").replace("-", "")
+    return bank_from_codes(ib[4:7])
 
 
 def main():
