@@ -1158,7 +1158,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'receiver_account': convert_numbers_to_farsi(context.user_data['receiver_account']),
             'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
             'description': convert_numbers_to_farsi(context.user_data['description']),
-            'reason': 'بدون علت',
+            'description2': convert_numbers_to_farsi(context.user_data['description2']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'ghabz': convert_numbers_to_farsi(context.user_data['marja']),
             'current_directory': current_directory,
