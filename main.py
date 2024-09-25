@@ -1683,6 +1683,16 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     elif context.user_data['bank_type'] == 'tejarat_paya':
         options['height'] = '1280'
         options['width'] = '591'
+    elif context.user_data['bank_type'] == 'sina_paya':
+        options['height'] = '1280'
+        options['width'] = '739'
+    elif context.user_data['bank_type'] == 'shahr_satna':
+        options['height'] = '1280'
+        options['width'] = '591'
+    elif context.user_data['bank_type'] == 'shahr_paya_2':
+        options['height'] = '1280'
+        # options['width'] = '591'
+        options['width'] = '0'
     elif context.user_data['bank_type'] == 'sepah_satna':
         options['height'] = '1280'
         options['width'] = '752'
@@ -1794,15 +1804,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     elif context.user_data['bank_type'] == 'shahr_paya':
         options['height'] = '1280'
         options['width'] = '623'
-    elif context.user_data['bank_type'] == 'shahr_paya_2':
-        options['height'] = '1280'
-        options['width'] = '591'
-    elif context.user_data['bank_type'] == 'shahr_satna':
-        options['height'] = '1280'
-        options['width'] = '591'
-    elif context.user_data['bank_type'] == 'sina_paya':
-        options['height'] = '1280'
-        options['width'] = '739'
     hti = Html2Image(output_path=png_path)
     hti.screenshot(
         html_str=rendered_html,
@@ -1810,10 +1811,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         save_as=png_name,
         size=(int(options['width']), int(options['height']))
     )
-
-    with open('dep.html', 'w') as f:
-        f.write(rendered_html)
-    f.close()
 
     # imgkit.from_string(rendered_html, png_path, options=options)
     photo = f"{png_path}{png_name}"
