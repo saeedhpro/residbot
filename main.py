@@ -37,7 +37,7 @@ async def select_bank_type(update, context):
     query = update.callback_query
     await query.answer()
     keyboard = [
-        [InlineKeyboardButton("بانک تجارت", callback_data='tejarat')],
+        [InlineKeyboardButton("بانک تجارت ساتنا", callback_data='tejarat')],
         [InlineKeyboardButton("بانک تجارت پایا", callback_data='tejarat_paya')],
         [InlineKeyboardButton("بانک تجارت کارت به کارت", callback_data='tejarat_card')],
         [InlineKeyboardButton("بانک سینا پایا", callback_data='sina_paya')],
@@ -518,9 +518,6 @@ async def handle_get_dest_name(update: Update, context):
     if context.user_data['bank_type'] == 'tejarat_paya':
         await update.message.reply_text('کد پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
-    if context.user_data['bank_type'] == 'shahr_satna':
-        await update.message.reply_text('کد پیگیری را وارد کنید:')
-        return GET_TRACKING_CODE
 
     if context.user_data['bank_type'] == 'sepah_satna':
         await update.message.reply_text('شماره حساب مقصد را وارد کنید:')
@@ -552,6 +549,9 @@ async def handle_get_dest_name(update: Update, context):
         await update.message.reply_text('توضیحات را وارد کنید:')
         return GET_DESCRIPTION
     if context.user_data['bank_type'] == 'keshavarzi':
+        await update.message.reply_text('توضیحات را وارد کنید:')
+        return GET_DESCRIPTION
+    if context.user_data['bank_type'] == 'shahr_satna':
         await update.message.reply_text('توضیحات را وارد کنید:')
         return GET_DESCRIPTION
 
@@ -1078,6 +1078,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'description': convert_numbers_to_farsi(context.user_data['description']),
             'current_directory': current_directory,
         }
 
