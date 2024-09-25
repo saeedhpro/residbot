@@ -514,10 +514,10 @@ async def handle_get_source_iban(update: Update, context):
 async def handle_get_dest_name(update: Update, context):
     context.user_data['receiver'] = update.message.text
     if context.user_data['bank_type'] == 'tejarat_card':
-        await update.message.reply_text('کد پیگیری را وارد کنید:')
+        await update.message.reply_text('شماره پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
     if context.user_data['bank_type'] == 'tejarat_paya':
-        await update.message.reply_text('کد پیگیری را وارد کنید:')
+        await update.message.reply_text('شماره پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
 
     if context.user_data['bank_type'] == 'sepah_satna':
@@ -1080,6 +1080,22 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'description': convert_numbers_to_farsi(context.user_data['description']),
+            'current_directory': current_directory,
+        }
+
+    if bank_type == 'shahr_paya':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'date': convert_numbers_to_farsi(context.user_data['date']),
+            'time': convert_numbers_to_farsi(context.user_data['time']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'description': format_amount(convert_numbers_to_farsi(context.user_data['description'])),
+            'description2': format_amount(convert_numbers_to_farsi(context.user_data['description2'])),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'current_directory': current_directory,
         }
 
@@ -1647,21 +1663,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'sender': convert_numbers_to_farsi(context.user_data['sender']),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
-            'description2': format_amount(convert_numbers_to_farsi(context.user_data['description2'])),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'shahr_paya':
-        html_content = {
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'description': format_amount(convert_numbers_to_farsi(context.user_data['description'])),
             'description2': format_amount(convert_numbers_to_farsi(context.user_data['description2'])),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'current_directory': current_directory,
