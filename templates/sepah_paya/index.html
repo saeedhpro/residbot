@@ -6,16 +6,15 @@
     <style>
       @font-face {
   font-family: vazir;
-  /*src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");*/
-  src: url("/home/saeed/work/python/residbot/templates/Vazirmatn-Regular.ttf");
+  src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
 }
 @font-face {
   font-family: vazir-light;
-  /*src: url("/home/original/residbot/templates/Vazir-Light.ttf");*/
-  src: url("/home/saeed/work/python/residbot/templates/Vazir-Light.ttf");
+  src: url("{{current_directory}}/templates/Vazir-Light.ttf");
 }
 
 body {
+  margin: 0;
   font-size: 22px;
   font-weight: 300;
   font-family: vazir;
@@ -25,8 +24,7 @@ body {
 .container {
   width: 685px;
   height: 1280px;
-  /*background-image: url("/home/original/residbot/templates/sepah_paya/Sepah-Paya.png");*/
-  background-image: url("/home/saeed/work/python/residbot/templates/sepah_paya/Sepah-Paya.png");
+  background-image: url("{{current_directory}}/templates/sepah_paya/Sepah-Paya.png");
   object-fit: cover;
   position: relative;
 }
@@ -174,7 +172,7 @@ body {
       <div class="receiver-value value">{{ receiver }}</div>
 
       <div class="from-description-title title">شرح مبدا‌:</div>
-      <div class="from-description-value value">ندارد</div>
+      <div class="from-description-value value">{{ description3 }}</div>
 
       <div class="reason-title title">بابت:</div>
       <div class="reason-value value">{{ description2 }}</div>
