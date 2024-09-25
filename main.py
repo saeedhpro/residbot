@@ -41,7 +41,7 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک تجارت پایا", callback_data='tejarat_paya')],
         [InlineKeyboardButton("بانک تجارت کارت به کارت", callback_data='tejarat_card')],
         [InlineKeyboardButton("بانک سینا پایا", callback_data='sina_paya')],
-        [InlineKeyboardButton("بانک شهر", callback_data='shahr')],
+        [InlineKeyboardButton("بانک شهر پایا عادی", callback_data='shahr')],
         [InlineKeyboardButton("بانک شهر ساتنا", callback_data='shahr_satna')],
         [InlineKeyboardButton("بانک شهر پایا", callback_data='shahr_paya')],
         [InlineKeyboardButton("بانک شهر پایا 2", callback_data='shahr_paya_2')],
