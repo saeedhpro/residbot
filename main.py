@@ -763,6 +763,9 @@ async def handle_get_description(update: Update, context):
         return GET_DESCRIPTION2
     if context.user_data['bank_type'] == 'shahr_paya':
         await update.message.reply_text('علت (بابت) انتقال را وارد کنید:')
+        print('================')
+        print(update.message.text)
+        print('================')
         return GET_DESCRIPTION2
 
     if context.user_data['bank_type'] == 'saderat_paya':
