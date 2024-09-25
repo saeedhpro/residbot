@@ -1162,6 +1162,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'ghabz': convert_numbers_to_farsi(context.user_data['marja']),
             'current_directory': current_directory,
+            'bank_icon': get_bank_icon(context.user_data['iban']),
         }
 
         # ====
@@ -1712,7 +1713,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1336'
         options['width'] = '591'
     elif context.user_data['bank_type'] == 'sepah_satna':
-        options['height'] = '1340'
+        options['height'] = '1360'
         options['width'] = '752'
     elif context.user_data['bank_type'] == 'sepah_paya':
         options['height'] = '1280'
