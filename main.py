@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+import re
 
 from jinja2 import Environment, FileSystemLoader
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
@@ -340,7 +341,15 @@ async def handle_source_account(update: Update, context):
 
 
 async def handle_get_dest_iban(update: Update, context):
-    context.user_data['iban'] = update.message.text
+    iban = update.message.text
+    iban = iban.upper()
+    pattern = r'^IR\d{24}$'
+    if not re.match(pattern, iban):
+        await update.message.reply_text('شماره شبا را وارد کنید:')
+        return GET_DEST_IBAN
+
+    context.user_data['iban'] = iban
+
     if context.user_data['bank_type'] == 'tejarat':
         await update.message.reply_text('نام واریز کننده را وارد کنید:')
         return GET_SENDER_NAME
