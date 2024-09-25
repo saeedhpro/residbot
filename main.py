@@ -41,6 +41,7 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک تجارت پایا", callback_data='tejarat_paya')],
         [InlineKeyboardButton("بانک تجارت کارت به کارت", callback_data='tejarat_card')],
         [InlineKeyboardButton("بانک سینا پایا", callback_data='sina_paya')],
+        [InlineKeyboardButton("بانک شهر", callback_data='shahr')],
         [InlineKeyboardButton("بانک شهر ساتنا", callback_data='shahr_satna')],
         [InlineKeyboardButton("بانک شهر پایا", callback_data='shahr_paya')],
         [InlineKeyboardButton("بانک شهر پایا 2", callback_data='shahr_paya_2')],
@@ -78,7 +79,6 @@ async def select_bank_type(update, context):
         # [InlineKeyboardButton("بانک صادرات پایا", callback_data='saderat_paya')],
         # [InlineKeyboardButton("بانک دی", callback_data='day')],
         # [InlineKeyboardButton("بانک دی ساتنا", callback_data='day_satna')],
-        # [InlineKeyboardButton("بانک شهر", callback_data='shahr')],
         # [InlineKeyboardButton("بازگشت", callback_data='return_to_menu')],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -1115,6 +1115,23 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'bank_icon': get_bank_icon(context.user_data['iban']),
         }
 
+    if bank_type == 'shahr':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'date': convert_numbers_to_farsi(context.user_data['date']),
+            'time': convert_numbers_to_farsi(context.user_data['time']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'source_iban': convert_numbers_to_farsi(context.user_data['source_iban']),
+            'sender': convert_numbers_to_farsi(context.user_data['sender']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
+            'description2': convert_numbers_to_farsi(context.user_data['description2']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'current_directory': current_directory,
+        }
+
         # ====
 
     if bank_type == 'saman_paya_dark':
@@ -1652,22 +1669,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'current_directory': current_directory,
         }
 
-    if bank_type == 'shahr':
-        html_content = {
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'date': convert_numbers_to_farsi(context.user_data['date']),
-            'time': convert_numbers_to_farsi(context.user_data['time']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'source_iban': convert_numbers_to_farsi(context.user_data['source_iban']),
-            'sender': convert_numbers_to_farsi(context.user_data['sender']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
-            'description2': format_amount(convert_numbers_to_farsi(context.user_data['description2'])),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'current_directory': current_directory,
-        }
     await update.message.reply_text('در حال ساخت رسید... لطفا صبر کنید!:')
     rendered_html = template.render(html_content)
     png_name = f"receipt_{context.user_data['tracking_code']}.png"
@@ -2193,6 +2194,7 @@ def bank_from_codes(code=''):
         '020': 'tose_saderat.png',
         '021': 'post_bank.png',
         '022': 'tose_taavon.png',
+        '030': 'qavamin.png',
         '051': 'tose.png',
         '053': 'kar_afarin.png',
         '054': 'parsian.png',

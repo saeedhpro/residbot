@@ -5,24 +5,23 @@
     <title>Document</title>
     <style>
       @font-face {
-        font-family: vazir;
-        /*src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");*/
-        src: url("/home/saeed/work/python/residbot/templates/Vazirmatn-Regular.ttf");
+        font-family: adobe-arabic;
+        src: url("{{current_directory}}/templates/AdobeArabic-Regular.otf");
       }
 
       html,
       body {
-        font-family: vazir;
+        margin: 0;
+        font-family: adobe-arabic;
+        font-weight: 400;
         font-size: 10px;
         color: #666666;
-        font-weight: 400;
       }
 
       .container {
         width: 591px;
         height: 1280px;
-        /*background-image: url("/home/original/residbot/templates/shahr/shahr.png");*/
-        background-image: url("/home/saeed/work/python/residbot/templates/shahr/shahr.png");
+        background-image: url("{{current_directory}}/templates/shahr/shahr.png");
         /* background-image: url("shahr-filled.png"); */
         object-fit: cover;
         position: relative;
@@ -57,7 +56,6 @@
       .row {
         width: auto;
         color: #333333;
-        font-weight: 400;
         position: relative;
       }
       .additional-col {
@@ -73,6 +71,12 @@
         position: absolute;
         top: 645px;
         right: 75px;
+      }
+      .pages {
+        position: absolute;
+        bottom: 240;
+        left: 50%;
+        transform: translateX(-50%);
       }
     </style>
   </head>
@@ -91,10 +95,10 @@
           <div class="additional-col">مبلغ {{amount}} ریال ایران</div>
         </div>
         <div class="row">
-          {{description2}}
+          بابت پرداخت قبض و تادیه دیون قرض الحسنه بدهی
           <div class="additional-col">تاریخ تراکنش: {{date}} - {{time}}</div>
         </div>
-        <div class="row" style="font-weight: 900;">وضعیت تراکنش ثبت شده</div>
+        <div class="row">وضعیت تراکنش ثبت شده</div>
       </div>
 
       <div class="rows" style="top: 475px">
@@ -105,25 +109,29 @@
             به نام :{{receiver}}
           </div>
         </div>
-        <div class="row" style="font-weight: bold;">{{iban}} {{receiver_bank}}</div>
+        <div class="row">{{iban}} {{receiver_bank}}</div>
       </div>
 
       <div class="rows" style="top: 555px">
-        <div class="row">مشخصات مبدا</div>
+        <div class="row" style="width: 168px; border-bottom: 2px solid #b3b3b3">
+          مشخصات مبدا
+        </div>
         <div class="row">
-          شماره سپرده {{source_account}}
+          شماره سپرده {{sender}}
           <div class="additional-col" style="right: calc(100% + 60px)">
             صاحب سپرده {{sender}}
           </div>
         </div>
-        <div class="row" style="font-weight: bold;">شبای مبدأ {{source_iban}}</div>
+        <div class="row">شبای مبدأ {{source_iban}}</div>
       </div>
 
       <div class="footer">
-        توجه:”دستور پرداخت بین بانکی پایا به شرح ذیل با موفقیت ثبت گردید .لازم
-        به تاکید است مبغ مذکور بر اساس سیکل های تصویه پایا در هر روز کاری به
-        سپرده اعلامی واریز خواهد شد* 0.225
+        توجه: دستور پرداخت بین بانکی پایا به شرح ذیل با موفقیت ثبت گردید .لازم
+        به تاکید است مبلغ مذکور بر اساس سیکل های تصویه پایا در هر روز کاری به
+        سپرده اعلامی واریز خواهد شد.
       </div>
+
+      <div class="pages">صفحه ۱ از ۱</div>
     </div>
   </body>
 </html>
