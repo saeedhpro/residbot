@@ -310,7 +310,7 @@ async def handle_source_account(update: Update, context):
         return GET_DEST_IBAN
 
     if context.user_data['bank_type'] == 'day_satna':
-        await update.message.reply_text('شماره شبا را وارد کنید:')
+        await update.message.reply_text('شماره شبا مقصد را وارد کنید:')
         return GET_DEST_IBAN
 
     if context.user_data['bank_type'] == 'sedarat_2':
@@ -868,7 +868,7 @@ async def handle_dest_bank(update: Update, context):
         await update.message.reply_text('شناسه پرداخت را وارد کنید:')
         return GET_TRACKING_CODE
     if context.user_data['bank_type'] == 'shahr':
-        await update.message.reply_text('شماره شبا را وارد کنید:')
+        await update.message.reply_text('شماره شبا مبدا را وارد کنید:')
         return GET_SOURCE_IBAN
 
     await update.message.reply_text('شماره حساب مبدا را وارد کنید:')
