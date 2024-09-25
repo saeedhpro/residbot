@@ -934,7 +934,7 @@ async def handle_tracking_code(update: Update, context):
     if context.user_data['bank_type'] == 'post_bank_paya_2':
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
-    if context.user_data['bank_type'] == 'ref   ah':
+    if context.user_data['bank_type'] == 'refah':
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
     if context.user_data['bank_type'] == 'refah_paya':
@@ -965,6 +965,9 @@ async def handle_tracking_code(update: Update, context):
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
     if context.user_data['bank_type'] == 'sina_paya':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
+    if context.user_data['bank_type'] == 'sepah_satna':
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
 
@@ -999,8 +1002,8 @@ async def handle_tracking_code(update: Update, context):
 async def handle_get_marja(update: Update, context):
     context.user_data['marja'] = update.message.text
     if context.user_data['bank_type'] == 'sepah_satna':
-        await update.message.reply_text('شماره واریز/شماره قبض را وارد کنید:')
-        return GET_
+        await update.message.reply_text('شماره پیگیری را وارد کنید:')
+        return GET_TRACKING_CODE
     await create_receipt_and_send_resid(update, context)
     return ConversationHandler.END
 
