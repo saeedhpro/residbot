@@ -42,6 +42,7 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک تجارت کارت به کارت", callback_data='tejarat_card')],
         [InlineKeyboardButton("بانک سینا پایا", callback_data='sina_paya')],
         [InlineKeyboardButton("بانک شهر ساتنا", callback_data='shahr_satna')],
+        [InlineKeyboardButton("بانک شهر پایا", callback_data='shahr_paya')],
         [InlineKeyboardButton("بانک شهر پایا 2", callback_data='shahr_paya_2')],
         # [InlineKeyboardButton("بانک سامان تیره", callback_data='saman_paya_dark')],
         # [InlineKeyboardButton("بانک سامان روشن", callback_data='saman_paya_light')],
@@ -78,7 +79,6 @@ async def select_bank_type(update, context):
         # [InlineKeyboardButton("بانک دی", callback_data='day')],
         # [InlineKeyboardButton("بانک دی ساتنا", callback_data='day_satna')],
         # [InlineKeyboardButton("بانک شهر", callback_data='shahr')],
-        # [InlineKeyboardButton("بانک شهر پایا", callback_data='shahr_paya')],
         # [InlineKeyboardButton("بازگشت", callback_data='return_to_menu')],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -985,7 +985,7 @@ async def handle_tracking_code(update: Update, context):
     if context.user_data['bank_type'] == 'saderat_paya':
         await update.message.reply_text('شناسه پرداخت را وارد کنید:')
         return GET_MARJA
-    await update.message.reply_text('کد مرجع را وارد کنید:')
+    await update.message.reply_text('شماره مرجع را وارد کنید:')
     return GET_MARJA
 
 
