@@ -763,9 +763,6 @@ async def handle_get_description(update: Update, context):
         return GET_DESCRIPTION2
     if context.user_data['bank_type'] == 'shahr_paya':
         await update.message.reply_text('علت (بابت) انتقال را وارد کنید:')
-        print('================')
-        print(update.message.text)
-        print('================')
         return GET_DESCRIPTION2
 
     if context.user_data['bank_type'] == 'saderat_paya':
@@ -1096,8 +1093,8 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'description': format_amount(convert_numbers_to_farsi(context.user_data['description'])),
-            'description2': format_amount(convert_numbers_to_farsi(context.user_data['description2'])),
+            'description': convert_numbers_to_farsi(context.user_data['description']),
+            'description2': convert_numbers_to_farsi(context.user_data['description2']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'current_directory': current_directory,
             'bank_icon': get_bank_icon(context.user_data['iban']),
@@ -1112,7 +1109,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'description2': format_amount(convert_numbers_to_farsi(context.user_data['description2'])),
+            'description2': convert_numbers_to_farsi(context.user_data['description2']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'current_directory': current_directory,
             'bank_icon': get_bank_icon(context.user_data['iban']),
