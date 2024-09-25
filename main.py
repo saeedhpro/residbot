@@ -1087,7 +1087,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'bank_icon': get_bank_icon(context.user_data['iban']),
         }
 
-
         # ====
 
     if bank_type == 'saman_paya_dark':
@@ -2169,7 +2168,8 @@ def format_iban_shar_satna(input_str, splitter='-'):
     #     return input_str
     # return f"{input_str[:4]}-{input_str[4:7]}-{input_str[8:12]}-{input_str[8:12]}"
 
-def bank_from_codes(code = ''):
+
+def bank_from_codes(code=''):
     bank_codes = {
         '011': 'sanat.png',
         '012': 'mellat.png',
@@ -2180,11 +2180,11 @@ def bank_from_codes(code = ''):
         '017': 'meli.png',
         '018': 'tejarat.png',
         '019': 'saderat.png',
-        '020': 'tose_saderat.svg',
-        '021': 'post_bank.svg',
-        '022': 'tose_taavon.svg',
-        '051': 'tose.svg',
-        '053': 'karafarin.svg',
+        '020': 'tose_saderat.png',
+        '021': 'post_bank.png',
+        '022': 'tose_taavon.png',
+        '051': 'tose.png',
+        '053': 'kar_afarin.png',
         '054': 'parsian.png',
         '055': 'eghtesad.png',
         '056': 'saman.png',
@@ -2193,12 +2193,12 @@ def bank_from_codes(code = ''):
         '059': 'sina.png',
         '060': 'mehr.png',
         '061': 'shahr.png',
-        '062': 'ayandeh.svg',
-        '063': 'ansar.svg',
-        '064': 'gardeshgari.svg',
-        '065': 'hekmat.svg',
-        '066': 'day.svg',
-        '069': 'iran_zamin.svg',
+        '062': 'ayandeh.png',
+        '063': 'ansar.png',
+        '064': 'gardeshgari.png',
+        '065': 'hekmat.png',
+        '066': 'day.png',
+        '069': 'iran_zamin.png',
     }
     return bank_codes[code]
 
@@ -2207,6 +2207,7 @@ def get_bank_icon(iban):
     if len(iban) < 26:
         return ''
     return bank_from_codes(iban[2:5])
+
 
 def main():
     load_dotenv()
@@ -2239,7 +2240,8 @@ def main():
             GET_MANDE: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_mande)],
             GET_DESCRIPTION2: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_description2)],
             GET_DESCRIPTION3: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_description3)],
-            GET_REDUCE_SOURCE_ACCOUNT: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_reduce_source_account)],
+            GET_REDUCE_SOURCE_ACCOUNT: [
+                MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_reduce_source_account)],
         },
         fallbacks=[CommandHandler('start', start)],
     )
