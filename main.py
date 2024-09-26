@@ -528,7 +528,7 @@ async def handle_get_dest_name(update: Update, context):
         await update.message.reply_text('شماره حساب مقصد را وارد کنید:')
         return GET_DEST_ACCOUNT
     if context.user_data['bank_type'] == 'saman_paya_light':
-        await update.message.reply_text('شماره حساب مقصد را وارد کنید:')
+        await update.message.reply_text('نام انتقال دهنده را وارد کنید:')
         return GET_SENDER_NAME
         # edit
     if context.user_data['bank_type'] == 'saman_paya_dark':
@@ -1006,6 +1006,9 @@ async def handle_tracking_code(update: Update, context):
     if context.user_data['bank_type'] == 'saderat_paya':
         await update.message.reply_text('شناسه پرداخت را وارد کنید:')
         return GET_MARJA
+    if context.user_data['bank_type'] == 'saman_paya_light':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
     await update.message.reply_text('شماره مرجع را وارد کنید:')
     return GET_MARJA
 
