@@ -1831,7 +1831,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1280'
         options['width'] = '996'
     elif context.user_data['bank_type'] == 'saderat_2':
-        options['height'] = '1280'
+        options['height'] = '1380'
         options['width'] = '635'
     elif context.user_data['bank_type'] == 'shahr':
         options['height'] = '1280'
