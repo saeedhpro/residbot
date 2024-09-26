@@ -53,6 +53,7 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک صادرات پایا", callback_data='saderat_paya')],
         [InlineKeyboardButton("بانک صادرات پایا 2", callback_data='saderat_2')],
         [InlineKeyboardButton("بانک رسالت ساتنا", callback_data='resalat_satna')],
+        [InlineKeyboardButton("بانک دی", callback_data='day')],
         # [InlineKeyboardButton("بانک آینده", callback_data='ayandeh')],
         # [InlineKeyboardButton("بانک آینده پایا", callback_data='ayandeh_paya')],
         # [InlineKeyboardButton("بانک اقتصاد", callback_data='eghtesad')],
@@ -77,7 +78,6 @@ async def select_bank_type(update, context):
         # [InlineKeyboardButton("بانک رفاه ساتنا", callback_data='refah_satna')],
         # [InlineKeyboardButton("بانک رسالت پایا", callback_data='resalat_paya')],
         # [InlineKeyboardButton("بانک رسالت ساتنا 2", callback_data='resalat_satna_2')],
-        # [InlineKeyboardButton("بانک دی", callback_data='day')],
         # [InlineKeyboardButton("بانک دی ساتنا", callback_data='day_satna')],
         # [InlineKeyboardButton("بازگشت", callback_data='return_to_menu')],
     ]
@@ -673,7 +673,7 @@ async def handle_get_sender_name(update: Update, context):
             or context.user_data['bank_type'] == 'day' \
             or context.user_data['bank_type'] == 'day_satna' \
             or context.user_data['bank_type'] == 'eghtesad':
-        await update.message.reply_text('کد پیگیری را وارد کنید:')
+        await update.message.reply_text('شماره پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
 
     if context.user_data['bank_type'] == 'mellat' \
@@ -1303,6 +1303,20 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'bank_icon': get_bank_icon(context.user_data['iban']),
         }
 
+    if bank_type == 'day':
+        html_content = {
+            'status': 'ثبت شد',
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'sender': convert_numbers_to_farsi(context.user_data['sender']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'current_directory': current_directory,
+            'bank_icon': get_bank_icon(context.user_data['iban']),
+        }
     # ===
 
     if bank_type == 'ayandeh':
@@ -1680,20 +1694,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'current_directory': current_directory,
         }
 
-    if bank_type == 'day':
-        html_content = {
-            'status': 'ثبت شد',
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'sender': convert_numbers_to_farsi(context.user_data['sender']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'current_directory': current_directory,
-        }
-
     if bank_type == 'day_satna':
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
@@ -1853,6 +1853,10 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         save_as=png_name,
         size=(int(options['width']), int(options['height']))
     )
+
+    with open("f.html", "+w") as f:
+        f.writelines(rendered_html)
+    f.close()
 
     # imgkit.from_string(rendered_html, png_path, options=options)
     photo = f"{png_path}{png_name}"
@@ -2252,7 +2256,7 @@ def bank_from_codes(code=''):
     return bank_codes[code]
 
 
-def get_bank_icon(iban, bank = ''):
+def get_bank_icon(iban, bank=''):
     ib = iban
     if bank == 'saderat':
         ib = 'IR'+ib

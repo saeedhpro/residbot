@@ -6,20 +6,21 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
       }
       @font-face {
         font-family: vazir-light;
-        src: url("/home/original/residbot/templates/Vazir-Light.ttf");
+        src: url("{{current_directory}}/templates/Vazir-Light.ttf");
       }
       @font-face {
         font-family: vazir-medium;
-        src: url("/home/original/residbot/templates/Vazirmatn-Medium.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Medium.ttf");
       }
 
       body {
+        margin: 0;
         font-size: 27px;
-        font-weight: 300;
+        font-weight: 700;
         font-family: vazir;
         color: #2a3034;
       }
@@ -38,8 +39,8 @@
       .container {
         width: 591px;
         height: 1280px;
-        /* background-image: url("day-filled.png"); */
-        background-image: url("/home/original/residbot/templates/day/day.png");
+        /* background-image: url("saman-paya-filled.png"); */
+        background-image: url("{{current_directory}}/templates/day/day.png");
         object-fit: cover;
         position: relative;
       }
@@ -47,16 +48,14 @@
       .price {
         position: absolute;
         top: 396px;
-        right: 116px;
+        right: 76px;
         color: #000;
-        font-weight: 700;
         font-size: 30px;
         font-family: vazir;
       }
 
       .price-unit {
         font-size: 24px;
-        font-weight: 400;
       }
 
       .date {
@@ -65,6 +64,7 @@
         right: 76px;
         color: #666666;
         font-size: 20px;
+        opacity: 0.831;
       }
 
       .ok {
@@ -72,7 +72,6 @@
         top: 480px;
         right: 110px;
         font-size: 21px;
-        font-weight: 400;
         color: #3fd85b;
       }
 
@@ -81,7 +80,6 @@
         top: 480px;
         right: 196px;
         font-size: 21px;
-        font-weight: 400;
         color: #999999;
       }
 
@@ -146,9 +144,10 @@
         line-height: 32px;
         display: flex;
       }
-      .to-value-number > svg {
-        width: 44px;
+      .to-icon {
+        /*width: 44px;*/
         height: 32px;
+        aspect-ratio: 1;
       }
       .to-value-name {
         font-size: 20px;
@@ -206,7 +205,7 @@
           <div class="to-value-container">
             <div class="to-value-number">
               {{iban}}
-              <svg></svg>
+              <img class="to-icon" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
             </div>
             <div class="to-value-name">{{receiver}}</div>
           </div>
