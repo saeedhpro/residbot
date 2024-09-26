@@ -809,6 +809,9 @@ async def handle_get_description2(update: Update, context):
 
 async def handle_get_description3(update: Update, context):
     context.user_data['description3'] = update.message.text
+    if context.user_data['bank_type'] == 'saderat_paya':
+        await update.message.reply_text('شماره پیگیری را وارد کنید')
+        return GET_TRACKING_CODE
     await update.message.reply_text('کد پیگیری را وارد کنید:')
     return GET_TRACKING_CODE
 
@@ -1230,17 +1233,17 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     if bank_type == 'saderat_paya':
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'description3': convert_numbers_to_farsi(context.user_data['description3']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'description2': convert_numbers_to_farsi(context.user_data['description2']),
-            'marja': convert_numbers_to_farsi(context.user_data['marja']),
-            'description': convert_numbers_to_farsi(context.user_data['description']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'date': convert_numbers_to_farsi(context.user_data['date']),
-            'time': convert_numbers_to_farsi(context.user_data['time']),
+            'source_account': context.user_data['source_account'],
+            'description3': context.user_data['description3'],
+            'iban': context.user_data['iban'],
+            'receiver': context.user_data['receiver'],
+            'amount': format_amount(context.user_data['amount']),
+            'description2': context.user_data['description2'],
+            'marja': context.user_data['marja'],
+            'description': context.user_data['description'],
+            'tracking_code': context.user_data['tracking_code'],
+            'date': context.user_data['date'],
+            'time': context.user_data['time'],
             'current_directory': current_directory,
             'bank_icon': get_bank_icon(context.user_data['iban']),
         }
