@@ -1735,6 +1735,9 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     elif context.user_data['bank_type'] == 'saman_paya_dark':
         options['height'] = '1380'
         options['width'] = '752'
+    elif context.user_data['bank_type'] == 'saderat_paya':
+        options['height'] = '1380'
+        options['width'] = '747'
     elif context.user_data['bank_type'] == 'ayandeh':
         options['height'] = '1280'
         options['width'] = '654'
@@ -1816,9 +1819,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     elif context.user_data['bank_type'] == 'saderat':
         options['height'] = '1280'
         options['width'] = '614'
-    elif context.user_data['bank_type'] == 'saderat_paya':
-        options['height'] = '1280'
-        options['width'] = '747'
     elif context.user_data['bank_type'] == 'day':
         options['height'] = '1280'
         options['width'] = '591'
