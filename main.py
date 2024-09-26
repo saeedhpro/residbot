@@ -1202,7 +1202,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
             'sender': convert_numbers_to_farsi(context.user_data['sender']),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'receiver_account': convert_numbers_to_farsi(context.user_data['receiver_account']),
             'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'current_directory': current_directory,
@@ -1727,7 +1726,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1380'
         options['width'] = '685'
     elif context.user_data['bank_type'] == 'saman_paya_light':
-        options['height'] = '1280'
+        options['height'] = '1380'
         options['width'] = '752'
     elif context.user_data['bank_type'] == 'saman_paya_dark':
         options['height'] = '1280'
