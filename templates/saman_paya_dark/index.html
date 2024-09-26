@@ -6,29 +6,25 @@
     <style>
       @font-face {
   font-family: vazir;
-  /*src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");*/
-  src: url("/home/saeed/work/python/residbot/templates/Vazirmatn-Regular.ttf");
+  src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
 }
 @font-face {
   font-family: vazir-light;
-  /*src: url("/home/original/residbot/templates/Vazir-Light.ttf");*/
-  src: url("/home/saeed/work/python/residbot/templates/Vazir-Light.ttf");
+  src: url("{{current_directory}}/templates/Vazir-Light.ttf");
 }
 
 body {
+  margin: 0;
   font-size: 27px;
   font-weight: 300;
   font-family: vazir;
   color: white;
 }
-.ltr {
-  direction: ltr !important;
-}
 
 h1 {
   text-wrap: nowrap;
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 28px;
+  font-weight: 300;
   position: absolute;
   top: 270px;
   left: 50%;
@@ -38,15 +34,14 @@ h1 {
 .container {
   width: 752px;
   height: 1280px;
-  /*background-image: url("/home/original/residbot/templates/saman_paya_dark/Saman_Paya_Dark.png");*/
-  background-image: url("/home/saeed/work/python/residbot/templates/saman_paya_dark/Saman_Paya_Dark.png");
+  background-image: url("{{current_directory}}/templates/saman_paya_dark/Saman_Paya_Dark.png");
   object-fit: cover;
   position: relative;
 }
 
 .rows {
   width: 520px;
-  padding-top: 420px;
+  padding-top: 413px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -82,15 +77,23 @@ h1 {
 
 .title {
   direction: rtl;
-  opacity: 0.85;
+  opacity: 0.941;
+  text-align: center;
+  font-family: vazir-light;
+  font-size: 25px;
   flex-shrink: 0;
 }
 
 .value {
+  opacity: 0.941;
   text-align: center;
-  font-weight: bold;
+  font-weight: 300;
   font-family: vazir-light;
+  font-size: 25px;
   flex-shrink: 0;
+}
+.ltr {
+  direction: ltr;
 }
     </style>
   </head>
@@ -105,10 +108,10 @@ h1 {
 
         <div class="row">
           <div class="title">مبلغ</div>
-          <div class="value"><span>{{ amount }}</span> <span>ریال</span></div>
+          <div class="value">{{ amount }} ریال</div>
         </div>
 
-        <div class="divider"></div>
+        <div style="margin-bottom: 10px"></div>
 
         <div class="row">
           <div class="title">انتقال دهنده</div>
@@ -120,7 +123,7 @@ h1 {
           <div class="value">{{ source_account }}</div>
         </div>
 
-        <div class="divider"></div>
+        <div style="margin-bottom: 16px"></div>
 
         <div class="row">
           <div class="title">دریافت کننده</div>
@@ -132,18 +135,17 @@ h1 {
           <div class="value">{{ iban }}</div>
         </div>
 
+        <div style="margin-bottom: 10px"></div>
+
         <div class="row">
           <div class="title">بانک مقصد</div>
           <div class="value">{{ receiver_bank }}</div>
         </div>
 
-        <div class="divider"></div>
-        <div class="divider"></div>
-        <div class="divider"></div>
-        <div class="divider"></div>
+        <div style="margin-bottom: 80px"></div>
 
-        <div class="row">
-          <div class="title">شماره پیگیری</div>
+        <div class="row" style="width: calc(100% - 6px);">
+          <div class="title" style="font-weight: 700;">شماره پیگیری</div>
           <div class="value">{{ tracking_code }}</div>
         </div>
       </div>

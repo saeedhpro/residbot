@@ -47,8 +47,8 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک شهر پایا 2", callback_data='shahr_paya_2')],
         [InlineKeyboardButton("بانک سپه ساتنا", callback_data='sepah_satna')],
         [InlineKeyboardButton("بانک سپه پایا", callback_data='sepah_paya')],
+        [InlineKeyboardButton("بانک سامان تیره", callback_data='saman_paya_dark')],
         [InlineKeyboardButton("بانک سامان روشن", callback_data='saman_paya_light')],
-        # [InlineKeyboardButton("بانک سامان تیره", callback_data='saman_paya_dark')],
         # [InlineKeyboardButton("بانک آینده", callback_data='ayandeh')],
         # [InlineKeyboardButton("بانک آینده پایا", callback_data='ayandeh_paya')],
         # [InlineKeyboardButton("بانک اقتصاد", callback_data='eghtesad')],
@@ -532,8 +532,8 @@ async def handle_get_dest_name(update: Update, context):
         return GET_SENDER_NAME
         # edit
     if context.user_data['bank_type'] == 'saman_paya_dark':
-        await update.message.reply_text('شماره حساب مقصد را وارد کنید:')
-        return GET_DEST_ACCOUNT
+        await update.message.reply_text('نام انتقال دهنده را وارد کنید:')
+        return GET_SENDER_NAME
 
     if context.user_data['bank_type'] == 'ayandeh':
         await update.message.reply_text('نام ارسال کننده را وارد کنید:')
@@ -1009,6 +1009,9 @@ async def handle_tracking_code(update: Update, context):
     if context.user_data['bank_type'] == 'saman_paya_light':
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
+    if context.user_data['bank_type'] == 'saman_paya_dark':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
     await update.message.reply_text('شماره مرجع را وارد کنید:')
     return GET_MARJA
 
@@ -1210,8 +1213,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'current_directory': current_directory,
         }
 
-        # ====
-
     if bank_type == 'saman_paya_dark':
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
@@ -1221,12 +1222,12 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
             'sender': convert_numbers_to_farsi(context.user_data['sender']),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'receiver_account': convert_numbers_to_farsi(context.user_data['receiver_account']),
             'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'marja': convert_numbers_to_farsi(context.user_data['marja']),
             'current_directory': current_directory,
         }
+
+        # ====
 
     if bank_type == 'ayandeh':
         html_content = {
@@ -1732,7 +1733,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1380'
         options['width'] = '752'
     elif context.user_data['bank_type'] == 'saman_paya_dark':
-        options['height'] = '1280'
+        options['height'] = '1380'
         options['width'] = '752'
     elif context.user_data['bank_type'] == 'ayandeh':
         options['height'] = '1280'
