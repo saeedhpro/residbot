@@ -6,112 +6,178 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
+      }
+
+      @font-face {
+        font-family: mj2;
+        src: url("{{current_directory}}/templates/Mj_Two\ Medium.ttf");
       }
 
       html,
       body {
+        margin: 0;
         font-family: vazir;
       }
 
       .container {
-        width: 614px;
+        width: 744px;
         height: 1280px;
-        background-image: url("/home/original/residbot/templates/saderat/saderat.png");
-        /* background-image: url("saderat-filled.png"); */
+        background-image: url("{{current_directory}}/templates/saderat/saderat.png");
+        /* background-image: url("melat-filled.png"); */
         object-fit: cover;
         position: relative;
       }
 
+      .price {
+        position: absolute;
+        top: 0;
+        left: auto;
+        right: auto;
+      }
+      .unit {
+        position: absolute;
+        top: 0;
+        left: auto;
+        right: auto;
+      }
+
       .value {
-        font-size: 22px;
-        line-height: 0px;
-        color: #1a1a1a;
-        font-weight: 400;
-        opacity: 0.741;
+        font-size: 16px;
+        letter-spacing: 0px;
+        color: #4d4d4d;
+        font-weight: 700;
+        opacity: 0.871;
       }
 
-      .to-bank {
+      .from {
         position: absolute;
-        top: 214;
-        left: 31;
+        top: 207;
+        right: 296;
+        letter-spacing: 1px;
       }
-
-      .to-shaba {
+      .from-name {
         position: absolute;
-        top: 441;
-        left: 94;
+        top: 243;
+        right: 296;
+      }
+      .receiver {
+        position: absolute;
+        top: 283;
+        right: 296;
+        direction: ltr;
+        letter-spacing: 1px;
+      }
+      .receiver-name {
+        position: absolute;
+        top: 320;
+        right: 296;
         direction: ltr;
       }
-
-      .to-name {
-        font-size: 24px;
+      .to-bank {
         position: absolute;
-        top: 510;
-        left: 44;
+        top: 413;
+        right: 374;
+        font-family: mj2;
+        font-size: 18px;
+        letter-spacing: 0px;
+        color: #4d4d4d;
+        font-weight: 700;
+        opacity: 0.871;
       }
-
-      .type-markup {
-        font-size: 21px;
-        line-height: 0px;
-        color: #999999;
-        font-weight: 400;
+      .to-icon {
         position: absolute;
-        top: 308;
-        right: 43;
+        top: 390;
+        right: 300;
+        width: 54px;
+        height: 54px;
       }
-
-      .type {
-        font-size: 23px;
+      .to-icon-img {
+        width: 54px;
+        height: 54px;
+      }
+      .to-label {
         position: absolute;
-        top: 577;
-        left: 44;
-      }
-
-      .price-toman {
-        color: #333333;
-        font-size: 23px;
-        position: absolute;
-        top: 632;
-        left: 45;
-      }
-
-      .price-rial {
-        font-size: 19px;
-        line-height: 0px;
+        bottom: -19;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 19px;
+        font-size: 17px;
+        letter-spacing: 0px;
         color: #808080;
+        opacity: 0.871;
+        text-wrap: nowrap;
+      }
+      .price {
+        position: absolute;
+        top: 479;
+        right: 280;
+        letter-spacing: 1px;
+        opacity: 0.871;
+      }
+      .unit {
+        top: -4;
+        left: -40;
         font-weight: 400;
-        position: absolute;
-        top: 674;
-        left: 53;
       }
-
+      .tracking-code {
+        position: absolute;
+        top: 517;
+        right: 280;
+        font-size: 16px;
+        letter-spacing: 0px;
+        color: #4d4d4d;
+        font-weight: 700;
+      }
+      .for {
+        position: absolute;
+        top: 552;
+        right: 280;
+        font-weight: 400;
+        font-size: 17px;
+      }
       .date {
-        font-size: 23px;
         position: absolute;
-        top: 723;
-        left: 44;
+        top: 28;
+        left: 20;
+        opacity: 0.871;
+        font-size: 18px;
+        letter-spacing: 0px;
+        color: #333333;
+        font-weight: 900;
       }
-
-      .desc {
-        font-size: 23px;
+      .time {
         position: absolute;
-        top: 792;
-        left: 45;
+        top: 52;
+        left: 32;
+        opacity: 0.871;
+        font-size: 18px;
+        letter-spacing: 0px;
+        color: #333333;
+        font-weight: 900;
       }
     </style>
   </head>
   <body>
     <div class="container">
+      <div class="value from">{{source_account}}</div>
+      <div class="value from-name">{{sender}}</div>
+      <div class="value receiver">{{iban}}</div>
+      <div class="value receiver-name">{{receiver}}</div>
       <div class="value to-bank">{{receiver_bank}}</div>
-      <div class="value to-shaba">{{iban}}</div>
-      <div class="value to-name">{{receiver}}</div>
-      <div class="value type">{{description2}}</div>
-      <div class="value type-markup">رسید برداشت وجه</div>
-      <div class="value price-toman">{{amount_toman}} تومان</div>
-      <div class="value price-rial">{{amount}} ریال</div>
-      <div class="value date" dir="ltr">{{datetime}}</div>
-      <div class="value desc">{{description}}</div>
+      <div class="to-icon">
+        <img class="to-icon-img" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
+        <div class="to-label">{{receiver_bank}}</div>
+      </div>
+
+      <div class="value price">
+        {{amount}}
+        <div class="unit">ریال</div>
+      </div>
+      <div class="value tracking-code">{{tracking_code}}</div>
+      <div class="value for">{{description2}}</div>
+      <div class="date">{{date}}</div>
+      <div class="time">{{time}}</div>
     </div>
   </body>
 </html>
