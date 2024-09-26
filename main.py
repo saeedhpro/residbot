@@ -527,12 +527,11 @@ async def handle_get_dest_name(update: Update, context):
         await update.message.reply_text('کسر کارمزد از سپرده را وارد کنید:')
         return GET_DEST_ACCOUNT
     if context.user_data['bank_type'] == 'sepah_paya':
-        await update.message.reply_text('شماره حساب مقصد را وارد کنید:')
+        await update.message.reply_text('کسر کارمزد از سپرده را وارد کنید:')
         return GET_DEST_ACCOUNT
     if context.user_data['bank_type'] == 'saman_paya_light':
         await update.message.reply_text('نام انتقال دهنده را وارد کنید:')
         return GET_SENDER_NAME
-        # edit
     if context.user_data['bank_type'] == 'saman_paya_dark':
         await update.message.reply_text('نام انتقال دهنده را وارد کنید:')
         return GET_SENDER_NAME
@@ -1283,7 +1282,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'current_directory': current_directory,
             'bank_icon': get_bank_icon(context.user_data['iban'], 'saderat'),
         }
-        # ====
 
     if bank_type == 'resalat_satna':
         amount = context.user_data['amount']
