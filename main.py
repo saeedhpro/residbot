@@ -852,7 +852,7 @@ async def handle_dest_bank(update: Update, context):
         await update.message.reply_text('نام بانک کسر کارمزد را وارد کنید:')
         return GET_REDUCE_SOURCE_ACCOUNT
     if context.user_data['bank_type'] == 'resalat_satna':
-        await update.message.reply_text('نام بانک کسر کارمزد را وارد کنید:')
+        await update.message.reply_text('شماره بانک کسر کارمزد را وارد کنید:')
         return GET_REDUCE_SOURCE_ACCOUNT
     if context.user_data['bank_type'] == 'resalat_satna_2':
         await update.message.reply_text('نام بانک کسر کارمزد را وارد کنید:')
@@ -1004,13 +1004,13 @@ async def handle_tracking_code(update: Update, context):
         await update.message.reply_text('شماره درخواست را وارد کنید:')
         return GET_MARJA
     if context.user_data['bank_type'] == 'resalat_paya':
-        await update.message.reply_text('شماره واریز/شماره قبض را وارد کنید:')
+        await update.message.reply_text('شناسه واریز/شماره قبض را وارد کنید:')
         return GET_MARJA
     if context.user_data['bank_type'] == 'resalat_satna':
-        await update.message.reply_text('شماره واریز/شماره قبض را وارد کنید:')
+        await update.message.reply_text('شناسه واریز/شماره قبض را وارد کنید:')
         return GET_MARJA
     if context.user_data['bank_type'] == 'resalat_satna_2':
-        await update.message.reply_text('شماره واریز/شماره قبض را وارد کنید:')
+        await update.message.reply_text('شناسه واریز/شماره قبض را وارد کنید:')
         return GET_MARJA
     if context.user_data['bank_type'] == 'saderat_paya':
         await update.message.reply_text('شناسه پرداخت را وارد کنید:')
