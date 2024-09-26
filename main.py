@@ -49,6 +49,7 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک سپه پایا", callback_data='sepah_paya')],
         [InlineKeyboardButton("بانک سامان تیره", callback_data='saman_paya_dark')],
         [InlineKeyboardButton("بانک سامان روشن", callback_data='saman_paya_light')],
+        [InlineKeyboardButton("بانک صادرات پایا", callback_data='saderat_paya')],
         # [InlineKeyboardButton("بانک آینده", callback_data='ayandeh')],
         # [InlineKeyboardButton("بانک آینده پایا", callback_data='ayandeh_paya')],
         # [InlineKeyboardButton("بانک اقتصاد", callback_data='eghtesad')],
@@ -76,7 +77,6 @@ async def select_bank_type(update, context):
         # [InlineKeyboardButton("بانک رسالت ساتنا 2", callback_data='resalat_satna_2')],
         # [InlineKeyboardButton("بانک صادرات", callback_data='saderat')],
         # [InlineKeyboardButton("بانک صادرات 2", callback_data='sedarat_2')],
-        # [InlineKeyboardButton("بانک صادرات پایا", callback_data='saderat_paya')],
         # [InlineKeyboardButton("بانک دی", callback_data='day')],
         # [InlineKeyboardButton("بانک دی ساتنا", callback_data='day_satna')],
         # [InlineKeyboardButton("بازگشت", callback_data='return_to_menu')],
@@ -1227,6 +1227,23 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'current_directory': current_directory,
         }
 
+    if bank_type == 'saderat_paya':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'description3': convert_numbers_to_farsi(context.user_data['description3']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'description2': convert_numbers_to_farsi(context.user_data['description2']),
+            'marja': convert_numbers_to_farsi(context.user_data['marja']),
+            'description': convert_numbers_to_farsi(context.user_data['description']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'date': convert_numbers_to_farsi(context.user_data['date']),
+            'time': convert_numbers_to_farsi(context.user_data['time']),
+            'current_directory': current_directory,
+            'bank_icon': get_bank_icon(context.user_data['iban']),
+        }
         # ====
 
     if bank_type == 'ayandeh':
@@ -1635,23 +1652,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
             'description': convert_numbers_to_farsi(context.user_data['description']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'saderat_paya':
-        html_content = {
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'description3': convert_numbers_to_farsi(context.user_data['description3']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'description2': convert_numbers_to_farsi(context.user_data['description2']),
-            'marja': convert_numbers_to_farsi(context.user_data['marja']),
-            'description': convert_numbers_to_farsi(context.user_data['description']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'date': convert_numbers_to_farsi(context.user_data['date']),
-            'time': convert_numbers_to_farsi(context.user_data['time']),
             'current_directory': current_directory,
         }
 

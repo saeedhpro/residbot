@@ -6,19 +6,26 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
+      }
+
+      @font-face {
+        font-family: vazir-medium;
+        src: url("{{current_directory}}/templates/Vazirmatn-Medium.ttf");
       }
 
       html,
       body {
+        margin: 0;
         font-family: vazir;
+        font-weight: 700;
       }
 
       .container {
         width: 747px;
         height: 1280px;
-        background-image: url("/home/original/residbot/templates/saderat_paya/saderat-paya.png");
-        /* background-image: url("saderat_paya-filled.png"); */
+        background-image: url("{{current_directory}}/templates/saderat_paya/saderat-paya.png");
+        /* background-image: url("saderat-paya-filled.png"); */
         object-fit: cover;
         position: relative;
       }
@@ -27,7 +34,6 @@
         font-size: 32px;
         line-height: 37px;
         color: #f2f2f2;
-        font-weight: 400;
         position: absolute;
         right: 231;
         top: 642;
@@ -36,10 +42,11 @@
       .from-type {
         opacity: 0.588;
         font-size: 27px;
+        font-family: vazir-medium;
+        font-weight: 500 !important;
         letter-spacing: -1px;
         line-height: 0px;
         color: #e6e6e6;
-        font-weight: 400;
         position: absolute;
         right: 229;
         top: 708;
@@ -49,17 +56,23 @@
         letter-spacing: 0px;
         line-height: 0px;
         color: #e6e6e6;
-        font-weight: 400;
         position: absolute;
         top: 761;
         right: 230;
+      }
+      .to-icon {
+        position: absolute;
+        top: 750;
+        left: 80;
+        z-index: 10;
+        width: 40px;
+        height: 60px;
       }
       .to-name {
         font-size: 28px;
         letter-spacing: -1px;
         line-height: 0px;
         color: #e6e6e6;
-        font-weight: 400;
         opacity: 0.588;
         position: absolute;
         top: 804;
@@ -69,32 +82,34 @@
         font-size: 28px;
         line-height: 0px;
         color: #e6e6e6;
-        font-weight: 400;
         position: absolute;
         top: 944;
         right: 232;
       }
       .price span {
         font-size: 27px;
+        font-family: vazir-medium;
+        font-weight: 500 !important;
         line-height: 0px;
         color: #e6e6e6;
-        font-weight: 400;
         opacity: 0.741;
       }
       .for {
         font-size: 26px;
+        font-family: vazir-medium;
+        font-weight: 500 !important;
         line-height: 0px;
         color: #e6e6e6;
-        font-weight: 400;
         position: absolute;
         top: 1085;
         right: 232;
       }
       .tracking-number {
         font-size: 27px;
+        font-family: vazir-medium;
+        font-weight: 500 !important;
         line-height: 0px;
         color: #e6e6e6;
-        font-weight: 400;
         opacity: 0.949;
         position: absolute;
         top: 1164;
@@ -104,7 +119,6 @@
         font-size: 29px;
         line-height: 0px;
         color: #e6e6e6;
-        font-weight: 400;
         opacity: 0.988;
         position: absolute;
         top: 1213;
@@ -118,7 +132,6 @@
         font-size: 29px;
         line-height: 0px;
         color: #e6e6e6;
-        font-weight: 400;
         opacity: 0.678;
         position: absolute;
         top: 1037;
@@ -128,7 +141,6 @@
         font-size: 29px;
         line-height: 0px;
         color: #e6e6e6;
-        font-weight: 400;
         opacity: 0.988;
         position: absolute;
         top: 990;
@@ -139,9 +151,17 @@
   <body>
     <div class="container">
       <div class="from-number">{{source_account}}</div>
-      <div class="from-type">{{description3}}</div>
+      <div
+        class="from-type"
+        style="font-family: vazir-medium; font-weight: 500 !important"
+      >
+        {{description3}}
+      </div>
       <div class="to-number">{{iban}}</div>
-      <div class="to-name">{{receiver}}</div>
+      <div class="to-name" style="font-family: vazir-medium; font-weight: 500 !important">
+        {{receiver}}
+      </div>
+      <img class="to-icon" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
       <div class="price">{{amount}} <span>ریال</span></div>
       <div class="type">{{description2}}</div>
       <div class="payment-id">{{marja}}</div>
