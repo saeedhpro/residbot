@@ -911,6 +911,9 @@ async def handle_tracking_code(update: Update, context):
     if context.user_data['bank_type'] == 'ayandeh':
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
+    if context.user_data['bank_type'] == 'sepah_paya':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
     if context.user_data['bank_type'] == 'keshavarzi':
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
