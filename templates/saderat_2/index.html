@@ -1,0 +1,128 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: farhoma;
+        src: url("{{current_directory}}/templates/Far_Homa.ttf");
+      }
+
+      html,
+      body {
+        margin: 0;
+        font-family: farhoma;
+        font-weight: 400;
+      }
+
+      .container {
+        width: 635px;
+        height: 1280px;
+        /* background-image: url(""); */
+        background-image: url("{{current_directory}}/templates/saderat_2/saderat-2.png");
+        object-fit: cover;
+        position: relative;
+      }
+      .from-number {
+        font-size: 29px;
+        letter-spacing: -1px;
+        line-height: 0px;
+        color: #1a1a1a;
+        position: absolute;
+        top: 540;
+        right: 152;
+      }
+      .from-type {
+        font-size: 28px;
+        letter-spacing: -1px;
+        line-height: 0px;
+        color: #999999;
+        position: absolute;
+        top: 574;
+        right: 148;
+      }
+      .to-number {
+        font-size: 29px;
+        letter-spacing: -1px;
+        line-height: 0px;
+        color: #1a1a1a;
+        position: absolute;
+        top: 659;
+        right: 146;
+      }
+      .to-name {
+        font-size: 28px;
+        letter-spacing: -1px;
+        line-height: 0px;
+        color: #999999;
+        position: absolute;
+        top: 693;
+        right: 152;
+      }
+      .price {
+        font-size: 30px;
+        letter-spacing: -1px;
+        line-height: 0px;
+        color: #1a1a1a;
+        position: absolute;
+        top: 820;
+        right: 300;
+      }
+      .type {
+        font-size: 30px;
+        letter-spacing: -1px;
+        line-height: 0px;
+        color: #1a1a1a;
+        position: absolute;
+        top: 890;
+        right: 300;
+      }
+      .for {
+        font-size: 30px;
+        letter-spacing: -1px;
+        line-height: 0px;
+        color: #1a1a1a;
+        position: absolute;
+        top: 953;
+        right: 300;
+      }
+      .tracking-code {
+        font-size: 37px;
+        letter-spacing: -1px;
+        line-height: 0px;
+        color: #1a1a1a;
+        position: absolute;
+        top: 1019;
+        right: 305;
+      }
+      .date {
+        font-size: 29px;
+        letter-spacing: -1px;
+        line-height: 0px;
+        color: #1a1a1a;
+        position: absolute;
+        top: 1083;
+        right: 304;
+        display: flex;
+        gap: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="from-number">{{source_account}}</div>
+      <div class="from-type">حساب جاری</div>
+      <div class="to-number">{{iban}}</div>
+      <div class="to-name">{{receiver}}</div>
+      <div class="price">{{amount}}</div>
+      <div class="type">انتقال وجه پایا</div>
+      <div class="for">{{description2}}</div>
+      <div class="tracking-code">{{tracking_code}}</div>
+      <div class="date" dir="ltr">
+        <span>{{date}}</span>
+        <span>{{time}}</span>
+      </div>
+    </div>
+  </body>
+</html>
