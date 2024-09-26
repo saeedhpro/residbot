@@ -6,19 +6,21 @@
     <style>
       @font-face {
         font-family: Vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
       }
 
       html,
       body {
+        margin: 0;
         font-family: Vazir;
+        font-weight: 700;
       }
 
       .container {
         width: 667px;
         height: 1280px;
-        background-image: url("/home/original/residbot/templates/resalat_satna/resalat-satna.png");
-        /* background-image: url("resalat_satna-filled.png"); */
+        background-image: url("{{current_directory}}/templates/resalat_satna/resalat-satna.png");
+        /* background-image: url("resalat-satna-filled.png"); */
         object-fit: cover;
         position: relative;
       }
@@ -81,6 +83,15 @@
         border-top: 2px dotted #177654;
         margin-bottom: 6px;
       }
+
+      .to-icon {
+        width: 32px;
+        height: 32px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
+      }
     </style>
   </head>
   <body>
@@ -113,14 +124,17 @@
         <div class="row">
           <div class="title">بانک مقصد:</div>
           <div class="divider"></div>
-          <div class="value">{{receiver_bank}}</div>
+          <div class="value" style="position: relative; padding-right: 34px">
+            {{receiver_bank}}
+            <img class="to-icon" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
+          </div>
         </div>
 
         <div class="row">
           <div class="title">مبلغ انتقال:</div>
           <div class="divider"></div>
-          <div class="value green-text" style="color: #3e9166">
-            {{amount}} ریال ({{amount_fa}} تومان)
+          <div class="value green-text" style="color: #17a56f">
+            <span style="letter-spacing: 1px">{{amount}}</span> ریال ({{amount_fa}})
           </div>
         </div>
 
@@ -133,12 +147,13 @@
         <div class="row">
           <div class="title">شماره پیگیری:</div>
           <div class="divider"></div>
-          <div class="value">{{tracking_code}}</div>
+          <div class="value" style="direction: ltr">{{tracking_code}}</div>
         </div>
 
         <div class="row">
-          <div class="title">شماره واریز/شماره قبض:</div>
-          <div class="divider">{{marja}}</div>
+          <div class="title">شناسه واریز/شماره قبض:</div>
+          <div class="divider"></div>
+          <div class="value">{{marja}}</div>
         </div>
 
         <div class="row">

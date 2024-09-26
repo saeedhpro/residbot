@@ -52,6 +52,7 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک صادرات عادی", callback_data='saderat')],
         [InlineKeyboardButton("بانک صادرات پایا", callback_data='saderat_paya')],
         [InlineKeyboardButton("بانک صادرات پایا 2", callback_data='saderat_2')],
+        [InlineKeyboardButton("بانک رسالت ساتنا", callback_data='resalat_satna')],
         # [InlineKeyboardButton("بانک آینده", callback_data='ayandeh')],
         # [InlineKeyboardButton("بانک آینده پایا", callback_data='ayandeh_paya')],
         # [InlineKeyboardButton("بانک اقتصاد", callback_data='eghtesad')],
@@ -75,7 +76,6 @@ async def select_bank_type(update, context):
         # [InlineKeyboardButton("بانک رفاه پایا", callback_data='refah_paya')],
         # [InlineKeyboardButton("بانک رفاه ساتنا", callback_data='refah_satna')],
         # [InlineKeyboardButton("بانک رسالت پایا", callback_data='resalat_paya')],
-        # [InlineKeyboardButton("بانک رسالت ساتنا", callback_data='resalat_satna')],
         # [InlineKeyboardButton("بانک رسالت ساتنا 2", callback_data='resalat_satna_2')],
         # [InlineKeyboardButton("بانک دی", callback_data='day')],
         # [InlineKeyboardButton("بانک دی ساتنا", callback_data='day_satna')],
@@ -1285,6 +1285,28 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         }
         # ====
 
+    if bank_type == 'resalat_satna':
+        amount = context.user_data['amount']
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'reduce_source_account': convert_numbers_to_farsi(context.user_data['reduce_source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'amount_fa': convert_numbers_to_farsi(convert_number_to_words(int(int(amount) / 10))),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'description': convert_numbers_to_farsi(context.user_data['description']),
+            'description2': convert_numbers_to_farsi(context.user_data['description2']),
+            'marja': convert_numbers_to_farsi(context.user_data['marja']),
+            'current_directory': current_directory,
+            'bank_icon': get_bank_icon(context.user_data['iban']),
+        }
+
+    # ===
+
     if bank_type == 'ayandeh':
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
@@ -1632,25 +1654,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
             'sender': convert_numbers_to_farsi(context.user_data['sender']),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'amount_fa': convert_numbers_to_farsi(convert_number_to_words(int(int(amount) / 10))),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'description': convert_numbers_to_farsi(context.user_data['description']),
-            'description2': convert_numbers_to_farsi(context.user_data['description2']),
-            'marja': convert_numbers_to_farsi(context.user_data['marja']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'resalat_satna':
-        amount = context.user_data['amount']
-        html_content = {
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'reduce_source_account': convert_numbers_to_farsi(context.user_data['reduce_source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
             'amount_fa': convert_numbers_to_farsi(convert_number_to_words(int(int(amount) / 10))),
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
