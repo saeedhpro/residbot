@@ -1269,7 +1269,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         }
 
     if bank_type == 'saderat':
-        amount = context.user_data['amount']
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
             'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
@@ -1280,7 +1279,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
             'date': context.user_data['date'],
             'time': context.user_data['time'],
-            'description': convert_numbers_to_farsi(context.user_data['description']),
             'current_directory': current_directory,
             'bank_icon': get_bank_icon(context.user_data['iban'], 'saderat'),
         }
