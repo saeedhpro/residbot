@@ -49,7 +49,7 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک سپه پایا", callback_data='sepah_paya')],
         [InlineKeyboardButton("بانک سامان تیره", callback_data='saman_paya_dark')],
         [InlineKeyboardButton("بانک سامان روشن", callback_data='saman_paya_light')],
-        [InlineKeyboardButton("بانک صادرات", callback_data='saderat')],
+        [InlineKeyboardButton("بانک صادرات عادی", callback_data='saderat')],
         [InlineKeyboardButton("بانک صادرات پایا", callback_data='saderat_paya')],
         [InlineKeyboardButton("بانک صادرات پایا 2", callback_data='saderat_2')],
         # [InlineKeyboardButton("بانک آینده", callback_data='ayandeh')],
