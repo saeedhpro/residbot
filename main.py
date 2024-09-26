@@ -47,8 +47,8 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک شهر پایا 2", callback_data='shahr_paya_2')],
         [InlineKeyboardButton("بانک سپه ساتنا", callback_data='sepah_satna')],
         [InlineKeyboardButton("بانک سپه پایا", callback_data='sepah_paya')],
+        [InlineKeyboardButton("بانک سامان روشن", callback_data='saman_paya_light')],
         # [InlineKeyboardButton("بانک سامان تیره", callback_data='saman_paya_dark')],
-        # [InlineKeyboardButton("بانک سامان روشن", callback_data='saman_paya_light')],
         # [InlineKeyboardButton("بانک آینده", callback_data='ayandeh')],
         # [InlineKeyboardButton("بانک آینده پایا", callback_data='ayandeh_paya')],
         # [InlineKeyboardButton("بانک اقتصاد", callback_data='eghtesad')],
@@ -1192,9 +1192,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'current_directory': current_directory,
         }
 
-        # ====
-
-    if bank_type == 'saman_paya_dark':
+    if bank_type == 'saman_paya_light':
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
@@ -1210,7 +1208,9 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'current_directory': current_directory,
         }
 
-    if bank_type == 'saman_paya_light':
+        # ====
+
+    if bank_type == 'saman_paya_dark':
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),

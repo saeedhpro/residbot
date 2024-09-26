@@ -6,29 +6,30 @@
     <style>
       @font-face {
   font-family: vazir;
-  /*src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");*/
-  src: url("/home/saeed/work/python/residbot/templates/Vazirmatn-Regular.ttf");
+  src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
 }
 @font-face {
   font-family: vazir-light;
-  /*src: url("/home/original/residbot/templates/Vazir-Light.ttf");*/
-  src: url("/home/saeed/work/python/residbot/templates/Vazir-Light.ttf");
+  src: url("{{current_directory}}/templates/Vazir-Light.ttf");
+}
+@font-face {
+  font-family: vazir-m;
+  src: url("{{current_directory}}/templates/Vazirmatn-Medium.ttf");
 }
 
 body {
+  margin: 0;
   font-size: 27px;
   font-weight: 300;
   font-family: vazir;
   color: #2a3034;
 }
-.ltr {
-  direction: ltr !important;
-}
+
 h1 {
   text-wrap: nowrap;
   font-size: 32px;
-  font-weight: bold;
-  font-family: vazir-light;
+  font-family: vazir;
+  font-weight: 500;
   position: absolute;
   top: 270px;
   left: 50%;
@@ -38,8 +39,7 @@ h1 {
 .container {
   width: 752px;
   height: 1280px;
-  /*background-image: url("/home/original/residbot/templates/saman_paya_light/Saman_Paya_Light.png");*/
-  background-image: url("/home/saeed/work/python/residbot/templates/saman_paya_light/Saman_Paya_Light.png");
+  background-image: url("{{current_directory}}/templates/saman_paya_light/Saman_Paya_Light.png");
   object-fit: cover;
   position: relative;
 }
@@ -85,13 +85,16 @@ h1 {
   opacity: 0.85;
   flex-shrink: 0;
   color: #7d8589;
+  font-family: vazir;
+  font-size: 29px;
 }
 
 .value {
   text-align: center;
-  font-weight: bold;
-  font-family: vazir-light;
+  font-family: vazir-m;
   flex-shrink: 0;
+  opacity: 0.941;
+  font-size: 28px;
 }
 
 .receipt {
@@ -142,12 +145,12 @@ svg {
       <div class="rows">
         <div class="row">
           <div class="title">تاریخ و زمان</div>
-          <div class="value ltr">{{ datetime }}</div>
+          <div class="value">{{ datetime }}</div>
         </div>
 
         <div class="row">
           <div class="title">مبلغ</div>
-          <div class="value"><span>{{ amount }}</span> <span>ریال</span></div>
+          <div class="value">{{ amount }} ریال</div>
         </div>
 
         <div class="divider"></div>
@@ -182,9 +185,8 @@ svg {
         <div class="divider"></div>
         <div class="divider"></div>
         <div class="divider"></div>
-        <div class="divider"></div>
 
-        <div class="row">
+        <div class="row" style="width: calc(100% - 6px);">
           <div class="title">شماره پیگیری</div>
           <div class="value">{{ tracking_code }}</div>
         </div>
