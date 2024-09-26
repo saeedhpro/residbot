@@ -529,7 +529,8 @@ async def handle_get_dest_name(update: Update, context):
         return GET_DEST_ACCOUNT
     if context.user_data['bank_type'] == 'saman_paya_light':
         await update.message.reply_text('شماره حساب مقصد را وارد کنید:')
-        return GET_DEST_ACCOUNT
+        return GET_SENDER_NAME
+        # edit
     if context.user_data['bank_type'] == 'saman_paya_dark':
         await update.message.reply_text('شماره حساب مقصد را وارد کنید:')
         return GET_DEST_ACCOUNT
@@ -875,7 +876,7 @@ async def handle_dest_bank(update: Update, context):
     if context.user_data['bank_type'] == 'refah_2' \
             or context.user_data['bank_type'] == 'saman_paya_light' \
             or context.user_data['bank_type'] == 'saman_paya_dark':
-        await update.message.reply_text('کد پیگیری را وارد کنید:')
+        await update.message.reply_text('شماره پیگیری را وارد کنید:')
         return GET_TRACKING_CODE
     if context.user_data['bank_type'] == 'refah_satna':
         await update.message.reply_text('شناسه پرداخت را وارد کنید:')
@@ -1204,7 +1205,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'receiver_account': convert_numbers_to_farsi(context.user_data['receiver_account']),
             'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'marja': convert_numbers_to_farsi(context.user_data['marja']),
             'current_directory': current_directory,
         }
 
