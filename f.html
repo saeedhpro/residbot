@@ -1,221 +1,207 @@
-<html lang="en" dir="rtl">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title title>Document</title>
     <style>
       @font-face {
-        font-family: vazir;
-        src: url("/home/saeed/work/python/residbot/templates/Vazirmatn-Regular.ttf");
-      }
-      @font-face {
-        font-family: vazir-light;
-        src: url("/home/saeed/work/python/residbot/templates/Vazir-Light.ttf");
-      }
-      @font-face {
-        font-family: vazir-medium;
-        src: url("/home/saeed/work/python/residbot/templates/Vazirmatn-Medium.ttf");
-      }
+  font-family: vazir;
+  src: url("/home/saeed/work/python/residbot/templates/Vazirmatn-Regular.ttf");
+}
+@font-face {
+  font-family: vazir-light;
+  src: url("/home/saeed/work/python/residbot/templates/Vazir-Light.ttf");
+}
 
-      body {
-        margin: 0;
-        font-size: 27px;
-        font-weight: 700;
-        font-family: vazir;
-        color: #2a3034;
-      }
+body {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 300;
+  font-family: vazir;
+  color: #4d4d4d;
+}
 
-      h1 {
-        text-wrap: nowrap;
-        font-size: 32px;
-        font-weight: bold;
-        font-family: vazir-light;
-        position: absolute;
-        top: 270px;
-        left: 50%;
-        transform: translateX(-50%);
-      }
+.container {
+  width: 685px;
+  height: 1448px;
+  background-image: url("/home/saeed/work/python/residbot/templates/sepah-paya.png");
+  object-fit: cover;
+  position: relative;
+}
 
-      .container {
-        width: 591px;
-        height: 1280px;
-        /* background-image: url("saman-paya-filled.png"); */
-        background-image: url("/home/saeed/work/python/residbot/templates/day/day.png");
-        object-fit: cover;
-        position: relative;
-      }
+.green {
+  color: #00a143;
+}
 
-      .price {
-        position: absolute;
-        top: 396px;
-        right: 76px;
-        color: #000;
-        font-size: 30px;
-        font-family: vazir;
-      }
+.font-bold {
+  font-weight: 700;
+}
 
-      .price-unit {
-        font-size: 24px;
-      }
+.record-date-title {
+  top: 235px;
+}
+.record-date-value {
+  top: 277px;
+}
 
-      .date {
-        position: absolute;
-        top: 440px;
-        right: 76px;
-        color: #666666;
-        font-size: 20px;
-        opacity: 0.831;
-      }
+.tracking-number-title {
+  top: 325px;
+}
+.tracking-number-value {
+  top: 362px;
+}
 
-      .ok {
-        position: absolute;
-        top: 480px;
-        right: 110px;
-        font-size: 21px;
-        color: #3fd85b;
-      }
+.from-title {
+  top: 408px;
+}
+.from-value {
+  top: 450px;
+}
 
-      .type {
-        position: absolute;
-        top: 480px;
-        right: 196px;
-        font-size: 21px;
-        color: #999999;
-      }
+.to-title {
+  top: 494px;
+}
+.to-value {
+  top: 534px;
+}
 
-      .from-container {
-        width: 440px;
-        position: absolute;
-        top: 622px;
-        right: 76px;
-        display: flex;
-        justify-content: space-between;
-      }
+.price-title {
+  top: 584px;
+}
+.price-value {
+  top: 617px;
+  direction: rtl;
+}
 
-      .from-title {
-        color: #999999;
-        font-size: 20px;
-      }
-      .from-value-container {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-      .from-value-number {
-        font-size: 19px;
-        text-align: left;
-        color: #333333;
-        line-height: 32px;
-        display: flex;
-      }
-      .from-value-number > svg {
-        width: 44px;
-        height: 32px;
-      }
-      .from-value-name {
-        font-size: 20px;
-        line-height: 22px;
-        color: #333333;
-        text-align: left;
-      }
+.transaction-fee-title {
+  top: 666px;
+}
+.transaction-fee-value {
+  top: 708px;
+}
 
-      .to-container {
-        width: 440px;
-        position: absolute;
-        top: 722px;
-        right: 76px;
-        display: flex;
-        justify-content: space-between;
-      }
+.to-bank-title {
+  top: 753px;
+}
+.to-bank-value {
+  top: 793px;
+}
 
-      .to-title {
-        color: #999999;
-        font-size: 20px;
-      }
-      .to-value-container {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-      .to-value-number {
-        font-size: 19px;
-        text-align: left;
-        color: #333333;
-        line-height: 32px;
-        display: flex;
-      }
-      .to-icon {
-        opacity: 0.5;
-        width: 44px;
-        height: 32px;
-      }
-      .to-value-name {
-        font-size: 20px;
-        line-height: 19px;
-        text-align: left;
-        color: #333333;
-      }
+.sender-title {
+  top: 838px;
+}
+.sender-value {
+  top: 880px;
+}
 
-      .tracking-number-container {
-        width: 439px;
-        display: flex;
-        justify-content: space-between;
+.receiver-title {
+  top: 924px;
+  right: 34px !important;
+}
+.receiver-value {
+  top: 968px;
+}
 
-        position: absolute;
-        top: 887px;
-        right: 78px;
-      }
+.from-description-title {
+  top: 1010px;
+  right: 34px !important;
+}
+.from-description-value {
+  top: 1050px;
+}
 
-      .tracking-title {
-        font-size: 21px;
-        color: #333;
-      }
-      .tracking-value {
-        font-size: 19px;
-        letter-spacing: -1;
-        color: #333;
-      }
+.reason-title {
+  top: 1099px;
+  right: 34 !important;
+}
+.reason-value {
+  top: 1135px;
+}
+
+.description-title {
+  top: 1179px;
+}
+.description-value {
+  top: 1230px;
+}
+
+.withdrawal-id-title {
+  top: 1268px;
+  right: 34px !important;
+}
+.withdrawal-id-value {
+  top: 1318px;
+}
+
+.title {
+  direction: rtl;
+  position: absolute;
+  right: 33px;
+  opacity: 0.85;
+  font-size: 22px;
+  letter-spacing: 0px;
+  line-height: 38px;
+  color: #4d4d4d;
+  font-weight: 300;
+}
+
+.value {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0px;
+  color: #606261;
+}
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="price">
-        ۱۲۰,۰۰۰,۰۰۰,۰۰۰ <span class="price-unit">ریال</span>
-      </div>
-      <div class="date">۵ مهر ۱۴۰۲ - ۱۵:۱۷</div>
-      <div class="ok">ثبت شد</div>
-      <div class="type">انتقال وجه پایا</div>
-
-      <div class="from-container">
-        <div class="from-title">از سپرده</div>
-        <div class="from-value">
-          <div class="from-value-container">
-            <div class="from-value-number">
-              ۰۲۰۵۲۷۶۰۷۹۰۰۶
-              <svg></svg>
-            </div>
-            <div class="from-value-name">مریم سادات مطلعی</div>
-          </div>
-        </div>
+      <div class="record-date-title title">تاریخ ثبت پایا:</div>
+      <div class="record-date-value value">
+        ۱۳۷۴/۱۱/۱۲ ۱۲:۴۵
       </div>
 
-      <div class="to-container">
-        <div class="to-title">به شبا</div>
-        <div class="to-value">
-          <div class="to-value-container">
-            <div class="to-value-number">
-              IR۸۴۰۱۲۰۰۱۰۰۰۰۰۹۸۹۷۴۹۸۲۸۲۲
-              <img class="to-icon" alt="" src="/home/saeed/work/python/residbot/icons/mellat.png">
-            </div>
-            <div class="to-value-name">فرحان کاشانی اصل</div>
-          </div>
-        </div>
+      <div class="tracking-number-title title">شماره پیگیری:</div>
+      <div class="tracking-number-value value" style="font-size: 25px">
+        ۱۲۳۴۵۶۸۷
       </div>
 
-      <div class="tracking-number-container">
-        <div class="tracking-title">شماره پیگیری</div>
-        <div class="tracking-value">۱۴۰۲۰۷۰۵۰۶۶۲۰۲۸۶۲۰۲۴</div>
-      </div>
+      <div class="from-title title">شماره سپرده مبدا‌:</div>
+      <div class="from-value value">۱۲۱۳۲۱۳۲۱۳۲۱۳۲۱۳۲</div>
+
+      <div class="to-title title">شماره شبای مقصد:</div>
+      <div class="to-value value">حیدری IR۶۵۰۱۷۰۲۰۰۰۰۰۰۰۰۲۱۴۵۰۲۵۰۲</div>
+
+      <div class="price-title title">مبلغ انتقال:</div>
+      <div class="price-value value">۱,۲۰۰,۰۰۰,۰۰۰,۰۰۰,۰۰۰ ریال</div>
+
+      <div class="transaction-fee-title title">کسر کارمزد از سپرده:</div>
+      <div class="transaction-fee-value value">۱۲۳۱۳۲۱۳۲۱۳۲۱۳۲۱۳۲۱۳۱</div>
+
+      <div class="to-bank-title title">نام بانک مقصد:</div>
+      <div class="to-bank-value value">بانک ملی</div>
+
+      <div class="sender-title title">فرستنده:</div>
+      <div class="sender-value value">حیدری</div>
+
+      <div class="receiver-title title">گیرنده:</div>
+      <div class="receiver-value value">حیدری</div>
+
+      <div class="from-description-title title">شرح مبدا‌:</div>
+      <div class="from-description-value value">شرح خرید</div>
+
+      <div class="reason-title title">بابت:</div>
+      <div class="reason-value value">خرید کالا</div>
+
+      <div class="description-title title">شرح:</div>
+      <div class="description-value value">خرید کالا</div>
+
+      <div class="withdrawal-id-title title">شناسه واریز:</div>
+      <div class="withdrawal-id-value value">۱۲۳۴۵۶۷۸۹۱۲۳</div>
     </div>
   </body>
 </html>
