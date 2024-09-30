@@ -54,8 +54,8 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک صادرات پایا 2", callback_data='saderat_2')],
         [InlineKeyboardButton("بانک رسالت ساتنا", callback_data='resalat_satna')],
         [InlineKeyboardButton("بانک دی", callback_data='day')],
-        [InlineKeyboardButton("بانک رفاه ساتنا", callback_data='refah_satna')],
         [InlineKeyboardButton("بانک رفاه پایا", callback_data='refah_paya')],
+        # [InlineKeyboardButton("بانک رفاه ساتنا", callback_data='refah_satna')],
         # [InlineKeyboardButton("بانک آینده", callback_data='ayandeh')],
         # [InlineKeyboardButton("بانک آینده پایا", callback_data='ayandeh_paya')],
         # [InlineKeyboardButton("بانک اقتصاد", callback_data='eghtesad')],
@@ -1322,20 +1322,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'bank_icon': get_bank_icon(context.user_data['iban']),
         }
 
-    if bank_type == 'refah_satna':
-        html_content = {
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'date': convert_numbers_to_farsi(context.user_data['date']),
-            'time': convert_numbers_to_farsi(context.user_data['time']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'current_directory': current_directory,
-        }
-
     if bank_type == 'refah_paya':
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
@@ -1352,6 +1338,20 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'bank_icon': get_bank_icon(context.user_data['iban']),
         }
     # ===
+
+    if bank_type == 'refah_satna':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'date': convert_numbers_to_farsi(context.user_data['date']),
+            'time': convert_numbers_to_farsi(context.user_data['time']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'current_directory': current_directory,
+        }
 
     if bank_type == 'ayandeh':
         html_content = {
