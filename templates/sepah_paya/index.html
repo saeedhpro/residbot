@@ -23,8 +23,8 @@ body {
 
 .container {
   width: 685px;
-  height: 1280px;
-  background-image: url("{{current_directory}}/templates/sepah_paya/Sepah-Paya.png");
+  height: 1448px;
+  background-image: url("{{current_directory}}/templates/sepah-paya.png");
   object-fit: cover;
   position: relative;
 }
@@ -38,105 +38,123 @@ body {
 }
 
 .record-date-title {
-  top: 240px;
+  top: 235px;
 }
 .record-date-value {
-  top: 275px;
+  top: 277px;
 }
 
 .tracking-number-title {
   top: 325px;
 }
 .tracking-number-value {
-  top: 360px;
+  top: 362px;
 }
 
 .from-title {
-  top: 415px;
+  top: 408px;
 }
 .from-value {
-  top: 445px;
+  top: 450px;
 }
 
 .to-title {
-  top: 500px;
+  top: 494px;
 }
 .to-value {
-  top: 535px;
+  top: 534px;
 }
 
 .price-title {
-  top: 585px;
+  top: 584px;
 }
 .price-value {
-  top: 620px;
+  top: 617px;
   direction: rtl;
 }
 
 .transaction-fee-title {
-  top: 673px;
+  top: 666px;
 }
 .transaction-fee-value {
-  top: 703px;
+  top: 708px;
 }
 
 .to-bank-title {
-  top: 758px;
+  top: 753px;
 }
 .to-bank-value {
-  top: 790px;
+  top: 793px;
 }
 
 .sender-title {
-  top: 845px;
+  top: 838px;
 }
 .sender-value {
-  top: 875px;
+  top: 880px;
 }
 
 .receiver-title {
-  top: 930px;
+  top: 924px;
+  right: 34px !important;
 }
 .receiver-value {
-  top: 960px;
+  top: 968px;
 }
 
 .from-description-title {
-  top: 1015px;
+  top: 1010px;
+  right: 34px !important;
 }
 .from-description-value {
   top: 1050px;
 }
 
 .reason-title {
-  top: 1100px;
+  top: 1099px;
+  right: 34 !important;
 }
 .reason-value {
-  top: 1140px;
+  top: 1135px;
 }
 
 .description-title {
-  top: 1185px;
+  top: 1179px;
 }
 .description-value {
-  top: 1215px;
+  top: 1230px;
+}
+
+.withdrawal-id-title {
+  top: 1268px;
+  right: 34px !important;
+}
+.withdrawal-id-value {
+  top: 1318px;
 }
 
 .title {
   direction: rtl;
   position: absolute;
-  right: 32px;
+  right: 33px;
   opacity: 0.85;
+  font-size: 22px;
+  letter-spacing: 0px;
+  line-height: 38px;
+  color: #4d4d4d;
+  font-weight: 300;
 }
 
 .value {
   width: 100%;
-  color: #606261;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  font-weight: bold;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0px;
+  color: #606261;
 }
     </style>
   </head>
@@ -148,7 +166,9 @@ body {
       </div>
 
       <div class="tracking-number-title title">شماره پیگیری:</div>
-      <div class="tracking-number-value value">{{ tracking_code }}</div>
+      <div class="tracking-number-value value" style="font-size: 25px">
+        {{ tracking_code }}
+      </div>
 
       <div class="from-title title">شماره سپرده مبدا‌:</div>
       <div class="from-value value">{{ source_account }}</div>
@@ -179,6 +199,9 @@ body {
 
       <div class="description-title title">شرح:</div>
       <div class="description-value value">{{ description }}</div>
+
+      <div class="withdrawal-id-title title">شناسه واریز:</div>
+      <div class="withdrawal-id-value value">{{marja}}</div>
     </div>
   </body>
 </html>
