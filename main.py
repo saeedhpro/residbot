@@ -1280,6 +1280,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'sender': convert_numbers_to_farsi(context.user_data['sender']),
             'description2': convert_numbers_to_farsi(context.user_data['description2']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'date': context.user_data['date'],
             'time': context.user_data['time'],
             'current_directory': current_directory,
