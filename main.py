@@ -1052,7 +1052,8 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         html_content = {
             'status': 'در حال انجام',
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'date': convert_numbers_to_farsi(context.user_data['date']),
+            'time': convert_numbers_to_farsi(context.user_data['time']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
             'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
             'iban': convert_numbers_to_farsi(context.user_data['iban']),

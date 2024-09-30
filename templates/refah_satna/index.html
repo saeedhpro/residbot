@@ -6,18 +6,24 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
+      }
+
+      @font-face {
+        font-family: vazir-m;
+        src: url("{{current_directory}}/templates/Vazirmatn-SemiBold.ttf");
       }
 
       html,
       body {
-        font-family: vazir;
+        font-family: vazir-m;
+        margin: 0;
       }
 
       .container {
         width: 591px;
         height: 1280px;
-        background-image: url("/home/original/residbot/templates/refah_satna/refah-satna.png");
+        background-image: url("{{current_directory}}/templates/refah_satna/refah-satna.png");
         /* background-image: url("refah-satna-filled.png"); */
         object-fit: cover;
         position: relative;
@@ -124,7 +130,9 @@
   <body>
     <div class="container">
       <div class="from">{{source_account}}</div>
-      <div class="to-shaba">{{iban}}</div>
+      <div class="to-shaba" style="font-family: vazir; font-weight: 400">
+        {{iban}}
+      </div>
       <div class="to-name">{{receiver}}</div>
       <div class="to-bank">{{receiver_bank}}</div>
       <div class="price">
@@ -132,9 +140,8 @@
         <div class="unit">ریال</div>
       </div>
       <div class="result">
-        <span class="green-text">موفق</span>
+        <span class="green-text" style="font-family: vazir; font-weight: 400;">موفق</span>
       </div>
-      <div class="tracking-code">{{tracking_code}}</div>
       <div class="date">{{date}}</div>
       <div class="time">{{time}}</div>
     </div>
