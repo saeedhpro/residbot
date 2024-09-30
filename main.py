@@ -1286,6 +1286,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'current_directory': current_directory,
             'bank_icon': get_bank_icon(context.user_data['iban'], 'saderat'),
         }
+        print(html_content)
 
     if bank_type == 'resalat_satna':
         amount = context.user_data['amount']
