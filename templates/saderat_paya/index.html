@@ -62,11 +62,11 @@
       }
       .to-icon {
         position: absolute;
-        top: 750;
-        left: 80;
+        top: 737;
+        left: 77;
         z-index: 10;
-        width: 40px;
-        height: 60px;
+        width: 41px;
+        height: 66px;
       }
       .to-name {
         font-size: 28px;
@@ -146,10 +146,22 @@
         top: 990;
         right: 222;
       }
+      .title {
+        width: 449px;
+        height: 41px;
+        font-size: 32px;
+        letter-spacing: 0px;
+        color: #A4C0DD;
+        font-weight: 500;
+        position: absolute;
+        top: 251;
+        left: 58;
+      }
     </style>
   </head>
   <body>
     <div class="container">
+      <div class="title">بانک صادرات ایران در خدمت مردم</div>
       <div class="from-number">{{source_account}}</div>
       <div
         class="from-type"
@@ -158,10 +170,13 @@
         {{description3}}
       </div>
       <div class="to-number">{{iban}}</div>
-      <div class="to-name" style="font-family: vazir-medium; font-weight: 500 !important">
+      <div
+        class="to-name"
+        style="font-family: vazir-medium; font-weight: 500 !important"
+      >
         {{receiver}}
       </div>
-      <img class="to-icon" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
+      <div class="to-icon"></div>
       <div class="price">{{amount}} <span>ریال</span></div>
       <div class="type">{{description2}}</div>
       <div class="payment-id">{{marja}}</div>
