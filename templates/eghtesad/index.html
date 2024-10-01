@@ -6,8 +6,7 @@
     <style>
       @font-face {
         font-family: vazir;
-        /*src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");*/
-        src: url("/home/saeed/work/python/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
       }
       .ltr {
         direction: ltr !important;
@@ -21,9 +20,7 @@
       .container {
         width: 637px;
         height: 1280px;
-        /*background-image: url("/home/original/residbot/templates/eghtesad/eghtesad.png");*/
-        background-image: url("/home/saeed/work/python/residbot/templates/eghtesad/eghtesad.png");
-        /* background-image: url("eghtesad-filled.png"); */
+        background-image: url("{{current_directory}}/templates/eghtesad/eghtesad.png");
         object-fit: cover;
         position: relative;
       }
