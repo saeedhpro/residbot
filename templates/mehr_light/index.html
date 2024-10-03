@@ -6,24 +6,25 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
       }
 
       html,
       body {
         opacity: 0.89;
+        margin: 0;
         font-family: vazir;
         letter-spacing: 0px;
         color: #e6e6e6;
-        font-weight: 400;
+        font-weight: 700;
         font-size: 25px;
       }
 
       .container {
         width: 591px;
         height: 1280px;
-        background-image: url("/home/original/residbot/templates/mehr_light/mehr-light.png");
-        /* background-image: url("mehr_light-filled.png"); */
+        background-image: url("{{current_directory}}/templates/mehr_light/mehr-light.png");
+        /* background-image: url("mehr-light-filled.png"); */
         object-fit: cover;
         position: relative;
       }
@@ -31,52 +32,45 @@
         font-size: 22px;
         letter-spacing: 0px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 545px;
-        left: 57px;
+        left: 58px;
       }
 
       .price {
         font-size: 24px;
-        letter-spacing: -1px;
         color: #1a1a1a;
-        font-weight: 400;
+        letter-spacing: 1px;
         position: absolute;
         top: 614px;
-        left: 101px;
+        left: 100px;
       }
       .unit {
         position: absolute;
         top: 0;
         left: -44px;
+        letter-spacing: 0;
       }
 
       .from {
         font-size: 24px;
-        letter-spacing: -2px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 693px;
-        left: 100px;
+        left: 101px;
         direction: ltr;
       }
       .to {
         font-size: 19px;
-        letter-spacing: -1px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
-        top: 770px;
+        top: 772px;
         left: 101px;
         direction: ltr;
       }
       .to-name {
         font-size: 21px;
-        letter-spacing: 1px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 840px;
         left: 60px;
@@ -85,10 +79,16 @@
         font-size: 21px;
         letter-spacing: 0px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
-        top: 914px;
+        top: 913px;
         left: 59px;
+      }
+      .to-icon {
+        position: absolute;
+        top: 768px;
+        left: 58px;
+        width: 32px;
+        height: 32px;
       }
     </style>
   </head>
@@ -102,6 +102,7 @@
       <div class="from">{{source_account}}</div>
       <div class="to">{{iban}}</div>
       <div class="to-name">{{receiver}}</div>
+      <img class="to-icon" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
       <div class="tracking-number">{{tracking_code}}</div>
     </div>
   </body>
