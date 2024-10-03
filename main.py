@@ -54,19 +54,21 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک صادرات پایا 2", callback_data='saderat_2')],
         [InlineKeyboardButton("بانک رسالت ساتنا", callback_data='resalat_satna')],
         [InlineKeyboardButton("بانک دی", callback_data='day')],
-        [InlineKeyboardButton("بانک رفاه پایا", callback_data='refah_paya')],
+        [InlineKeyboardButton("بانک رفاه پایا 1", callback_data='refah')],
+        [InlineKeyboardButton("بانک رفاه پایا 2", callback_data='refah_2')],
+        [InlineKeyboardButton("بانک رفاه پایا 3", callback_data='refah_paya')],
+        [InlineKeyboardButton("بانک رفاه ساتنا", callback_data='refah_satna')],
         [InlineKeyboardButton("بانک اقتصاد", callback_data='eghtesad')],
-        # [InlineKeyboardButton("بانک رفاه ساتنا", callback_data='refah_satna')],
-        # [InlineKeyboardButton("بانک آینده", callback_data='ayandeh')],
-        # [InlineKeyboardButton("بانک آینده پایا", callback_data='ayandeh_paya')],
-        # [InlineKeyboardButton("بانک کشاورزی", callback_data='keshavarzi')],
-        # [InlineKeyboardButton("بانک مهر", callback_data='mehr')],
-        # [InlineKeyboardButton("بانک مهر 2", callback_data='mehr_2')],
-        # [InlineKeyboardButton("بانک مهر 3", callback_data='mehr_3')],
+        [InlineKeyboardButton("بانک مهر", callback_data='mehr')],
+        [InlineKeyboardButton("بانک مهر 2", callback_data='mehr_2')],
+        [InlineKeyboardButton("بانک مهر 3", callback_data='mehr_3')],
         # [InlineKeyboardButton("بانک مهر 4", callback_data='mehr_4')],
         # [InlineKeyboardButton("بانک مهر تاریک", callback_data='mehr_dark')],
         # [InlineKeyboardButton("بانک مهر تاریک 2", callback_data='mehr_dark_2')],
         # [InlineKeyboardButton("بانک مهر روشن", callback_data='mehr_light')],
+        # [InlineKeyboardButton("بانک آینده", callback_data='ayandeh')],
+        # [InlineKeyboardButton("بانک آینده پایا", callback_data='ayandeh_paya')],
+        # [InlineKeyboardButton("بانک کشاورزی", callback_data='keshavarzi')],
         # [InlineKeyboardButton("بانک ملت", callback_data='mellat')],
         # [InlineKeyboardButton("بانک پارسیان", callback_data='parsian')],
         # [InlineKeyboardButton("بانک پاسارگاد پایا", callback_data='pasargad_paya')],
@@ -74,8 +76,6 @@ async def select_bank_type(update, context):
         # [InlineKeyboardButton("بانک پاسارگاد ساتنا", callback_data='pasargad_satna')],
         # [InlineKeyboardButton("بانک پست بانک پایا", callback_data='post_bank_paya')],
         # [InlineKeyboardButton("بانک پست بانک پایا 2", callback_data='post_bank_paya_2')],
-        # [InlineKeyboardButton("بانک رفاه", callback_data='refah')],
-        # [InlineKeyboardButton("بانک رفاه 2", callback_data='refah_2')],
         # [InlineKeyboardButton("بانک رسالت پایا", callback_data='resalat_paya')],
         # [InlineKeyboardButton("بانک رسالت ساتنا 2", callback_data='resalat_satna_2')],
         # [InlineKeyboardButton("بانک دی ساتنا", callback_data='day_satna')],
@@ -1322,6 +1322,20 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'bank_icon': get_bank_icon(context.user_data['iban']),
         }
 
+    if bank_type == 'eghtesad':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'sender': convert_numbers_to_farsi(context.user_data['sender']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'marja': convert_numbers_to_farsi(context.user_data['marja']),
+            'current_directory': current_directory,
+        }
+
     if bank_type == 'refah_paya':
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
@@ -1337,7 +1351,36 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'current_directory': current_directory,
             'bank_icon': get_bank_icon(context.user_data['iban']),
         }
-    # ===
+
+    if bank_type == 'refah':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'description2': convert_numbers_to_farsi(context.user_data['description2']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'current_directory': current_directory,
+        }
+
+    if bank_type == 'refah_2':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'sender': convert_numbers_to_farsi(context.user_data['sender']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'date': convert_numbers_to_farsi(context.user_data['date']),
+            'time': convert_numbers_to_farsi(context.user_data['time']),
+            'marja': convert_numbers_to_farsi(context.user_data['marja']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'current_directory': current_directory,
+        }
 
     if bank_type == 'refah_satna':
         html_content = {
@@ -1352,6 +1395,102 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'current_directory': current_directory,
         }
+
+    if bank_type == 'mehr':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'mande': format_amount(convert_numbers_to_farsi(context.user_data['mande'])),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'current_directory': current_directory,
+            'bank_icon': get_bank_icon(context.user_data['iban']),
+        }
+
+    if bank_type == 'mehr_2':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'mande': format_amount(convert_numbers_to_farsi(context.user_data['mande'])),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'current_directory': current_directory,
+            'bank_icon': get_bank_icon(context.user_data['iban']),
+        }
+
+    if bank_type == 'mehr_3':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'current_directory': current_directory,
+            'bank_icon': get_bank_icon(context.user_data['iban']),
+        }
+
+    if bank_type == 'mehr_4':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'sender': convert_numbers_to_farsi(context.user_data['sender']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'current_directory': current_directory,
+            'bank_icon': get_bank_icon(context.user_data['iban']),
+        }
+
+    if bank_type == 'mehr_dark':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'current_directory': current_directory,
+        }
+
+    if bank_type == 'mehr_dark_2':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'mande': format_amount(convert_numbers_to_farsi(context.user_data['mande'])),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'description': convert_numbers_to_farsi(context.user_data['description']),
+            'description2': convert_numbers_to_farsi(context.user_data['description2']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'current_directory': current_directory,
+            'bank_icon': get_bank_icon(context.user_data['iban']),
+        }
+
+    if bank_type == 'mehr_light':
+        html_content = {
+            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
+            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
+            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'current_directory': current_directory,
+        }
+    # ===
 
     if bank_type == 'ayandeh':
         html_content = {
@@ -1378,20 +1517,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
             'marja': convert_numbers_to_farsi(context.user_data['marja']),
             'description': convert_numbers_to_farsi(context.user_data['description']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'eghtesad':
-        html_content = {
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'sender': convert_numbers_to_farsi(context.user_data['sender']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'marja': convert_numbers_to_farsi(context.user_data['marja']),
             'current_directory': current_directory,
         }
 
@@ -1423,96 +1548,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'receiver_lname': convert_numbers_to_farsi(context.user_data['receiver_lname']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'marja': convert_numbers_to_farsi(context.user_data['marja']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'mehr':
-        html_content = {
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'mande': format_amount(convert_numbers_to_farsi(context.user_data['mande'])),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'mehr_2':
-        html_content = {
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'mande': format_amount(convert_numbers_to_farsi(context.user_data['mande'])),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'mehr_3':
-        html_content = {
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'mehr_4':
-        html_content = {
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'sender': convert_numbers_to_farsi(context.user_data['sender']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'mehr_dark':
-        html_content = {
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'mehr_dark_2':
-        html_content = {
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'mande': format_amount(convert_numbers_to_farsi(context.user_data['mande'])),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'description': convert_numbers_to_farsi(context.user_data['description']),
-            'description2': convert_numbers_to_farsi(context.user_data['description2']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'mehr_light':
-        html_content = {
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'current_directory': current_directory,
         }
 
@@ -1628,36 +1663,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'time': convert_numbers_to_farsi(context.user_data['time']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'sender': convert_numbers_to_farsi(context.user_data['sender']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'refah':
-        html_content = {
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
-            'description2': convert_numbers_to_farsi(context.user_data['description2']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'current_directory': current_directory,
-        }
-
-    if bank_type == 'refah_2':
-        html_content = {
-            'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'sender': convert_numbers_to_farsi(context.user_data['sender']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'date': convert_numbers_to_farsi(context.user_data['date']),
-            'time': convert_numbers_to_farsi(context.user_data['time']),
-            'marja': convert_numbers_to_farsi(context.user_data['marja']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'current_directory': current_directory,
         }
 

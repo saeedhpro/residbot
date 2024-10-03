@@ -6,19 +6,21 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
       }
 
       html,
       body {
         font-family: vazir;
+        font-weight: 700;
+        margin: 0;
       }
 
       .container {
         width: 591px;
         height: 1280px;
         /* background-image: url("mehr-3-filled.png"); */
-        background-image: url("/home/original/residbot/templates/mehr_3/mehr-3.png");
+        background-image: url("{{current_directory}}/templates/mehr_3/mehr-3.png");
         object-fit: cover;
         position: relative;
       }
@@ -27,52 +29,45 @@
         font-size: 25px;
         letter-spacing: 0px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 343px;
         right: 46px;
       }
 
       .price {
-        font-size: 37px;
-        letter-spacing: -1px;
+        font-size: 38px;
+        letter-spacing: 2px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 430px;
         left: 50%;
         transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
       .unit {
         font-size: 26px;
         letter-spacing: 0px;
         color: #1a1a1a;
-        font-weight: 400;
-        position: absolute;
-        top: 7px;
-        left: -56px;
       }
 
       .date {
         font-size: 19px;
         letter-spacing: 0px;
         color: #999999;
-        font-weight: 400;
         position: absolute;
         top: 512px;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
-        gap: 12px;
       }
       .date span {
         display: inline-block;
       }
       .from {
         font-size: 20px;
-        letter-spacing: -1px;
         color: #333333;
-        font-weight: 400;
         position: absolute;
         top: 610px;
         left: 86px;
@@ -80,23 +75,27 @@
       }
       .to {
         font-size: 19px;
-        letter-spacing: -1px;
         color: #333333;
-        font-weight: 400;
         position: absolute;
         top: 674px;
         left: 78px;
         direction: ltr;
       }
+      .to-icon {
+        position: absolute;
+        top: 674px;
+        left: 40px;
+        width: 32px;
+        height: 32px;
+      }
       .remaining {
         font-size: 20px;
         color: #333333;
-        font-weight: 400;
         position: absolute;
         top: 738px;
         left: 42px;
         display: flex;
-        gap: 14px;
+        gap: 4px;
       }
       .amount {
         direction: ltr;
@@ -104,7 +103,6 @@
       .tracking-number {
         font-size: 20px;
         color: #333333;
-        font-weight: 400;
         position: absolute;
         top: 800px;
         left: 43px;
@@ -120,10 +118,14 @@
         <div class="unit">ریال</div>
       </div>
       <div class="date">
+<!--        <span style="display: inline-block; margin-left: 6px">شنبه</span>-->
+<!--        <span>۱۴۰۲/۲/۱۰</span>-->
+<!--        <span style="display: inline-block; margin-right: 16px">۱۳:۰۱</span>-->
         <span>{{datetime}}</span>
       </div>
       <div class="from">{{source_account}}</div>
       <div class="to">{{iban}}</div>
+      <img class="to-icon" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
       <div class="remaining">
         <div class="amount">{{mande}}</div>
         <div class="unit-2">ریال</div>

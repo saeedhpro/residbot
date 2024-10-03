@@ -8,12 +8,11 @@
         font-family: vazir;
         src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
       }
-      .ltr {
-        direction: ltr !important;
-      }
+
       html,
       body {
         font-family: vazir;
+        font-weight: 700;
         margin: 0;
       }
 
@@ -29,7 +28,6 @@
         letter-spacing: -1px;
         line-height: 23px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 373px;
         left: 53px;
@@ -39,7 +37,6 @@
         letter-spacing: -1px;
         line-height: 23px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 437px;
         left: 53px;
@@ -49,7 +46,6 @@
         letter-spacing: -1px;
         line-height: 23px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 497px;
         left: 50px;
@@ -58,7 +54,6 @@
         font-size: 19px;
         letter-spacing: .5px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 557px;
         left: 97px;
@@ -67,20 +62,19 @@
         font-size: 21px;
         letter-spacing: 0px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         bottom: 0;
-        left: -43px;
+        left: -40px;
       }
 
       .from {
+        opacity: 0.749;
         width: 100%;
         text-align: center;
         font-size: 23px;
         letter-spacing: 0px;
         line-height: 34px;
         color: #ffffff;
-        font-weight: 400;
         position: absolute;
         top: 209px;
         left: 50%;
@@ -97,13 +91,10 @@
         letter-spacing: 0px;
         line-height: 34px;
         color: #ffffff;
-        font-weight: 400;
       }
       .to {
         font-size: 19px;
-        letter-spacing: -1px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 620px;
         left: 55px;
@@ -112,10 +103,12 @@
         font-size: 23px;
         letter-spacing: 0px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 676px;
         left: 55px;
+      }
+      .ltr {
+        direction: ltr;
       }
     </style>
   </head>

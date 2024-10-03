@@ -6,33 +6,78 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Medium.ttf");
+      }
+
+      @font-face {
+        font-family: vazir-b;
+        src: url("{{current_directory}}/templates/Vazirmatn-Bold.ttf");
       }
 
       html,
       body {
         font-family: vazir;
+        margin: 0;
       }
 
       .container {
         width: 630px;
         height: 1289px;
-        background-image: url("/home/original/residbot/templates/refah/refah.png");
+        background-image: url("{{current_directory}}/templates/refah/refah.png");
         /* background-image: url("refah-filled.png"); */
         object-fit: cover;
         position: relative;
       }
 
+      .rows {
+        width: 578px;
+        min-height: 20px;
+
+        position: absolute;
+        top: 561;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .row {
+        width: 100%;
+        min-height: 71px;
+        border-bottom: 2px dotted #999999;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .title {
+        font-size: 22px;
+        letter-spacing: 0px;
+        color: #000000;
+        font-weight: 500;
+        opacity: 0.902;
+        flex-shrink: 0;
+      }
+
+      .value {
+        max-width: 410px;
+        padding: 20px 0 20px 0;
+        font-size: 22px;
+        letter-spacing: 0px;
+        color: #333333;
+        font-weight: 500;
+        text-align: left;
+        opacity: 0.941;
+        text-wrap: wrap;
+      }
+
       .price {
         position: absolute;
-        top: 521;
+        top: 500;
         left: 50%;
         transform: translateX(-50%);
         font-size: 26px;
+        font-family: vazir-b;
         letter-spacing: 1px;
-        line-height: 0px;
         color: #1a1a1a;
-        font-weight: 800;
       }
       .unit {
         position: absolute;
@@ -83,6 +128,18 @@
         top: 1054;
         left: 29;
       }
+      .status {
+        position: absolute;
+        top: 454;
+        left: 240px;
+        font-size: 21px;
+        line-height: 0px;
+        color: #007e0b;
+        font-weight: 400;
+      }
+      .ltr {
+        direction: ltr;
+      }
     </style>
   </head>
   <body>
@@ -92,13 +149,45 @@
         {{amount}}
         <span style="font-size: 23px">ریال</span>
       </div>
-      <div class="from value">{{ source_account }}</div>
-      <div class="to-number value">{{iban}}</div>
-      <div class="to-bank value">{{receiver_bank}}</div>
-      <div class="to-name value">{{receiver}}</div>
-      <div class="reason value">{{description2}}</div>
-      <div class="date value">{{datetime}}</div>
-      <div class="tracking-code value">{{tracking_code}}</div>
+
+      <div class="status">تراکنش موفق</div>
+
+      <div class="rows">
+        <div class="row">
+          <div class="title">حساب مبدا</div>
+          <div class="value" dir="ltr">{{ source_account }}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">شماره شبا مقصد</div>
+          <div class="value">{{iban}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">بانک مقصد</div>
+          <div class="value">{{receiver_bank}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">نام گیرنده</div>
+          <div class="value">{{receiver}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">بابت</div>
+          <div class="value">{{description2}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">تاریخ تراکنش</div>
+          <div class="value ltr">{{datetime}}</div>
+        </div>
+
+        <div class="row">
+          <div class="title">شماره پیگیری</div>
+          <div class="value">{{tracking_code}}</div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

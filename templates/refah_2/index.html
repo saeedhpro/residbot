@@ -5,20 +5,21 @@
     <title>Document</title>
     <style>
       @font-face {
-        font-family: FarHoma;
-        src: url("/home/original/residbot/templates/Far_Homa.ttf");
+        font-family: vazir;
+        src: url("{{current_directory}}/templates/Vazirmatn-Medium.ttf");
       }
 
       html,
       body {
-        font-family: FarHoma;
+        font-family: vazir;
+        margin: 0;
       }
 
       .container {
         width: 656px;
         height: 1282px;
-        background-image: url("/home/original/residbot/templates/refah_2/refah-2.png");
-        /* background-image: url("refah_2-filled.png"); */
+        background-image: url("{{current_directory}}/templates/refah_2/refah-2.png");
+        /* background-image: url("refah-2-filled.png"); */
         object-fit: cover;
         position: relative;
       }
@@ -47,7 +48,7 @@
         top: 230;
       }
       .to-shaba {
-        top: 265
+        top: 265;
       }
       .to-name {
         top: 304;
