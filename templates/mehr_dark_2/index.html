@@ -104,6 +104,9 @@
         margin: 0;
         height: 29px;
       }
+      .ltr {
+        direction: ltr;
+      }
     </style>
   </head>
   <body>
@@ -119,7 +122,7 @@
       </div>
       <div class="from">{{source_account}}</div>
       <div class="to">{{iban}}</div>
-      <div class="remaining">{{mande}} ریال</div>
+      <div class="remaining ltr">{{mande}} ریال</div>
       <div class="details">
         <p>{{description}}</p>
         <p>{{description2}}</p>

@@ -92,6 +92,9 @@
         left: 50%;
         transform: translateX(-50%);
       }
+      .ltr {
+        direction: ltr;
+      }
     </style>
   </head>
   <body>
@@ -104,9 +107,9 @@
       <div class="from">{{source_account}}</div>
       <div class="to">{{iban}}</div>
       <img class="to-icon" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
-      <div class="remaining">{{mande}} ریال</div>
+      <div class="remaining ltr">{{mande}} ریال</div>
       <div class="date">{{datetime}}</div>
-      <div class="tracking-number">{{tracking_number}}</div>
+      <div class="tracking-number">{{tracking_code}}</div>
     </div>
   </body>
 </html>

@@ -108,6 +108,9 @@
         left: 43px;
         direction: ltr;
       }
+      .ltr {
+        direction: ltr;
+      }
     </style>
   </head>
   <body>
@@ -127,7 +130,7 @@
       <div class="to">{{iban}}</div>
       <img class="to-icon" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
       <div class="remaining">
-        <div class="amount">{{mande}}</div>
+        <div class="amount ltr">{{mande}}</div>
         <div class="unit-2">ریال</div>
       </div>
       <div class="tracking-number">{{tracking_code}}</div>
