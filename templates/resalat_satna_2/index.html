@@ -6,12 +6,14 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
       }
 
       body {
+        margin: 0;
         font-size: 22px;
         font-family: vazir;
+        font-weight: 700;
         color: #4d4d4d;
       }
 
@@ -19,7 +21,7 @@
         width: 612px;
         height: 1280px;
         /* background-image: url("resalat-satna-2-filled.png"); */
-        background-image: url("/home/original/residbot/templates/resalat_satna_2/resalat-satna-2.png");
+        background-image: url("{{current_directory}}/templates/resalat_satna_2/resalat-satna-2.png");
         object-fit: cover;
         position: relative;
       }
@@ -28,15 +30,10 @@
         color: #00a143;
       }
 
-      .font-bold {
-        font-weight: 700;
-      }
-
       .title {
         font-size: 20px;
         letter-spacing: 0px;
         color: #666666;
-        font-weight: 400;
         direction: rtl;
         position: absolute;
         right: 32px;
@@ -46,7 +43,6 @@
       .value {
         width: 100%;
         font-size: 20px;
-        letter-spacing: -1px;
         color: #1a1a1a;
         position: absolute;
         left: 50%;
@@ -54,7 +50,6 @@
         bottom: 10px;
         transform: translateX(-50%);
         text-align: center;
-        font-weight: bold;
       }
       .rows {
         width: 584px;
@@ -68,6 +63,15 @@
         display: flex;
         flex-direction: column;
         position: relative;
+      }
+      .white-card {
+        width: 582px;
+        height: 18px;
+        border-top: 2px solid #D4D7D6;
+        background-color: white;
+        position: absolute;
+        bottom: 9;
+        right: 16;
       }
     </style>
   </head>
@@ -86,12 +90,12 @@
 
         <div class="row">
           <div class="title">شماره سپرده مبدا‌:</div>
-          <div class="value">{{source_account}}</div>
+          <div class="value" dir="ltr">{{source_account}}</div>
         </div>
 
         <div class="row">
           <div class="title">شماره شبای مقصد:</div>
-          <div class="value">{{iban}}</div>
+          <div class="value">{{iban}} {{receiver}}</div>
         </div>
 
         <div class="row">
@@ -101,7 +105,7 @@
 
         <div class="row">
           <div class="title">کسر کارمزد از سپرده:</div>
-          <div class="value">{{reduce_source_account}}</div>
+          <div class="value" dir="ltr">{{reduce_source_account}}</div>
         </div>
 
         <div class="row">
@@ -111,7 +115,7 @@
 
         <div class="row">
           <div class="title">شناسه واریز:</div>
-          <div class="divider">{{marja}}</div>
+          <div class="value">{{marja}}</div>
         </div>
 
         <div class="row">
@@ -131,7 +135,8 @@
 
         <div class="row">
           <div class="title">شرح:</div>
-          <div class="value" style="bottom: 32px">{{description}}</div>
+          <div class="value" style="bottom: 8px">{{description}}</div>
+          <div class="white-card"></div>
         </div>
       </div>
     </div>

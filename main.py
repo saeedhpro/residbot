@@ -75,9 +75,10 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک پست بانک پایا", callback_data='post_bank_paya')],
         [InlineKeyboardButton("بانک پست بانک پایا 2", callback_data='post_bank_paya_2')],
         [InlineKeyboardButton("بانک آینده", callback_data='ayandeh')],
-        # [InlineKeyboardButton("بانک آینده پایا", callback_data='ayandeh_paya')],
-        # [InlineKeyboardButton("بانک رسالت پایا", callback_data='resalat_paya')],
-        # [InlineKeyboardButton("بانک رسالت ساتنا 2", callback_data='resalat_satna_2')],
+        [InlineKeyboardButton("بانک آینده پایا", callback_data='ayandeh_paya')],
+        [InlineKeyboardButton("بانک مسکن ساتنا", callback_data='maskan_satna')],
+        [InlineKeyboardButton("بانک رسالت پایا", callback_data='resalat_paya')],
+        [InlineKeyboardButton("بانک رسالت ساتنا 2", callback_data='resalat_satna_2')],
         # [InlineKeyboardButton("بازگشت", callback_data='return_to_menu')],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -1651,7 +1652,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'signer_small': do_signer_small(context.user_data['signer']),
             'current_directory': current_directory,
         }
-    # ===
 
     if bank_type == 'maskan_satna':
         html_content = {
@@ -1687,6 +1687,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'description2': convert_numbers_to_farsi(context.user_data['description2']),
             'marja': convert_numbers_to_farsi(context.user_data['marja']),
             'current_directory': current_directory,
+            'bank_icon': get_bank_icon(context.user_data['iban']),
         }
 
     if bank_type == 'resalat_satna_2':

@@ -7,19 +7,21 @@
     <style>
       @font-face {
         font-family: Vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("../Vazirmatn-Regular.ttf");
       }
 
       html,
       body {
         font-family: Vazir;
+        font-weight: 700;
+        margin: 0;
       }
 
       /* FIXME: bg */
       .container {
         width: 623px;
         height: 1280px;
-        background-image: url("/home/original/residbot/templates/resalat_paya/resalat-paya.png");
+        background-image: url("resalat-paya.png");
         /* background-image: url("resalat-paya-filled.png"); */
         object-fit: cover;
         position: relative;
@@ -39,10 +41,6 @@
         color: #177654;
       }
 
-      .font-bold {
-        font-weight: 700;
-      }
-
       .from-title {
         top: 240px;
       }
@@ -54,14 +52,13 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
-        align-items: flex-end;
         gap: 10px;
       }
 
       .title {
         direction: rtl;
         opacity: 0.85;
-        color: #666666;
+        color: #999;
         flex-shrink: 0;
       }
 
@@ -69,9 +66,7 @@
         font-size: 19px;
         letter-spacing: 0px;
         color: #333333;
-        font-weight: 400;
         text-align: center;
-        font-weight: bold;
         flex-shrink: 0;
       }
 
@@ -80,6 +75,16 @@
         height: 1px;
         border-top: 2px dotted #177654;
         margin-bottom: 6px;
+        margin-top: 20px;
+      }
+
+      .to-icon {
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
       }
     </style>
   </head>
@@ -107,7 +112,10 @@
         <div class="row">
           <div class="title">بانک مقصد:</div>
           <div class="divider"></div>
+          <div class="value" style="display: flex; gap: 1px; position: relative; padding-right: 25px;">
+          <img class="to-icon" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
           <div class="value">{{receiver_bank}}</div>
+          </div>
         </div>
 
         <div class="row">
@@ -125,7 +133,10 @@
         <div class="row">
           <div class="title">مبلغ انتقال:</div>
           <div class="divider"></div>
-          <div class="value green-text" style="color: #3e9166">
+          <div
+            class="value green-text"
+            style="color: #3e9166; max-width: 380px; display: inline-block"
+          >
             {{amount}} ریال ({{amount_fa}} تومان)
           </div>
         </div>
@@ -143,8 +154,9 @@
         </div>
 
         <div class="row">
-          <div class="title">شماره واریز/شماره قبض:</div>
-          <div class="divider">{{marja}}</div>
+          <div class="title">شناسه واریز/شماره قبض:</div>
+          <div class="divider"></div>
+          <div class="value">{{marja}}</div>
         </div>
 
         <div class="row">

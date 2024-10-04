@@ -6,22 +6,23 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
       }
 
       html,
       body {
+        margin: 0;
         font-family: vazir;
         font-size: 20px;
         color: #184056;
-        font-weight: 400;
+        font-weight: 700;
       }
 
       .container {
         width: 668px;
         height: 1280px;
-        background-image: url("/home/original/residbot/templates/maskan_satna/maskan-satna.png");
-        /* background-image: url("maskan_satna-filled.png"); */
+        background-image: url("{{current_directory}}/templates/maskan_satna/maskan-satna.png");
+        /* background-image: url("maskan-satna-filled.png"); */
         object-fit: cover;
         position: relative;
       }
@@ -63,6 +64,7 @@
         left: 85;
       }
       .unit {
+        opacity: 0.859;
         position: absolute;
         top: 0;
         left: -42;
@@ -82,7 +84,7 @@
       }
       .tracking-code {
         position: absolute;
-        top: 989; 
+        top: 989;
         left: 44;
       }
       .date {
