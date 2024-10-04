@@ -12,7 +12,7 @@ from html2image import Html2Image
 (START, RETURN_MENU, SELECT_ACTION, SELECT_BANK, GET_STATUS, GET_TRANSACTION_TYPE, GET_SOURCE_ACCOUNT, GET_DEST_IBAN,
  GET_DEST_NAME, GET_DATETIME, GET_AMOUNT, GET_SENDER_NAME, GET_DEST_ACCOUNT, GET_DEST_BANK, GET_REASON, GET_DESCRIPTION,
  GET_TRACKING_CODE, GET_MARJA, GET_DATE, GET_TIME, GET_RECEIVER_FNAME, GET_RECEIVER_LNAME, GET_SOURCE_IBAN,
- GET_MANDE, GET_DESCRIPTION2, GET_REDUCE_SOURCE_ACCOUNT, GET_DESCRIPTION3) = range(27)
+ GET_MANDE, GET_DESCRIPTION2, GET_REDUCE_SOURCE_ACCOUNT, GET_DESCRIPTION3, GET_SIGNER) = range(28)
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -74,7 +74,7 @@ async def select_bank_type(update, context):
         [InlineKeyboardButton("بانک پاسارگاد ساتنا", callback_data='pasargad_satna')],
         [InlineKeyboardButton("بانک پست بانک پایا", callback_data='post_bank_paya')],
         [InlineKeyboardButton("بانک پست بانک پایا 2", callback_data='post_bank_paya_2')],
-        # [InlineKeyboardButton("بانک آینده", callback_data='ayandeh')],
+        [InlineKeyboardButton("بانک آینده", callback_data='ayandeh')],
         # [InlineKeyboardButton("بانک آینده پایا", callback_data='ayandeh_paya')],
         # [InlineKeyboardButton("بانک رسالت پایا", callback_data='resalat_paya')],
         # [InlineKeyboardButton("بانک رسالت ساتنا 2", callback_data='resalat_satna_2')],
@@ -651,7 +651,6 @@ async def handle_get_dest_name(update: Update, context):
 async def handle_get_sender_name(update: Update, context):
     context.user_data['sender'] = update.message.text
     if context.user_data['bank_type'] == 'tejarat' \
-            or context.user_data['bank_type'] == 'ayandeh' \
             or context.user_data['bank_type'] == 'mehr_4' \
             or context.user_data['bank_type'] == 'post_bank_paya' \
             or context.user_data['bank_type'] == 'day' \
@@ -690,6 +689,10 @@ async def handle_get_sender_name(update: Update, context):
         return GET_DESCRIPTION
 
     if context.user_data['bank_type'] == 'resalat_paya':
+        await update.message.reply_text('شرح را وارد کنید:')
+        return GET_DESCRIPTION
+
+    if context.user_data['bank_type'] == 'ayandeh':
         await update.message.reply_text('شرح را وارد کنید:')
         return GET_DESCRIPTION
 
@@ -773,7 +776,11 @@ async def handle_get_description(update: Update, context):
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
 
-    await update.message.reply_text('کد پیگیری را وارد کنید:')
+    if context.user_data['bank_type'] == 'ayandeh_paya':
+        await update.message.reply_text('امضا کنندگان را وارد کنید:')
+        return GET_SIGNER
+
+    await update.message.reply_text('شماره پیگیری را وارد کنید:')
     return GET_TRACKING_CODE
 
 
@@ -804,6 +811,12 @@ async def handle_get_description3(update: Update, context):
         await update.message.reply_text('شماره پیگیری را وارد کنید')
         return GET_TRACKING_CODE
     await update.message.reply_text('کد پیگیری را وارد کنید:')
+    return GET_TRACKING_CODE
+
+
+async def handle_get_signer(update: Update, context):
+    context.user_data['signer'] = update.message.text
+    await update.message.reply_text('شماره پیگیری را وارد کنید:')
     return GET_TRACKING_CODE
 
 
@@ -967,6 +980,9 @@ async def handle_tracking_code(update: Update, context):
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
 
+    if context.user_data['bank_type'] == 'ayandeh_paya':
+        await update.message.reply_text('شماره دستور پرداخت را وارد کنید:')
+        return GET_MARJA
     if context.user_data['bank_type'] == 'pasargad_paya_2':
         await update.message.reply_text('شناسه واریز را وارد کنید:')
         return GET_MARJA
@@ -1600,11 +1616,10 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'time': convert_numbers_to_farsi(context.user_data['time']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'sender': convert_numbers_to_farsi(context.user_data['sender']),
-            'description2': convert_numbers_to_farsi(context.user_data['sender']),
+            'description2': convert_numbers_to_farsi(context.user_data['description2']),
             'current_directory': current_directory,
             'bank_icon': get_bank_icon(context.user_data['iban']),
         }
-    # ===
 
     if bank_type == 'ayandeh':
         html_content = {
@@ -1615,6 +1630,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'description': convert_numbers_to_farsi(context.user_data['description']),
             'current_directory': current_directory,
         }
 
@@ -1631,8 +1647,11 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
             'marja': convert_numbers_to_farsi(context.user_data['marja']),
             'description': convert_numbers_to_farsi(context.user_data['description']),
+            'signer': convert_numbers_to_farsi(context.user_data['signer']),
+            'signer_small': do_signer_small(context.user_data['signer']),
             'current_directory': current_directory,
         }
+    # ===
 
     if bank_type == 'maskan_satna':
         html_content = {
@@ -1910,6 +1929,13 @@ def format_amount(amount, splitter=','):
 def convert_numbers_to_farsi(text):
     english_to_farsi = str.maketrans('0123456789', '۰۱۲۳۴۵۶۷۸۹')
     return text.translate(english_to_farsi)
+
+
+def do_signer_small(text: str):
+    splits = text.split(' ')
+    if len(splits) > 2:
+        return splits[1][0] + ' ' + splits[0][0]
+    return text[0]
 
 
 def convert_number_to_words(number):
@@ -2237,7 +2263,7 @@ def bank_from_codes(code=''):
 def get_bank_icon(iban, bank=''):
     ib = iban
     if bank == 'saderat':
-        ib = 'IR'+ib
+        ib = 'IR' + ib
     elif len(ib) < 26:
         return ''
     ib = ib.replace(" ", "").replace("-", "")
@@ -2275,6 +2301,7 @@ def main():
             GET_MANDE: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_mande)],
             GET_DESCRIPTION2: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_description2)],
             GET_DESCRIPTION3: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_description3)],
+            GET_SIGNER: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_signer)],
             GET_REDUCE_SOURCE_ACCOUNT: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_reduce_source_account)],
         },

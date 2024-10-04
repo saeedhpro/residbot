@@ -5,19 +5,25 @@
     <title>Document</title>
     <style>
       @font-face {
-        font-family: vazir;
-        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
+        font-family: vazir-medium;
+        src: url("{{current_directory}}/templates/Vazirmatn-Medium.ttf");
+      }
+
+      @font-face {
+        font-family: vazir-semi-bold;
+        src: url("{{current_directory}}/templates/Vazirmatn-SemiBold.ttf");
       }
 
       html,
       body {
-        font-family: vazir;.
+        margin: 0;
+        font-family: vazir-medium;
+        /* font-weight: 700; */
       }
 
       .container {
         width: 654px;
         height: 1280px;
-        /*background-image: url("/home/original/residbot/templates/ayandeh/ayandeh.png");*/
         background-image: url("{{current_directory}}/templates/ayandeh/ayandeh.png");
         /* background-image: url("ayandeh-filled.png"); */
         object-fit: cover;
@@ -30,7 +36,6 @@
         opacity: 0.91;
         font-size: 32px;
         color: #ffffff;
-        font-weight: 400;
         position: absolute;
         top: 24;
         left: 50%;
@@ -40,14 +45,12 @@
       .from {
         opacity: 0.729;
         position: absolute;
-        top: 287;
+        top: 290;
         left: 50%;
         transform: translateX(-50%);
         text-wrap: nowrap;
         font-size: 32px;
-        letter-spacing: -1px;
         color: #1a1a1a;
-        font-weight: 400;
       }
 
       .date {
@@ -56,35 +59,33 @@
         left: 62;
         opacity: 0.859;
         font-size: 32px;
-        letter-spacing: -1px;
         color: #1a1a1a;
       }
 
       .price {
         opacity: 0.859;
         font-size: 32px;
-        letter-spacing: -1px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 526;
-        left: 119;
-      }
-      .unit {
-        position: absolute;
-        top: 0;
-        left: -57;
+        left: 116;
       }
 
       .to {
         position: absolute;
         top: 609;
-        left: 108;
+        left: 106;
         font-size: 32px;
         opacity: 0.859;
-        letter-spacing: -1px;
         color: #1a1a1a;
-        font-weight: 400;
+      }
+
+      .to-icon {
+        position: absolute;
+        top: 614;
+        left: 60px;
+        width: 32px;
+        height: 32px;
       }
 
       .to-name {
@@ -93,9 +94,7 @@
         left: 61;
         font-size: 32px;
         opacity: 0.859;
-        letter-spacing: -1px;
         color: #1a1a1a;
-        font-weight: 400;
       }
 
       .tracking-code {
@@ -104,20 +103,45 @@
         left: 62;
         font-size: 32px;
         opacity: 0.859;
-        letter-spacing: -1px;
         color: #1a1a1a;
-        font-weight: 400;
       }
 
       .desc {
         position: absolute;
-        top: 862;
+        top: 860;
         left: 62;
         font-size: 32px;
         opacity: 0.859;
-        letter-spacing: -1px;
         color: #1a1a1a;
-        font-weight: 400;
+      }
+
+      .row {
+        width: 534px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .title {
+        opacity: 0.729;
+        font-size: 27px;
+        color: #808080;
+        flex-shrink: 0;
+      }
+
+      .divider {
+        width: 100%;
+        border: 0.5px solid #f0f0f0;
+        margin: 2px 15px 0 12px;
+      }
+
+      .value {
+        flex-shrink: 0;
+      }
+      .ltr {
+        direction: ltr;
       }
     </style>
   </head>
@@ -127,17 +151,44 @@
       <div class="from">
         {{sender}} - <span dir="ltr">{{ source_account }}</span>
       </div>
-      <div class="date" style="direction: ltr">{{ datetime }}</div>
-
-      <div class="price">
-        {{ amount }}
-        <div class="unit">ریال</div>
+      <div class="date row">
+        <div class="title">تاریخ</div>
+        <div class="divider"></div>
+        <div class="value ltr">{{ datetime }}</div>
       </div>
 
-      <div class="to">{{iban}}</div>
-      <div class="to-name">{{receiver}}</div>
-      <div class="tracking-code">{{tracking_code}}</div>
-      <div class="desc">خرید</div>
+      <div class="price row">
+        <div class="title">مبلغ</div>
+        <div class="divider"></div>
+        <span class="value" style="display: flex; gap: 8px">
+          {{ amount }}
+          <div class="unit">ریال</div>
+        </span>
+      </div>
+
+      <div class="to row" style="font-family: vazir-semi-bold">
+        <div class="title">مقصد</div>
+        <div class="divider"></div>
+        <div class="value" style="padding-left: 45px">
+          {{iban}}
+        </div>
+      </div>
+      <div class="to-icon"></div>
+      <div class="to-name row">
+        <div class="title">به نام</div>
+        <div class="divider"></div>
+        <div class="value">{{receiver}}</div>
+      </div>
+      <div class="tracking-code row">
+        <div class="title">کد پیگیری</div>
+        <div class="divider"></div>
+        <div class="value">{{tracking_code}}</div>
+      </div>
+      <div class="desc row" style="width: 538px">
+        <div class="title" style="padding-bottom: 3px">شرح</div>
+        <div class="divider"></div>
+        <div class="value">{{description}}</div>
+      </div>
     </div>
   </body>
 </html>

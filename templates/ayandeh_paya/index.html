@@ -6,20 +6,23 @@
     <style>
       @font-face {
         font-family: vazir;
-        /*src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");*/
-        src: url("/home/saeed/work/python/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
+      }
+      @font-face {
+        font-family: vazir-semibold;
+        src: url("{{current_directory}}/templates/Vazirmatn-SemiBold.ttf");
       }
 
       html,
       body {
-        font-family: vazir;
+        font-family: vazir-semibold;
+        margin: 0;
       }
 
       .container {
         width: 966px;
         height: 1280px;
-        /*background-image: url("/home/original/residbot/templates/ayandeh_paya/ayandeh-paya.png");*/
-        background-image: url("/home/saeed/work/python/residbot/templates/ayandeh_paya/ayandeh-paya.png");
+        background-image: url("{{current_directory}}/templates/ayandeh_paya/ayandeh-paya.png");
         /* background-image: url("ayandeh-paya-filled.png"); */
         object-fit: cover;
         position: relative;
@@ -28,33 +31,40 @@
       .payment-code {
         opacity: 0.878;
         font-size: 32px;
-        letter-spacing: -2px;
         color: #000000;
-        font-weight: 400;
         position: absolute;
-        top: 164;
+        top: 160;
         left: 42;
       }
 
       .status {
         opacity: 0.878;
         font-size: 34px;
-        letter-spacing: -2px;
         color: #000000;
-        font-weight: 400;
         position: absolute;
-        top: 232;
+        top: 228;
         left: 41;
+      }
+
+      .row {
+        width: 860px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .divider {
+        width: 100%;
+        border-top: 2px dashed #cccccc;
       }
 
       .from {
         opacity: 0.878;
         font-size: 30px;
-        letter-spacing: -1px;
         color: #000000;
-        font-weight: 400;
         position: absolute;
-        top: 308;
+        top: 304;
         left: 99;
       }
 
@@ -62,9 +72,7 @@
       .time {
         opacity: 0.729;
         font-size: 32px;
-        letter-spacing: -1px;
         color: #808080;
-        font-weight: 400;
         position: absolute;
         top: 677;
         left: 804px;
@@ -73,9 +81,7 @@
       .date {
         opacity: 0.729;
         font-size: 32px;
-        letter-spacing: -1px;
         color: #808080;
-        font-weight: 400;
         position: absolute;
         top: 675;
         left: 605;
@@ -83,49 +89,39 @@
 
       .to-name {
         font-size: 34px;
-        letter-spacing: -1px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 751;
-        right: 78;
+        right: 70;
       }
 
       .to-number {
         font-size: 30px;
-        letter-spacing: -1px;
         color: #4d4d4d;
-        font-weight: 400;
         position: absolute;
         top: 983;
-        right: 170;
+        right: 112;
       }
 
       .tracking-number {
         font-size: 31px;
-        letter-spacing: -1px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
-        top: 1060;
-        right: 290;
+        top: 1055;
+        right: 255;
       }
 
       .desc {
         font-size: 31px;
-        letter-spacing: -1px;
         color: #999999;
-        font-weight: 400;
         position: absolute;
         top: 1128;
-        right: 133;
+        right: 130;
       }
 
       .price {
         font-size: 34px;
-        letter-spacing: -1px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         top: 833;
         left: 124;
@@ -135,16 +131,109 @@
         top: 0;
         left: -70;
       }
+
+      .sign-circle {
+        position: relative;
+        width: 81px;
+        height: 81px;
+        border-radius: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 32px;
+        color: #1a1a1a;
+        background-color: #dcaf50;
+      }
+      .sign-circle-badge {
+        position: absolute;
+        top: 5;
+        right: 5;
+        width: 15px;
+        height: 15px;
+        border-radius: 8px;
+        background-color: #5cbb9b;
+      }
+      .sign-circle span {
+        opacity: 0.729;
+      }
+      .signer-name {
+        width: auto;
+        opacity: 0.729;
+        text-wrap: nowrap;
+        font-size: 22px;
+        color: #4d4d4d;
+        padding-top: 12px;
+      }
+      .to-icon {
+        position: absolute;
+        top: 984;
+        right: 55;
+        width: 44px;
+        height: 44px;
+      }
+      .title {
+        font-size: 32px;
+        color: #333333;
+        font-weight: 700;
+        opacity: 0.729;
+        flex-shrink: 0;
+      }
+      .value {
+        flex-shrink: 0;
+      }
+      .signers {
+        position: absolute;
+        top: 456;
+        right: 70;
+        display: flex;
+        gap: 22px;
+      }
+      .signer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="payment-code">{{marja}}</div>
-      <div class="status">{{status}}</div>
-      <div class="from">{{source_account}}</div>
+      <div class="payment-code row">
+        <span class="title">شماره دستور پرداخت</span>
+        <div class="divider"></div>
+        <span class="value">{{marja}}</span>
+      </div>
+
+      <div class="status row">
+        <span class="title">وضعیت</span>
+        <div class="divider"></div>
+        <span class="value">{{status}}</span>
+      </div>
+
+      <div class="from row" style="width: 800px">
+        <span class="title">از مبدا</span>
+        <div class="divider"></div>
+        <span
+          class="value"
+          style="display: flex; flex-direction: row-reverse; gap: 8px"
+          >{{source_account}}
+          <img src="{{current_directory}}/templates/ayandeh_paya/copy.png" alt="" />
+        </span>
+      </div>
+
+      <div class="signers">
+        <div class="signer">
+          <div class="sign-circle">
+            <div class="sign-circle-badge"></div>
+            <span>{{signer_small}}</span>
+          </div>
+          <div class="signer-name">{{signer}}</div>
+        </div>
+      </div>
+
       <div class="time">{{time}}</div>
       <div class="date">{{date}}</div>
       <div class="to-name">{{receiver}}</div>
+      <img class="to-icon" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
       <div class="price">
         {{amount}}
         <div class="unit">ریال</div>
