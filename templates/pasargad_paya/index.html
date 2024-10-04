@@ -6,18 +6,20 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
       }
 
       html,
       body {
         font-family: vazir;
+        font-weight: 700;
+        margin: 0;
       }
 
       .container {
         width: 615px;
         height: 1280px;
-        background-image: url("/home/original/residbot/templates/pasargad_paya/pasargad-paya.png");
+        background-image: url("{{current_directory}}/templates/pasargad_paya/pasargad-paya.png");
         /* background-image: url("pasargad-paya-filled.png"); */
         object-fit: cover;
         position: relative;
@@ -27,17 +29,11 @@
         color: #00a143;
       }
 
-      .font-bold {
-        font-weight: 700;
-      }
-
       .value {
         opacity: 0.878;
         width: 100%;
         font-size: 22px;
-        letter-spacing: -1px;
         color: #1a1a1a;
-        font-weight: 400;
         position: absolute;
         left: 50%;
         top: auto;
@@ -75,17 +71,17 @@
         </div>
 
         <div class="row">
-          <div class="value">{{source_account}}</div>
+          <div class="value" dir="ltr">{{source_account}}</div>
         </div>
 
         <div class="row" style="height: 122px">
-          <div class="value" style="padding-bottom: 25px">
-            <span>{{iban}}</span><span>{{receiver}}</span>
+          <div class="value">
+            {{iban}} {{receiver}}
           </div>
         </div>
 
         <div class="row">
-          <div class="value"><span>{{amount}}</span> ریال</div>
+          <div class="value">{{amount}} ریال</div>
         </div>
 
         <div class="row">
@@ -109,7 +105,7 @@
         </div>
 
         <div class="row">
-          <div class="value">{{description2}}</div>
+          <div class="value" style="padding-bottom: 4px;">{{description2}}</div>
         </div>
       </div>
     </div>

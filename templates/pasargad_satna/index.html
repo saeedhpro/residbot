@@ -6,19 +6,21 @@
     <style>
       @font-face {
         font-family: vazir;
-        src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
       }
 
       html,
       body {
         font-family: vazir;
+        font-weight: 700;
+        margin: 0;
       }
 
       .container {
         width: 623px;
         height: 1280px;
-        background-image: url("/home/original/residbot/templates/pasargad_satna/pasargad-satna.png");
-        /* background-image: url("pasargad_satna-filled.png"); */
+        background-image: url("{{current_directory}}/templates/pasargad_satna/pasargad-satna.png");
+        /* background-image: url("pasargad-satna-filled.png"); */
         object-fit: cover;
         position: relative;
       }
@@ -34,18 +36,17 @@
       }
 
       .green-text {
-        color: #177654;
+        opacity: 0.729;
+        color: #1c6646;
       }
-
-      .font-bold {
-        font-weight: 700;
+      .price {
+        letter-spacing: 1px;
       }
 
       .row {
         width: 100%;
         display: flex;
         justify-content: space-between;
-        align-items: flex-end;
         gap: 10px;
       }
 
@@ -61,7 +62,6 @@
         font-size: 18px;
         line-height: 33px;
         color: #1a1a1a;
-        font-weight: 400;
         text-align: center;
         flex-shrink: 0;
       }
@@ -71,6 +71,12 @@
         height: 1px;
         border-top: 2px dotted #177654;
         margin-bottom: 6px;
+        margin-top: 18px;
+      }
+      .to-icon {
+        width: 24px;
+        height: 24px;
+        margin-left: 1px;
       }
     </style>
   </head>
@@ -84,7 +90,7 @@
         </div>
 
         <div class="row">
-          <div class="title">کسر کارمزد از سپرده</div>
+          <div class="title">کسر کارمزد از سپرده:</div>
           <div class="divider"></div>
           <div class="value">{{reduce_source_account}}</div>
         </div>
@@ -104,15 +110,20 @@
         <div class="row">
           <div class="title">بانک مقصد:</div>
           <div class="divider"></div>
-          <div class="value">{{receiver_bank}}</div>
+          <div class="value" style="display: flex">
+            <img class="to-icon" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
+            {{receiver_bank}}
+          </div>
         </div>
 
         <div class="row">
           <div class="title">مبلغ انتقال:</div>
           <div class="divider"></div>
           <div class="value">
-            <span class="green-text"
-              >{{amount}} ریال ({{amount_fa}} تومان)</span
+            <span
+              class="green-text"
+              style="max-width: 380px; display: inline-block"
+              ><span class="price">{{amount}}</span> ریال ({{amount_fa}} تومان)</span
             >
           </div>
         </div>
@@ -136,7 +147,7 @@
         </div>
 
         <div class="row">
-          <div class="title">بایت:</div>
+          <div class="title">بابت:</div>
           <div class="divider"></div>
           <div class="value">{{description2}}</div>
         </div>

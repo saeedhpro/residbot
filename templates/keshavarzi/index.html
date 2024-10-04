@@ -6,61 +6,56 @@
     <style>
       @font-face {
         font-family: vazir;
-        /*src: url("/home/original/residbot/templates/Vazirmatn-Regular.ttf");*/
         src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
       }
 
       html,
       body {
         font-family: vazir;
+        font-weight: 700;
+        margin: 0;
       }
 
       .container {
         width: 665px;
         height: 1280px;
-        /*background-image: url("/home/original/residbot/templates/keshavarzi/keshavarzi.png");*/
         background-image: url("{{current_directory}}/templates/{{bank_type_en}}/keshavarzi.png");
-        /* background-image: url("keshavarzi-filled.png"); */
+        /* background-image: url("a.png"); */
         object-fit: cover;
         position: relative;
       }
 
       .from {
         font-size: 21px;
-        letter-spacing: 0px;
+        letter-spacing: 1px;
         line-height: 29px;
         color: #4d4d4d;
-        font-weight: 400;
         position: absolute;
         top: 415px;
-        left: 80px;
+        left: 75px;
       }
       .to {
-        font-size: 25px;
-        letter-spacing: 0px;
+        font-size: 22px;
+        letter-spacing: 1px;
         line-height: 34px;
         color: #4d4d4d;
-        font-weight: 400;
         position: absolute;
         top: 445px;
-        left: 92px;
+        left: 75px;
       }
 
       .price {
         font-size: 23px;
-        letter-spacing: 0px;
+        letter-spacing: 2px;
         line-height: 34px;
         color: #4d4d4d;
-        font-weight: 400;
         position: absolute;
         top: 484px;
-        left: 132px;
+        left: 75px;
         direction: ltr;
-      }
-      .unit {
-        position: absolute;
-        top: -2px;
-        left: -55px;
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 8px;
       }
       .tracking-number {
         position: absolute;
@@ -73,27 +68,24 @@
         letter-spacing: 0px;
         line-height: 34px;
         color: #4d4d4d;
-        font-weight: 400;
         position: absolute;
         top: 520px;
-        left: 86px;
+        left: 75px;
       }
       .status {
         font-size: 23px;
         letter-spacing: 0px;
         line-height: 34px;
         color: #4d4d4d;
-        font-weight: 400;
         position: absolute;
         top: 555px;
-        left: 73px;
+        left: 75px;
       }
       .description {
         font-size: 23px;
         letter-spacing: 0px;
         line-height: 34px;
         color: #4d4d4d;
-        font-weight: 400;
         position: absolute;
         top: 590px;
         left: 76px;
@@ -103,7 +95,6 @@
         letter-spacing: 0px;
         line-height: 34px;
         color: #4d4d4d;
-        font-weight: 400;
         position: absolute;
         top: 590px;
         left: 76px;
@@ -113,7 +104,6 @@
         letter-spacing: 0px;
         line-height: 34px;
         color: #4d4d4d;
-        font-weight: 400;
         position: absolute;
         top: 626px;
         left: 76px;
@@ -123,10 +113,12 @@
         letter-spacing: 1px;
         line-height: 34px;
         color: #4d4d4d;
-        font-weight: 400;
         position: absolute;
         top: 665px;
-        left: 100px;
+        left: 85px;
+      }
+      .unit {
+        letter-spacing: 0;
       }
     </style>
   </head>
