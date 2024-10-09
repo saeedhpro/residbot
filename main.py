@@ -1371,16 +1371,16 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     if bank_type == 'refah_2':
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
-            'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'sender': convert_numbers_to_farsi(context.user_data['sender']),
-            'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
-            'receiver_bank': convert_numbers_to_farsi(context.user_data['receiver_bank']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'date': convert_numbers_to_farsi(context.user_data['date']),
-            'time': convert_numbers_to_farsi(context.user_data['time']),
-            'marja': convert_numbers_to_farsi(context.user_data['marja']),
-            'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
+            'source_account': context.user_data['source_account'],
+            'iban': context.user_data['iban'],
+            'sender': context.user_data['sender'],
+            'receiver': context.user_data['receiver'],
+            'receiver_bank': context.user_data['receiver_bank'],
+            'amount': format_amount(context.user_data['amount']),
+            'date': context.user_data['date'],
+            'time': context.user_data['time'],
+            'marja': context.user_data['marja'],
+            'tracking_code': context.user_data['tracking_code'],
             'current_directory': current_directory,
         }
 
