@@ -1899,6 +1899,7 @@ def get_bank_type_in_farsi(bank_type='tejarat'):
         'mehr_dark_2': 'بانک مهر تاریک 2',
         'mehr_light': 'بانک مهر روشن',
         'mellat': 'بانک ملت',
+        'maskan_satna': 'بانک مسکن ساتنا',
         'parsian': 'بانک پارسیان',
         'pasargad_paya': 'بانک پاسارگاد پایا',
         'pasargad_paya_2': 'بانک پاسارگاد پایا 2',
