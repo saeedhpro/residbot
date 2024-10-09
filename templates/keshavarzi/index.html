@@ -120,11 +120,14 @@
       .unit {
         letter-spacing: 0;
       }
+      .ltr {
+        direction: ltr;
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="from">{{source_account}}</div>
+      <div class="from ltr">{{source_account}}</div>
       <div class="to">{{iban}}</div>
       <div class="price">
         {{amount}}

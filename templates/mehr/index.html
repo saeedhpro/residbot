@@ -46,6 +46,8 @@
         position: absolute;
         top: 718px;
         left: 30px;
+        display: flex;
+        flex-direction: row;
       }
       .to-name {
         position: absolute;
@@ -107,7 +109,7 @@
       <div class="from">{{source_account}}</div>
       <div class="to">{{iban}}</div>
       <img class="to-icon" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
-      <div class="remaining ltr">{{mande}} ریال</div>
+      <div class="remaining"><div class="ltr">{{mande}}</div> ریال</div>
       <div class="date">{{datetime}}</div>
       <div class="tracking-number">{{tracking_code}}</div>
     </div>

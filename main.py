@@ -12,7 +12,7 @@ from html2image import Html2Image
 (START, RETURN_MENU, SELECT_ACTION, SELECT_BANK, GET_STATUS, GET_TRANSACTION_TYPE, GET_SOURCE_ACCOUNT, GET_DEST_IBAN,
  GET_DEST_NAME, GET_DATETIME, GET_AMOUNT, GET_SENDER_NAME, GET_DEST_ACCOUNT, GET_DEST_BANK, GET_REASON, GET_DESCRIPTION,
  GET_TRACKING_CODE, GET_MARJA, GET_DATE, GET_TIME, GET_RECEIVER_FNAME, GET_RECEIVER_LNAME, GET_SOURCE_IBAN,
- GET_MANDE, GET_DESCRIPTION2, GET_REDUCE_SOURCE_ACCOUNT, GET_DESCRIPTION3, GET_SIGNER) = range(28)
+ GET_MANDE, GET_DESCRIPTION2, GET_REDUCE_SOURCE_ACCOUNT, GET_DESCRIPTION3, GET_SIGNER, GET_DAY_NAME) = range(29)
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -105,6 +105,9 @@ async def handle_select_bank(update, context):
             or context.user_data['bank_type'] == 'sina_paya' \
             or context.user_data['bank_type'] == 'saderat_2' \
             or context.user_data['bank_type'] == 'saderat' \
+            or context.user_data['bank_type'] == 'mehr_2' \
+            or context.user_data['bank_type'] == 'mehr_3' \
+            or context.user_data['bank_type'] == 'mehr_dark_2' \
             or context.user_data['bank_type'] == 'tejarat':
         await query.edit_message_text('تاریخ را وارد کنید')
         return GET_DATE
@@ -129,6 +132,16 @@ async def handle_get_date(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def handle_get_time(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data['time'] = update.message.text
+    if context.user_data['bank_type'] == 'mehr_2' or \
+            context.user_data['bank_type'] == 'mehr_3':
+        await update.message.reply_text('نام روز هفته (شنبه و یکشنبه و ...) را وارد کنید:')
+        return GET_DAY_NAME
+    await update.message.reply_text('مبلغ را به ریال وارد کنید ')
+    return GET_AMOUNT
+
+
+async def handle_get_day_name(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    context.user_data['day_name'] = update.message.text
 
     await update.message.reply_text('مبلغ را به ریال وارد کنید ')
     return GET_AMOUNT
@@ -542,7 +555,7 @@ async def handle_get_dest_name(update: Update, context):
         await update.message.reply_text('شرح را وارد کنید:')
         return GET_DESCRIPTION
     if context.user_data['bank_type'] == 'keshavarzi':
-        await update.message.reply_text('توضیحات را وارد کنید:')
+        await update.message.reply_text('شرح را وارد کنید:')
         return GET_DESCRIPTION
     if context.user_data['bank_type'] == 'shahr_satna':
         await update.message.reply_text('توضیحات را وارد کنید:')
@@ -780,6 +793,10 @@ async def handle_get_description(update: Update, context):
     if context.user_data['bank_type'] == 'ayandeh_paya':
         await update.message.reply_text('امضا کنندگان را وارد کنید:')
         return GET_SIGNER
+
+    if context.user_data['bank_type'] == 'keshavarzi':
+        await update.message.reply_text('کد پیگیری را وارد کنید:')
+        return GET_TRACKING_CODE
 
     await update.message.reply_text('شماره پیگیری را وارد کنید:')
     return GET_TRACKING_CODE
@@ -1418,7 +1435,9 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'date': convert_numbers_to_farsi(context.user_data['date']),
+            'time': convert_numbers_to_farsi(context.user_data['time']),
+            'day_name': convert_numbers_to_farsi(context.user_data['day_name']),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'current_directory': current_directory,
@@ -1432,7 +1451,9 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
             'mande': format_amount(convert_numbers_to_farsi(context.user_data['mande'])),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'date': convert_numbers_to_farsi(context.user_data['date']),
+            'time': convert_numbers_to_farsi(context.user_data['time']),
+            'day_name': convert_numbers_to_farsi(context.user_data['day_name']),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'current_directory': current_directory,
@@ -1471,7 +1492,9 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
             'mande': format_amount(convert_numbers_to_farsi(context.user_data['mande'])),
-            'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
+            'date': convert_numbers_to_farsi(context.user_data['date']),
+            'time': convert_numbers_to_farsi(context.user_data['time']),
+            'day_name': convert_numbers_to_farsi(context.user_data['day_name']),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'description': convert_numbers_to_farsi(context.user_data['description']),
             'description2': convert_numbers_to_farsi(context.user_data['description2']),
@@ -1512,7 +1535,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
             'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
-            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount']), ' '),
+            'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount']), '&#10076;'),
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
             'status': 'ارسال شده',
             'description': convert_numbers_to_farsi(context.user_data['description']),
@@ -1818,10 +1841,10 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1380'
         options['width'] = '591'
     elif context.user_data['bank_type'] == 'refah':
-        options['height'] = '1289'
+        options['height'] = '1378'
         options['width'] = '630'
     elif context.user_data['bank_type'] == 'refah_2':
-        options['height'] = '1282'
+        options['height'] = '1382'
         options['width'] = '656'
     elif context.user_data['bank_type'] == 'refah_paya':
         options['height'] = '1380'
@@ -2310,6 +2333,7 @@ def main():
             GET_DESCRIPTION2: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_description2)],
             GET_DESCRIPTION3: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_description3)],
             GET_SIGNER: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_signer)],
+            GET_DAY_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_day_name)],
             GET_REDUCE_SOURCE_ACCOUNT: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_reduce_source_account)],
         },
