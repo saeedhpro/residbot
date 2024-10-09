@@ -115,6 +115,16 @@
         top: 1011;
         left: 27;
       }
+      .payment-id {
+        font-size: 36px;
+        letter-spacing: 1px;
+        line-height: 0px;
+        color: #1e1e1b;
+        font-weight: 400;
+        position: absolute;
+        top: 930;
+        left: 27;
+      }
       .time {
         font-size: 34px;
         letter-spacing: 1px;
@@ -140,8 +150,11 @@
         <div class="unit">ریال</div>
       </div>
       <div class="result">
-        <span class="green-text" style="font-family: vazir; font-weight: 400;">موفق</span>
+        <span class="green-text" style="font-family: vazir; font-weight: 400"
+          >موفق</span
+        >
       </div>
+      <div class="payment-id">{{tracking_code}}</div>
       <div class="date">{{date}}</div>
       <div class="time">{{time}}</div>
     </div>
