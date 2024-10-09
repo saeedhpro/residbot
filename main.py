@@ -599,9 +599,12 @@ async def handle_get_dest_name(update: Update, context):
     if context.user_data['bank_type'] == 'post_bank_paya':
         await update.message.reply_text('نام ارسال کننده را وارد کنید:')
         return GET_SENDER_NAME
+    # if context.user_data['bank_type'] == 'post_bank_paya_2':
+    #     await update.message.reply_text('نام ارسال کننده را وارد کنید:')
+    #     return GET_SENDER_NAME
     if context.user_data['bank_type'] == 'post_bank_paya_2':
-        await update.message.reply_text('نام ارسال کننده را وارد کنید:')
-        return GET_SENDER_NAME
+        await update.message.reply_text('بابت (علت) را وارد کنید:')
+        return GET_DESCRIPTION2
     if context.user_data['bank_type'] == 'refah_satna':
         await update.message.reply_text('نام بانک مقصد را وارد کنید:')
         return GET_DEST_BANK
@@ -1642,7 +1645,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'date': convert_numbers_to_farsi(context.user_data['date']),
             'time': convert_numbers_to_farsi(context.user_data['time']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'sender': convert_numbers_to_farsi(context.user_data['sender']),
+            # 'sender': convert_numbers_to_farsi(context.user_data['sender']),
             'description2': convert_numbers_to_farsi(context.user_data['description2']),
             'current_directory': current_directory,
             'bank_icon': get_bank_icon(context.user_data['iban']),
