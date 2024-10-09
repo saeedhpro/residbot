@@ -591,11 +591,11 @@ async def handle_get_dest_name(update: Update, context):
         await update.message.reply_text('نام فرستنده را وارد کنید:')
         return GET_SENDER_NAME
     if context.user_data['bank_type'] == 'pasargad_paya_2':
-        await update.message.reply_text('نام ارسال کننده را وارد کنید:')
+        await update.message.reply_text('نام فرستنده را وارد کنید:')
         return GET_SENDER_NAME
     if context.user_data['bank_type'] == 'pasargad_satna':
-        await update.message.reply_text('نام ارسال کننده را وارد کنید:')
-        return GET_SENDER_NAME
+        await update.message.reply_text('نام بانک مقصد را وارد کنید:')
+        return GET_DEST_BANK
     if context.user_data['bank_type'] == 'post_bank_paya':
         await update.message.reply_text('نام ارسال کننده را وارد کنید:')
         return GET_SENDER_NAME
@@ -690,10 +690,6 @@ async def handle_get_sender_name(update: Update, context):
         return GET_DEST_BANK
 
     if context.user_data['bank_type'] == 'pasargad_paya_2':
-        await update.message.reply_text('نام بانک مقصد را وارد کنید:')
-        return GET_DEST_BANK
-
-    if context.user_data['bank_type'] == 'pasargad_satna':
         await update.message.reply_text('نام بانک مقصد را وارد کنید:')
         return GET_DEST_BANK
 
@@ -880,7 +876,7 @@ async def handle_dest_bank(update: Update, context):
         await update.message.reply_text('نام بانک کسر کارمزد را وارد کنید:')
         return GET_REDUCE_SOURCE_ACCOUNT
     if context.user_data['bank_type'] == 'pasargad_paya_2':
-        await update.message.reply_text('نام بانک کسر کارمزد را وارد کنید:')
+        await update.message.reply_text('کسر کارمزد از سپرده را وارد کنید:')
         return GET_REDUCE_SOURCE_ACCOUNT
     if context.user_data['bank_type'] == 'pasargad_satna':
         await update.message.reply_text('نام بانک کسر کارمزد را وارد کنید:')
@@ -1613,7 +1609,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'datetime': convert_numbers_to_farsi(context.user_data['datetime']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'marja': convert_numbers_to_farsi(context.user_data['marja']),
-            'sender': convert_numbers_to_farsi(context.user_data['sender']),
             'description2': convert_numbers_to_farsi(context.user_data['description2']),
             'description': convert_numbers_to_farsi(context.user_data['description']),
             'current_directory': current_directory,
@@ -1826,14 +1821,14 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1280'
         options['width'] = '591'
     elif context.user_data['bank_type'] == 'parsian':
-        options['height'] = '1280'
+        options['height'] = '1378'
         options['width'] = '687'
     elif context.user_data['bank_type'] == 'pasargad_paya':
         options['height'] = '1380'
         options['width'] = '615'
     elif context.user_data['bank_type'] == 'pasargad_paya_2':
         options['height'] = '1280'
-        options['width'] = '615'
+        options['width'] = '591'
     elif context.user_data['bank_type'] == 'pasargad_satna':
         options['height'] = '1280'
         options['width'] = '623'
