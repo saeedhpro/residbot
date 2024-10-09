@@ -539,7 +539,7 @@ async def handle_get_dest_name(update: Update, context):
         return GET_SENDER_NAME
 
     if context.user_data['bank_type'] == 'ayandeh_paya':
-        await update.message.reply_text('توضیحات را وارد کنید:')
+        await update.message.reply_text('شرح را وارد کنید:')
         return GET_DESCRIPTION
     if context.user_data['bank_type'] == 'keshavarzi':
         await update.message.reply_text('توضیحات را وارد کنید:')
@@ -575,7 +575,7 @@ async def handle_get_dest_name(update: Update, context):
         await update.message.reply_text('نام ارسال کننده را وارد کنید:')
         return GET_SENDER_NAME
     if context.user_data['bank_type'] == 'pasargad_paya':
-        await update.message.reply_text('نام ارسال کننده را وارد کنید:')
+        await update.message.reply_text('نام فرستنده را وارد کنید:')
         return GET_SENDER_NAME
     if context.user_data['bank_type'] == 'pasargad_paya_2':
         await update.message.reply_text('نام ارسال کننده را وارد کنید:')
@@ -748,7 +748,7 @@ async def handle_get_description(update: Update, context):
         await update.message.reply_text('توضیحات خط دوم را وارد کنید:')
         return GET_DESCRIPTION2
     if context.user_data['bank_type'] == 'pasargad_paya':
-        await update.message.reply_text('علت (بابت) انتقال را وارد کنید:')
+        await update.message.reply_text('بابت انتقال را وارد کنید:')
         return GET_DESCRIPTION2
     if context.user_data['bank_type'] == 'pasargad_paya_2':
         await update.message.reply_text('علت (بابت) انتقال را وارد کنید:')
@@ -848,13 +848,13 @@ async def handle_dest_bank(update: Update, context):
         return GET_DESCRIPTION
 
     if context.user_data['bank_type'] == 'resalat_paya':
-        await update.message.reply_text('نام بانک کسر کارمزد را وارد کنید:')
+        await update.message.reply_text('کسر کارمزد از سپرده را وارد کنید:')
         return GET_REDUCE_SOURCE_ACCOUNT
     if context.user_data['bank_type'] == 'resalat_satna':
         await update.message.reply_text('شماره بانک کسر کارمزد را وارد کنید:')
         return GET_REDUCE_SOURCE_ACCOUNT
     if context.user_data['bank_type'] == 'resalat_satna_2':
-        await update.message.reply_text('نام بانک کسر کارمزد را وارد کنید:')
+        await update.message.reply_text('کسر کارمزد از سپرده را وارد کنید:')
         return GET_REDUCE_SOURCE_ACCOUNT
     if context.user_data['bank_type'] == 'pasargad_paya':
         await update.message.reply_text('نام بانک کسر کارمزد را وارد کنید:')
@@ -978,6 +978,9 @@ async def handle_tracking_code(update: Update, context):
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
     if context.user_data['bank_type'] == 'saderat':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
+    if context.user_data['bank_type'] == 'pasargad_paya':
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
 
@@ -1629,10 +1632,12 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'amount': format_amount(convert_numbers_to_farsi(context.user_data['amount'])),
             'source_account': convert_numbers_to_farsi(context.user_data['source_account']),
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
+            'sender': convert_numbers_to_farsi(context.user_data['sender']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
             'iban': convert_numbers_to_farsi(context.user_data['iban']),
             'description': convert_numbers_to_farsi(context.user_data['description']),
             'current_directory': current_directory,
+            'bank_icon': get_bank_icon(context.user_data['iban']),
         }
 
     if bank_type == 'ayandeh_paya':
@@ -1651,6 +1656,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'signer': convert_numbers_to_farsi(context.user_data['signer']),
             'signer_small': do_signer_small(context.user_data['signer']),
             'current_directory': current_directory,
+            'bank_icon': get_bank_icon(context.user_data['iban']),
         }
 
     if bank_type == 'maskan_satna':
@@ -1758,10 +1764,10 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1380'
         options['width'] = '744'
     elif context.user_data['bank_type'] == 'ayandeh':
-        options['height'] = '1280'
+        options['height'] = '1380'
         options['width'] = '654'
     elif context.user_data['bank_type'] == 'ayandeh_paya':
-        options['height'] = '1280'
+        options['height'] = '1380'
         options['width'] = '966'
     elif context.user_data['bank_type'] == 'eghtesad':
         options['height'] = '1380'
@@ -1797,7 +1803,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1280'
         options['width'] = '687'
     elif context.user_data['bank_type'] == 'pasargad_paya':
-        options['height'] = '1280'
+        options['height'] = '1380'
         options['width'] = '615'
     elif context.user_data['bank_type'] == 'pasargad_paya_2':
         options['height'] = '1280'
@@ -1809,7 +1815,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1280'
         options['width'] = '591'
     elif context.user_data['bank_type'] == 'post_bank_paya_2':
-        options['height'] = '1280'
+        options['height'] = '1380'
         options['width'] = '591'
     elif context.user_data['bank_type'] == 'refah':
         options['height'] = '1289'
@@ -1830,7 +1836,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1280'
         options['width'] = '667'
     elif context.user_data['bank_type'] == 'resalat_satna_2':
-        options['height'] = '1280'
+        options['height'] = '1380'
         options['width'] = '612'
     elif context.user_data['bank_type'] == 'day':
         options['height'] = '1280'

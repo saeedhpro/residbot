@@ -52,7 +52,7 @@
       }
       .price {
         font-size: 19px;
-        letter-spacing: .5px;
+        letter-spacing: 0.5px;
         color: #1a1a1a;
         position: absolute;
         top: 557px;
@@ -110,6 +110,24 @@
       .ltr {
         direction: ltr;
       }
+      .divider {
+        opacity: 0.75;
+        width: 554px;
+        border-top: 2px solid #e0e0e0;
+        position: absolute;
+        top: 870;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .title {
+        position: absolute;
+        top: 116;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 33px;
+        color: #ffffff;
+        font-weight: 700;
+      }
     </style>
   </head>
   <body>
@@ -123,6 +141,7 @@
       <div class="resource-number">{{marja}}</div>
       <div class="to">{{iban}}</div>
       <div class="to-name">{{receiver}}</div>
+      <div class="divider"></div>
       <div class="price">
         {{amount}}
         <div class="unit">ریال</div>
