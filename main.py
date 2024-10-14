@@ -127,6 +127,10 @@ async def handle_get_datetime(update: Update, context: ContextTypes.DEFAULT_TYPE
         await update.message.reply_text('مبلغ انتقال را به ریال وارد کنید ')
         return GET_AMOUNT
 
+    if context.user_data['bank_type'] == 'resalat_satna_2':
+        await update.message.reply_text('مبلغ انتقال را به ریال وارد کنید ')
+        return GET_AMOUNT
+
     await update.message.reply_text('مبلغ را به ریال وارد کنید ')
     return GET_AMOUNT
 
@@ -174,6 +178,18 @@ async def handle_get_amount(update: Update, context):
         await update.message.reply_text('سپرده مبدا را وارد کنید:')
         return GET_SOURCE_ACCOUNT
 
+    if context.user_data['bank_type'] == 'pasargad_satna':
+        await update.message.reply_text('سپرده مبدا را وارد کنید:')
+        return GET_SOURCE_ACCOUNT
+
+    if context.user_data['bank_type'] == 'pasargad_paya':
+        await update.message.reply_text('شماره سپرده مبدا را وارد کنید:')
+        return GET_SOURCE_ACCOUNT
+
+    if context.user_data['bank_type'] == 'pasargad_paya_2':
+        await update.message.reply_text('شماره سپرده مبدا را وارد کنید:')
+        return GET_SOURCE_ACCOUNT
+
     if context.user_data['bank_type'] == 'sepah_paya':
         await update.message.reply_text('سپرده مبدا را وارد کنید:')
         return GET_SOURCE_ACCOUNT
@@ -192,6 +208,10 @@ async def handle_get_amount(update: Update, context):
 
     if context.user_data['bank_type'] == 'resalat_satna_2':
         await update.message.reply_text('شماره سپرده مبدا را وارد کنید:')
+        return GET_SOURCE_ACCOUNT
+
+    if context.user_data['bank_type'] == 'maskan_satna':
+        await update.message.reply_text('شماره حساب را وارد کنید:')
         return GET_SOURCE_ACCOUNT
 
     if context.user_data['bank_type'] == 'shahr_satna' \
@@ -259,8 +279,8 @@ async def handle_source_account(update: Update, context):
         return GET_DEST_IBAN
 
     if context.user_data['bank_type'] == 'maskan_satna':
-        await update.message.reply_text('شماره شبا مقصد را وارد کنید:')
-        return GET_DEST_IBAN
+        await update.message.reply_text('شماره شبا مبدا را وارد کنید:')
+        return GET_SOURCE_IBAN
 
     if context.user_data['bank_type'] == 'mehr':
         await update.message.reply_text('شماره شبا مقصد را وارد کنید:')
@@ -451,16 +471,17 @@ async def handle_get_dest_iban(update: Update, context):
         await update.message.reply_text('دارنده مقصد را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'parsian':
-        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
-        return GET_DEST_NAME
+        await update.message.reply_text('نام ارسال کننده را وارد کنید:')
+        return GET_SENDER_NAME
+
     if context.user_data['bank_type'] == 'pasargad_paya':
-        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        await update.message.reply_text('نام گیرنده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'pasargad_paya_2':
-        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        await update.message.reply_text('نام گیرنده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'pasargad_satna':
-        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        await update.message.reply_text('نام صاحب شبا را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'post_bank_paya':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
@@ -484,7 +505,7 @@ async def handle_get_dest_iban(update: Update, context):
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'resalat_satna':
-        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        await update.message.reply_text('نام صاحب شبا را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'resalat_satna_2':
         await update.message.reply_text('گیرنده را وارد کنید:')
@@ -493,7 +514,7 @@ async def handle_get_dest_iban(update: Update, context):
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'saderat_paya':
-        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        await update.message.reply_text('نام صاحب حساب مقصد را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'day':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
@@ -538,6 +559,10 @@ async def handle_get_receiver_fname(update: Update, context):
 async def handle_get_receiver_lname(update: Update, context):
     context.user_data['receiver_lname'] = update.message.text
 
+    if context.user_data['bank_type'] == 'maskan_satna':
+        await update.message.reply_text('بابت را وارد کنید:')
+        return GET_DESCRIPTION
+
     await update.message.reply_text('شماره شبا مبدا را وارد کنید:')
     return GET_SOURCE_IBAN
 
@@ -553,6 +578,10 @@ async def handle_get_source_iban(update: Update, context):
     if context.user_data['bank_type'] == 'shahr_satna':
         await update.message.reply_text('شرح را وارد کنید:')
         return GET_DESCRIPTION
+
+    if context.user_data['bank_type'] == 'maskan_satna':
+        await update.message.reply_text('شماره شبا مقصد را وارد کنید:')
+        return GET_DEST_IBAN
 
     await update.message.reply_text('توضیحات را وارد کنید:')
     return GET_DESCRIPTION
@@ -627,8 +656,9 @@ async def handle_get_dest_name(update: Update, context):
         await update.message.reply_text('نام ارسال کننده را وارد کنید:')
         return GET_SENDER_NAME
     if context.user_data['bank_type'] == 'parsian':
-        await update.message.reply_text('نام ارسال کننده را وارد کنید:')
-        return GET_SENDER_NAME
+        await update.message.reply_text('توضیحات را وارد کنید:')
+        return GET_DESCRIPTION
+
     if context.user_data['bank_type'] == 'pasargad_paya':
         await update.message.reply_text('نام فرستنده را وارد کنید:')
         return GET_SENDER_NAME
@@ -740,8 +770,8 @@ async def handle_get_sender_name(update: Update, context):
         return GET_DEST_BANK
 
     if context.user_data['bank_type'] == 'parisan':
-        await update.message.reply_text('توضیحات را وارد کنید:')
-        return GET_DESCRIPTION
+        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        return GET_DEST_NAME
 
     if context.user_data['bank_type'] == 'resalat_paya':
         await update.message.reply_text('شرح را وارد کنید:')
@@ -805,10 +835,10 @@ async def handle_get_description(update: Update, context):
         await update.message.reply_text('بابت انتقال را وارد کنید:')
         return GET_DESCRIPTION2
     if context.user_data['bank_type'] == 'pasargad_paya_2':
-        await update.message.reply_text('علت (بابت) انتقال را وارد کنید:')
+        await update.message.reply_text('بابت انتقال را وارد کنید:')
         return GET_DESCRIPTION2
     if context.user_data['bank_type'] == 'pasargad_satna':
-        await update.message.reply_text('علت (بابت) انتقال را وارد کنید:')
+        await update.message.reply_text('بابت انتقال را وارد کنید:')
         return GET_DESCRIPTION2
     if context.user_data['bank_type'] == 'resalat_paya':
         await update.message.reply_text('علت (بابت) انتقال را وارد کنید:')
@@ -837,6 +867,10 @@ async def handle_get_description(update: Update, context):
 
     if context.user_data['bank_type'] == 'keshavarzi':
         await update.message.reply_text('کد پیگیری را وارد کنید:')
+        return GET_TRACKING_CODE
+
+    if context.user_data['bank_type'] == 'maskan_satna':
+        await update.message.reply_text('کد رهگیری را وارد کنید:')
         return GET_TRACKING_CODE
 
     await update.message.reply_text('شماره پیگیری را وارد کنید:')
@@ -909,19 +943,19 @@ async def handle_dest_bank(update: Update, context):
         await update.message.reply_text('کسر کارمزد از سپرده را وارد کنید:')
         return GET_REDUCE_SOURCE_ACCOUNT
     if context.user_data['bank_type'] == 'resalat_satna':
-        await update.message.reply_text('شماره بانک کسر کارمزد را وارد کنید:')
+        await update.message.reply_text('کسر کارمزد از سپرده را وارد کنید:')
         return GET_REDUCE_SOURCE_ACCOUNT
     if context.user_data['bank_type'] == 'resalat_satna_2':
         await update.message.reply_text('کسر کارمزد از سپرده را وارد کنید:')
         return GET_REDUCE_SOURCE_ACCOUNT
     if context.user_data['bank_type'] == 'pasargad_paya':
-        await update.message.reply_text('نام بانک کسر کارمزد را وارد کنید:')
+        await update.message.reply_text('کسر کارمز از سپرده را وارد کنید:')
         return GET_REDUCE_SOURCE_ACCOUNT
     if context.user_data['bank_type'] == 'pasargad_paya_2':
         await update.message.reply_text('کسر کارمزد از سپرده را وارد کنید:')
         return GET_REDUCE_SOURCE_ACCOUNT
     if context.user_data['bank_type'] == 'pasargad_satna':
-        await update.message.reply_text('نام بانک کسر کارمزد را وارد کنید:')
+        await update.message.reply_text('کسر کارمزد از سپرده را وارد کنید:')
         return GET_REDUCE_SOURCE_ACCOUNT
 
     if context.user_data['bank_type'] == 'refah':
@@ -1049,7 +1083,7 @@ async def handle_tracking_code(update: Update, context):
         await update.message.reply_text('شناسه واریز را وارد کنید:')
         return GET_MARJA
     if context.user_data['bank_type'] == 'pasargad_satna':
-        await update.message.reply_text('شناسه واریز را وارد کنید:')
+        await update.message.reply_text('شناسه واریز/شماره قبض را وارد کنید:')
         return GET_MARJA
     if context.user_data['bank_type'] == 'post_bank_paya':
         await update.message.reply_text('شناسه واریز را وارد کنید:')
@@ -1080,6 +1114,9 @@ async def handle_tracking_code(update: Update, context):
         return ConversationHandler.END
     if context.user_data['bank_type'] == 'eghtesad':
         await update.message.reply_text('شماره مرجع تراکنش را وارد کنید:')
+        return GET_MARJA
+    if context.user_data['bank_type'] == 'maskan_satna':
+        await update.message.reply_text('شناسه مرجع را وارد کنید:')
         return GET_MARJA
     await update.message.reply_text('شماره مرجع را وارد کنید:')
     return GET_MARJA
@@ -1869,7 +1906,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         options['height'] = '1380'
         options['width'] = '615'
     elif context.user_data['bank_type'] == 'pasargad_paya_2':
-        options['height'] = '1280'
+        options['height'] = '1380'
         options['width'] = '591'
     elif context.user_data['bank_type'] == 'pasargad_satna':
         options['height'] = '1280'
