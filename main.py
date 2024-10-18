@@ -1,4 +1,7 @@
 import os
+import random
+from random import randint
+
 from dotenv import load_dotenv
 import re
 
@@ -1184,6 +1187,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'description': convert_numbers_to_farsi(context.user_data['description']),
             'description2': convert_numbers_to_farsi(context.user_data['description2']),
             'current_directory': current_directory,
+            'tracking_code': convert_numbers_to_farsi(str(random.randint(10000000000000, 100000000000000000000))),
             'bank_icon': get_bank_icon(context.user_data['iban'], 'pasargad_shaba'),
         }
 
