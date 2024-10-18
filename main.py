@@ -1187,7 +1187,6 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'description': convert_numbers_to_farsi(context.user_data['description']),
             'description2': convert_numbers_to_farsi(context.user_data['description2']),
             'current_directory': current_directory,
-            'tracking_code': convert_numbers_to_farsi(str(random.randint(10000000000000, 100000000000000000000))),
             'bank_icon': get_bank_icon(context.user_data['iban'], 'pasargad_shaba'),
         }
 
@@ -1862,7 +1861,11 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
 
     await update.message.reply_text('در حال ساخت رسید... لطفا صبر کنید!:')
     rendered_html = template.render(html_content)
-    png_name = f"receipt_{context.user_data['tracking_code']}.png"
+    try:
+        png_name = f"receipt_{context.user_data['tracking_code']}.png"
+    except Exception as e:
+        png_name = f"receipt_{str(random.randint(10000000000000, 100000000000000000000))}.png"
+
     png_path = f"./receipts/image/"
     options = {
         'format': 'png',
