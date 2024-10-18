@@ -190,6 +190,10 @@ async def handle_get_amount(update: Update, context):
         await update.message.reply_text('سپرده مبدا را وارد کنید:')
         return GET_SOURCE_ACCOUNT
 
+    if context.user_data['bank_type'] == 'day_satna':
+        await update.message.reply_text('سپرده مبدا را وارد کنید:')
+        return GET_SOURCE_ACCOUNT
+
     if context.user_data['bank_type'] == 'pasargad_satna':
         await update.message.reply_text('سپرده مبدا را وارد کنید:')
         return GET_SOURCE_ACCOUNT
@@ -216,6 +220,10 @@ async def handle_get_amount(update: Update, context):
 
     if context.user_data['bank_type'] == 'saman_paya_light':
         await update.message.reply_text('سپرده مبدا را وارد کنید:')
+        return GET_SOURCE_ACCOUNT
+
+    if context.user_data['bank_type'] == 'resalat_satna':
+        await update.message.reply_text('شماره سپرده مبدا را وارد کنید:')
         return GET_SOURCE_ACCOUNT
 
     if context.user_data['bank_type'] == 'resalat_satna_2':
@@ -379,7 +387,7 @@ async def handle_source_account(update: Update, context):
         return GET_DEST_IBAN
 
     if context.user_data['bank_type'] == 'saderat':
-        await update.message.reply_text('شماره شبا مقصد را وارد کنید:')
+        await update.message.reply_text('شماره شبا مقصد را بدون IR وارد کنید:')
         return GET_DEST_IBAN
 
     if context.user_data['bank_type'] == 'day':
@@ -444,7 +452,7 @@ async def handle_get_dest_iban(update: Update, context):
         await update.message.reply_text('نام صاحب شبا را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'sepah_paya':
-        await update.message.reply_text('گیرنده را وارد کنید:')
+        await update.message.reply_text('نام گیرنده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'saman_paya_light':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
@@ -502,7 +510,7 @@ async def handle_get_dest_iban(update: Update, context):
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'post_bank_paya_2':
-        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        await update.message.reply_text('نام مقصد را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'refah':
         await update.message.reply_text('گیرنده را وارد کنید:')
@@ -517,16 +525,16 @@ async def handle_get_dest_iban(update: Update, context):
         await update.message.reply_text('نام دارنده شماره شبا را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'resalat_paya':
-        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        await update.message.reply_text('نام گیرنده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'resalat_satna':
         await update.message.reply_text('نام صاحب شبا را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'resalat_satna_2':
-        await update.message.reply_text('گیرنده را وارد کنید:')
+        await update.message.reply_text('نام گیرنده را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'saderat':
-        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        await update.message.reply_text('نام صاحب حساب مقصد را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'saderat_paya':
         await update.message.reply_text('نام صاحب حساب مقصد را وارد کنید:')
@@ -846,7 +854,7 @@ async def handle_get_description(update: Update, context):
         await update.message.reply_text('شرح انتقال را وارد کنید:')
         return GET_DESCRIPTION2
     if context.user_data['bank_type'] == 'sepah_paya':
-        await update.message.reply_text('فرستنده را وارد کنید:')
+        await update.message.reply_text('نام فرستنده را وارد کنید:')
         return GET_SENDER_NAME
     if context.user_data['bank_type'] == 'sepah_satna':
         await update.message.reply_text('علت (بابت) انتقال را وارد کنید:')
