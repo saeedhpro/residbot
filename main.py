@@ -557,7 +557,7 @@ async def handle_get_dest_iban(update: Update, context):
         return GET_DEST_NAME
 
     if context.user_data['bank_type'] == 'maskan_satna':
-        await update.message.reply_text('نام دریافت کننده را وارد کنید:')
+        await update.message.reply_text('نام صاحب حساب مقصد را وارد کنید:')
         return GET_RECEIVER_FNAME
 
     await update.message.reply_text('نام صاحب شبا را وارد کنید:')
@@ -566,7 +566,9 @@ async def handle_get_dest_iban(update: Update, context):
 
 async def handle_get_receiver_fname(update: Update, context):
     context.user_data['receiver_fname'] = update.message.text
-
+    if context.user_data['bank_type'] == 'maskan_satna':
+        await update.message.reply_text(' نام خانوادگی صاحب حساب مقصد را وارد کنید:')
+        return GET_RECEIVER_LNAME
     await update.message.reply_text('نام خانوادگی دریافت کننده را وارد کنید:')
     return GET_RECEIVER_LNAME
 
