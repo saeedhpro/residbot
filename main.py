@@ -897,6 +897,9 @@ async def handle_get_description(update: Update, context):
 
 async def handle_get_description2(update: Update, context):
     context.user_data['description2'] = update.message.text
+    if context.user_data['bank_type'] == 'pasargad_shaba':
+        await create_receipt_and_send_resid(update, context)
+        return ConversationHandler.END
     if context.user_data['bank_type'] == 'pasargad_paya_2':
         await update.message.reply_text('شرح را وارد کنید')
         return GET_DESCRIPTION3
@@ -910,9 +913,6 @@ async def handle_get_description2(update: Update, context):
         await update.message.reply_text('شرح مبدا را وارد کنید')
         return GET_DESCRIPTION3
     if context.user_data['bank_type'] == 'mehr_dark_2':
-        await create_receipt_and_send_resid(update, context)
-        return ConversationHandler.END
-    if context.user_data['bank_type'] == 'pasargad_shaba':
         await create_receipt_and_send_resid(update, context)
         return ConversationHandler.END
     await update.message.reply_text('شماره پیگیری را وارد کنید:')
