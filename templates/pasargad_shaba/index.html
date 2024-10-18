@@ -1,0 +1,151 @@
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: vazir;
+        src: url("{{current_directory}}/templates/Vazirmatn-Regular.ttf");
+      }
+
+      @font-face {
+        font-family: iran-yekan;
+        src: url("{{current_directory}}/templates/iranyekanwebregularfanum.ttf");
+      }
+
+      html,
+      body {
+        font-family: iran-yekan;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      .container {
+        width: 614px;
+        height: 1280px;
+        background-image: url("{{current_directory}}/templates/pasargad_shaba/pasargad-shaba.png");
+        /* background-image: url("saderat-filled.png"); */
+        object-fit: cover;
+        position: relative;
+      }
+
+      .value {
+        font-size: 22px;
+        line-height: 0px;
+        color: #1a1a1a;
+        opacity: 0.741;
+      }
+
+      .to-bank {
+        position: absolute;
+        top: 214;
+        left: 31;
+      }
+
+      .to-shaba {
+        position: absolute;
+        top: 441;
+        left: 94;
+        direction: ltr;
+      }
+
+      .to-name {
+        font-size: 24px;
+        position: absolute;
+        top: 510;
+        left: 44;
+      }
+
+      .type-markup {
+        font-size: 21px;
+        line-height: 0px;
+        color: #999999;
+        position: absolute;
+        top: 308;
+        right: 43;
+      }
+
+      .type {
+        font-size: 23px;
+        position: absolute;
+        top: 577;
+        left: 44;
+      }
+
+      .price-toman {
+        color: #333333;
+        font-size: 23px;
+        position: absolute;
+        top: 632;
+        left: 45;
+      }
+
+      .price-rial {
+        opacity: 0.741;
+        font-size: 19px;
+        line-height: 0px;
+        color: #808080;
+        font-weight: 400;
+        position: absolute;
+        top: 674;
+        left: 53;
+      }
+
+      .date {
+        font-size: 23px;
+        position: absolute;
+        top: 723;
+        left: 44;
+        display: flex;
+        gap: 20px;
+      }
+
+      .desc {
+        width: 410px;
+        height: 140px;
+        display: flex;
+        text-align: left;
+        letter-spacing: 0;
+        font-size: 23px;
+        position: absolute;
+        top: 780;
+        left: 45;
+      }
+
+      .to-icon {
+        position: absolute;
+        top: 425;
+        left: 54;
+        width: 25px;
+        height: 25px;
+      }
+
+      .to-icon-top {
+        position: absolute;
+        top: 118;
+        left: 46;
+        width: 43px;
+        height: 43px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="value to-bank">به {{receiver_bank}}</div>
+      <div class="to-icon-top"></div>
+      <div class="value to-shaba">{{iban}}</div>
+      <img class="to-icon" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
+      <div class="value to-name">{{receiver}}</div>
+      <div class="value type">{{description}}</div>
+      <div class="value price-toman">{{amount_toman}} تومان</div>
+      <div class="value price-rial">{{amount}} ریال</div>
+      <div class="value date" dir="ltr">
+        <span>{{date}}</span> <span>{{time}}</span>
+      </div>
+      <div class="value desc" style="line-height: initial">
+        {{description2}}
+      </div>
+    </div>
+  </body>
+</html>
