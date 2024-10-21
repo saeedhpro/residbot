@@ -283,7 +283,7 @@ async def handle_source_account(update: Update, context):
         return GET_DEST_IBAN
 
     if context.user_data['bank_type'] == 'ayandeh':
-        await update.message.reply_text('شماره شبا مقصد را وارد کنید:')
+        await update.message.reply_text('شماره شبا مقصد را بدون ستاره و به صورت کامل وارد کنید:')
         return GET_DEST_IBAN
 
     if context.user_data['bank_type'] == 'ayandeh_paya':
@@ -684,7 +684,7 @@ async def handle_get_dest_name(update: Update, context):
         await update.message.reply_text('نام ارسال کننده را وارد کنید:')
         return GET_SENDER_NAME
     if context.user_data['bank_type'] == 'parsian':
-        await update.message.reply_text('توضیحات را وارد کنید:')
+        await update.message.reply_text('شرح را وارد کنید:')
         return GET_DESCRIPTION
 
     if context.user_data['bank_type'] == 'pasargad_paya':
@@ -814,8 +814,8 @@ async def handle_get_sender_name(update: Update, context):
         return GET_DESCRIPTION
 
     if context.user_data['bank_type'] == 'parsian':
-        await update.message.reply_text('شرح را وارد کنید:')
-        return GET_DESCRIPTION
+        await update.message.reply_text('نام گیرنده را وارد کنید:')
+        return GET_DEST_NAME
 
     if context.user_data['bank_type'] == 'shahr':
         await update.message.reply_text('بابت (علت) را وارد کنید:')
@@ -1789,7 +1789,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'receiver': convert_numbers_to_farsi(context.user_data['receiver']),
             'sender': convert_numbers_to_farsi(context.user_data['sender']),
             'tracking_code': convert_numbers_to_farsi(context.user_data['tracking_code']),
-            'iban': convert_numbers_to_farsi(context.user_data['iban']),
+            'iban': replace_star_ayandeh(convert_numbers_to_farsi(context.user_data['iban'])),
             'description': convert_numbers_to_farsi(context.user_data['description']),
             'current_directory': current_directory,
             'bank_icon': get_bank_icon(context.user_data['iban']),
@@ -2374,6 +2374,12 @@ def convert_number_to_words(number):
     return result
 
 
+def replace_star_ayandeh(iban):
+    if len(iban) < 26:
+        return iban
+    return iban[:2] + ('*' * 7) + iban[-5:]
+
+
 def mask_string(s):
     if len(s) <= 4:
         return s
@@ -2436,7 +2442,7 @@ def get_bank_icon(iban, bank=''):
     if bank == 'saderat' \
             or bank == 'pasargad_shaba':
         ib = 'IR' + ib
-    elif len(ib) < 26:
+    elif len(ib) < 10:
         return ''
     ib = ib.replace(" ", "").replace("-", "")
     return bank_from_codes(ib[4:7])
