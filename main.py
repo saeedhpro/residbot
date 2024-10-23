@@ -703,7 +703,7 @@ async def handle_get_dest_name(update: Update, context):
     #     await update.message.reply_text('نام ارسال کننده را وارد کنید:')
     #     return GET_SENDER_NAME
     if context.user_data['bank_type'] == 'post_bank_paya_2':
-        await update.message.reply_text('بابت انتقال را وارد کنید:')
+        await update.message.reply_text('علت انتقال را وارد کنید:')
         return GET_DESCRIPTION2
     if context.user_data['bank_type'] == 'refah_satna':
         await update.message.reply_text('نام بانک مقصد را وارد کنید:')
@@ -2377,7 +2377,8 @@ def convert_number_to_words(number):
 def replace_star_ayandeh(iban):
     if len(iban) < 26:
         return iban
-    return iban[:2] + ('*' * 7) + iban[-5:]
+    l = len(iban)
+    return iban[:2] + ('*' * (l - 7)) + iban[-5:]
 
 
 def mask_string(s):
