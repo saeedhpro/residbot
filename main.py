@@ -15,7 +15,7 @@ from html2image import Html2Image
 (START, RETURN_MENU, SELECT_ACTION, SELECT_BANK, GET_STATUS, GET_TRANSACTION_TYPE, GET_SOURCE_ACCOUNT, GET_DEST_IBAN,
  GET_DEST_NAME, GET_DATETIME, GET_AMOUNT, GET_SENDER_NAME, GET_DEST_ACCOUNT, GET_DEST_BANK, GET_REASON, GET_DESCRIPTION,
  GET_TRACKING_CODE, GET_MARJA, GET_DATE, GET_TIME, GET_RECEIVER_FNAME, GET_RECEIVER_LNAME, GET_SOURCE_IBAN,
- GET_MANDE, GET_DESCRIPTION2, GET_REDUCE_SOURCE_ACCOUNT, GET_DESCRIPTION3, GET_SIGNER, GET_DAY_NAME) = range(29)
+ GET_MANDE, GET_DESCRIPTION2, GET_REDUCE_SOURCE_ACCOUNT, GET_DESCRIPTION3, GET_SIGNER, GET_DAY_NAME, GET_BANK_NAME) = range(30)
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -426,6 +426,11 @@ async def handle_source_account(update: Update, context):
     return GET_SOURCE_ACCOUNT
 
 
+async def handle_get_bank_name(update: Update, context):
+    context.user_data['bank_name'] = update.message.text
+    await update.message.reply_text('نام صاحب حساب مقصد را وارد کنید:')
+    return GET_DEST_NAME
+
 async def handle_get_dest_iban(update: Update, context):
     iban = update.message.text
     iban = iban.upper()
@@ -537,8 +542,8 @@ async def handle_get_dest_iban(update: Update, context):
         await update.message.reply_text('نام صاحب حساب مقصد را وارد کنید:')
         return GET_DEST_NAME
     if context.user_data['bank_type'] == 'saderat_paya':
-        await update.message.reply_text('نام صاحب حساب مقصد را وارد کنید:')
-        return GET_DEST_NAME
+        await update.message.reply_text('نام بانک مقصد را وارد کنید:')
+        return GET_BANK_NAME
     if context.user_data['bank_type'] == 'day':
         await update.message.reply_text('نام دریافت کننده را وارد کنید:')
         return GET_DEST_NAME
@@ -1393,6 +1398,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     if bank_type == 'saderat_paya':
         html_content = {
             'bank_type': get_bank_type_in_farsi(context.user_data['bank_type']),
+            'bank_name': context.user_data['bank_name'],
             'source_account': context.user_data['source_account'],
             'description3': context.user_data['description3'],
             'iban': context.user_data['iban'],
@@ -2482,6 +2488,7 @@ def main():
             GET_DESCRIPTION3: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_description3)],
             GET_SIGNER: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_signer)],
             GET_DAY_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_day_name)],
+            GET_BANK_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_bank_name)],
             GET_REDUCE_SOURCE_ACCOUNT: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND, handle_get_reduce_source_account)],
         },

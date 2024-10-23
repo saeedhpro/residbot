@@ -63,9 +63,9 @@
       .to-icon {
         position: absolute;
         top: 737;
-        left: 77;
+        left: 66;
         z-index: 10;
-        height: 66px;
+        height: 60px;
       }
       .to-name {
         font-size: 28px;
@@ -158,6 +158,15 @@
         top: 251;
         left: 58;
       }
+      .bank-name {
+        color: red;
+        position: absolute;
+        top: 796px;
+        left: 70px;
+        z-index: 10;
+        font-weight: 900;
+        font-size: 9px;
+      }
     </style>
   </head>
   <body>
@@ -178,6 +187,7 @@
         {{receiver}}
       </div>
       <img class="to-icon" alt="" src="{{current_directory}}/icons/{{bank_icon}}">
+      <div class="bank-name">{{bank_name}}</div>
       <div class="price">{{amount}} <span>ریال</span></div>
       <div class="type">{{description2}}</div>
       <div class="payment-id">{{marja}}</div>
