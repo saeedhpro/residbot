@@ -1405,7 +1405,7 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
             'date': context.user_data['date'],
             'time': context.user_data['time'],
             'current_directory': current_directory,
-            'bank_icon': get_bank_icon(context.user_data['iban']),
+            'bank_icon': get_bank_icon(context.user_data['iban'], 'saderat_paya'),
         }
 
     if bank_type == 'saderat_2':
@@ -2403,7 +2403,7 @@ def format_iban_shar_satna(input_str, splitter='-'):
     # return f"{input_str[:4]}-{input_str[4:7]}-{input_str[8:12]}-{input_str[8:12]}"
 
 
-def bank_from_codes(code=''):
+def bank_from_codes(code='', bank=''):
     bank_codes = {
         '011': 'sanat.png',
         '012': 'mellat.png',
@@ -2435,6 +2435,9 @@ def bank_from_codes(code=''):
         '066': 'day.png',
         '069': 'iran_zamin.png',
     }
+    if bank == 'saderat_paya' and code == '017':
+        return 'meli_3.png'
+
     return bank_codes[code]
 
 
@@ -2446,7 +2449,7 @@ def get_bank_icon(iban, bank=''):
     elif len(ib) < 10:
         return ''
     ib = ib.replace(" ", "").replace("-", "")
-    return bank_from_codes(ib[4:7])
+    return bank_from_codes(ib[4:7], bank)
 
 
 def main():
