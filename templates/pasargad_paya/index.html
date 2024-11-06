@@ -29,6 +29,16 @@
         color: #00a143;
       }
 
+      .title {
+        position: absolute;
+        top: 0;
+        right: 8;
+        opacity: 0.729;
+        font-size: 23px;
+        color: #333333;
+        font-weight: 700;
+      }
+
       .value {
         opacity: 0.878;
         width: 100%;
@@ -61,50 +71,61 @@
     <div class="container">
       <div class="rows">
         <div class="row">
+          <div class="title">تاریخ ثبت پایا:</div>
           <div class="value">
             {{datetime}}
           </div>
         </div>
 
         <div class="row">
+          <div class="title">شماره پیگری:</div>
           <div class="value">{{tracking_code}}</div>
         </div>
 
         <div class="row">
+          <div class="title">شماره سپرده مبدا:</div>
           <div class="value" dir="ltr">{{source_account}}</div>
         </div>
 
         <div class="row" style="height: 122px">
+          <div class="title" style="right: 6 !important;">شماره شبای مقصد:</div>
           <div class="value">
             {{iban}} {{receiver}}
           </div>
         </div>
 
         <div class="row">
+          <div class="title" style="top: 3; right: 7">مبلغ انتقال:</div>
           <div class="value">{{amount}} ریال</div>
         </div>
 
         <div class="row">
+          <div class="title">کسر کارمزد از سپرده:</div>
           <div class="value" dir="ltr">{{reduce_source_account}}</div>
         </div>
 
         <div class="row">
+          <div class="title">نام بانک مقصد:</div>
           <div class="value">{{receiver_bank}}</div>
         </div>
 
         <div class="row">
+          <div class="title" style="right: 9;">فرستنده:</div>
           <div class="value">{{sender}}</div>
         </div>
 
         <div class="row">
+          <div class="title" style="right: 9;">گیرنده:</div>
           <div class="value">{{receiver}}</div>
         </div>
 
         <div class="row">
+          <div class="title" style="top: -2">شرح مبدا:</div>
           <div class="value">{{description}}</div>
         </div>
 
         <div class="row">
+          <div class="title" style="top: -2">بابت:</div>
           <div class="value" style="padding-bottom: 4px;">{{description2}}</div>
         </div>
       </div>

@@ -150,7 +150,8 @@ async def handle_get_date(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def handle_get_time(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data['time'] = update.message.text
     if context.user_data['bank_type'] == 'mehr_2' or \
-            context.user_data['bank_type'] == 'mehr_3':
+            context.user_data['bank_type'] == 'mehr_3' or \
+            context.user_data['bank_type'] == 'mehr_dark_2':
         await update.message.reply_text('نام روز هفته (شنبه و یکشنبه و ...) را وارد کنید:')
         return GET_DAY_NAME
     if context.user_data['bank_type'] == 'pasargad_shaba':
