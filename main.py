@@ -1,6 +1,7 @@
 import os
 import random
 from random import randint
+from PIL import Image
 
 from dotenv import load_dotenv
 import re
@@ -1887,132 +1888,304 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     if context.user_data['bank_type'] == 'tejarat':
         options['height'] = '1019'
         options['width'] = '677'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '677'
+        options['bottom'] = '1019'
     elif context.user_data['bank_type'] == 'tejarat_card':
         options['height'] = '1280'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'tejarat_paya':
         options['height'] = '1280'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'sina_paya':
         options['height'] = '1280'
         options['width'] = '739'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '739'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'shahr_satna':
         options['height'] = '1280'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'shahr_paya_2':
         options['height'] = '1336'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'sepah_satna':
         options['height'] = '1380'
         options['width'] = '752'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '752'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'sepah_paya':
         options['height'] = '1588'
         options['width'] = '685'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '685'
+        options['bottom'] = '1448'
     elif context.user_data['bank_type'] == 'saman_paya_light':
         options['height'] = '1380'
         options['width'] = '752'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '752'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'saman_paya_dark':
         options['height'] = '1380'
         options['width'] = '752'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '752'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'saderat_paya':
         options['height'] = '1380'
         options['width'] = '747'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '747'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'saderat_2':
         options['height'] = '1380'
         options['width'] = '635'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '635'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'saderat':
         options['height'] = '1380'
         options['width'] = '744'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '744'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'ayandeh':
         options['height'] = '1380'
         options['width'] = '654'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '654'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'ayandeh_paya':
         options['height'] = '1380'
         options['width'] = '966'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '966'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'eghtesad':
         options['height'] = '1380'
         options['width'] = '637'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '637'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'keshavarzi':
         options['height'] = '1280'
         options['width'] = '665'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '665'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'maskan_satna':
         options['height'] = '1280'
         options['width'] = '668'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '668'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'mehr':
         options['height'] = '1280'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'mehr_2':
         options['height'] = '1280'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'mehr_3':
         options['height'] = '1280'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'mehr_4':
         options['height'] = '1280'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'mehr_dark':
         options['height'] = '1280'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'mehr_dark_2':
         options['height'] = '1380'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'mehr_light':
         options['height'] = '1280'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'parsian':
         options['height'] = '1378'
         options['width'] = '687'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '687'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'pasargad_paya':
         options['height'] = '1400'
         options['width'] = '615'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '615'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'pasargad_paya_2':
         options['height'] = '1280'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'pasargad_satna':
         options['height'] = '1280'
         options['width'] = '623'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '623'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'pasargad_shaba':
         options['height'] = '1380'
         options['width'] = '614'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '614'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'post_bank_paya':
         options['height'] = '1280'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'post_bank_paya_2':
         options['height'] = '1380'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'refah':
         options['height'] = '1378'
         options['width'] = '630'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '630'
+        options['bottom'] = '1278'
     elif context.user_data['bank_type'] == 'refah_2':
         options['height'] = '1382'
         options['width'] = '656'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '656'
+        options['bottom'] = '1282'
     elif context.user_data['bank_type'] == 'refah_paya':
         options['height'] = '1380'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'refah_satna':
         options['height'] = '1280'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'resalat_paya':
         options['height'] = '1380'
         options['width'] = '623'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '623'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'resalat_satna':
         options['height'] = '1280'
         options['width'] = '667'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '667'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'resalat_satna_2':
         options['height'] = '1380'
         options['width'] = '612'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '612'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'day':
         options['height'] = '1280'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'day_satna':
         options['height'] = '1280'
         options['width'] = '996'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '996'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'shahr':
         options['height'] = '1280'
         options['width'] = '591'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '591'
+        options['bottom'] = '1280'
     elif context.user_data['bank_type'] == 'shahr_paya':
         options['height'] = '1320'
         options['width'] = '623'
+        options['left'] = '0'
+        options['top'] = '0'
+        options['right'] = '623'
+        options['bottom'] = '1280'
     hti = Html2Image(output_path=png_path)
     hti.screenshot(
         html_str=rendered_html,
@@ -2021,12 +2194,10 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
         size=(int(options['width']), int(options['height']))
     )
 
-    with open("f.html", "+w") as f:
-        f.writelines(rendered_html)
-    f.close()
-
-    # imgkit.from_string(rendered_html, png_path, options=options)
     photo = f"{png_path}{png_name}"
+    with Image.open(photo) as img:
+        cropped_img = img.crop((int(options['left']), int(options['top']), int(options['right']), int(options['bottom'])))
+        cropped_img.save(photo)
     await update.message.reply_photo(photo=open(photo, 'rb'))
 
     return RETURN_MENU
