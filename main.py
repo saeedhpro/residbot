@@ -1875,8 +1875,10 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     rendered_html = template.render(html_content)
     try:
         png_name = f"receipt_{context.user_data['tracking_code']}.png"
+        png_name_crop = f"receipt_{context.user_data['tracking_code']}_crop.png"
     except Exception as e:
         png_name = f"receipt_{str(random.randint(10000000000000, 100000000000000000000))}.png"
+        png_name_crop = f"receipt_{str(random.randint(10000000000000, 100000000000000000000))}_crop.png"
 
     png_path = f"./receipts/image/"
     options = {
@@ -2195,11 +2197,13 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
     )
 
     photo = f"{png_path}{png_name}"
+    photo_crop = f"{png_path}{png_name_crop}"
     with Image.open(photo) as img:
         box = (int(options['left']), int(options['top']), int(options['right']), int(options['bottom']))
+        print(box, "box")
         img.crop(box)
-        img.save(photo)
-    await update.message.reply_photo(photo=open(photo, 'rb'))
+        img.save(photo_crop)
+    await update.message.reply_photo(photo=open(photo_crop, 'rb'))
 
     return RETURN_MENU
 
