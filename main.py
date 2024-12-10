@@ -2196,8 +2196,9 @@ async def create_and_send_receipt(update: Update, context: ContextTypes.DEFAULT_
 
     photo = f"{png_path}{png_name}"
     with Image.open(photo) as img:
-        cropped_img = img.crop((int(options['left']), int(options['top']), int(options['right']), int(options['bottom'])))
-        cropped_img.save(photo)
+        box = (int(options['left']), int(options['top']), int(options['right']), int(options['bottom']))
+        img.crop(box)
+        img.save(photo)
     await update.message.reply_photo(photo=open(photo, 'rb'))
 
     return RETURN_MENU
